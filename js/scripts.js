@@ -8,6 +8,20 @@
 // 
 
 window.addEventListener('DOMContentLoaded', event => {
+    var myAudio = document.getElementById("suiseinamba1");
+    myAudio.volume = 0.4;
+    var isPlaying = false;
+
+    function togglePlay() {
+        isPlaying ? myAudio.pause() : myAudio.play();
+    };
+
+    myAudio.onplaying = function() {
+        isPlaying = true;
+    };
+    myAudio.onpause = function() {
+        isPlaying = false;
+    };
 
     // Navbar shrink function
     var navbarShrink = function () {
