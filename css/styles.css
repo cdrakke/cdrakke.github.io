@@ -11739,3 +11739,6 @@ body {
   color: white;
 }
 
+.container > .text-white-50 > .yt-link {
+  line-height: 25px;
+}
