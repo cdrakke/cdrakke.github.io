@@ -32,3 +32,7 @@ document.addEventListener('DOMContentLoaded', function(event) {
     StartTextAnimation(0);
   }
 );
+
+function on_development() {
+    alert("Currently in development!")
+}

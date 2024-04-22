@@ -10,7 +10,14 @@ body {
   font-family: "Delius", Comfortaa;
   padding-top: 3em; 
   width: 100vw;
-  height: 100vh;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+section {
+  height: 4em;
 }
 
 .content {
@@ -80,12 +87,27 @@ body {
   flex-direction: row;
 }
 
-.other-info button {
+.btn-aboutme {
   margin-left: 10px;
   margin-right: 10px;
   font-family: "Delius", Comfortaa;
-  visibility: hidden;
+  width: 125px;
+  height: 40px;
+  border-radius: 25px;
+  background: rgba(255, 255, 255, 0.1);
+  border-color: rgba(255, 255, 255, 0.1);
+  font-weight: bold;
+  transition: all 0.2s ease-in-out; 
+  color: rgba(255, 255, 255, 0.8);
+  letter-spacing: 2px;
+  border: 1px solid rgba(255,255,255,0.1);
+  border: 0;
 }
+
+.btn-aboutme:hover {
+  background-color: rgba(255, 255, 255, 0.3);
+}
+
 
 .content h1 {
   color: white;
