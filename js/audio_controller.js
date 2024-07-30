@@ -9,7 +9,7 @@ window.onload = async function () {
     if (myAudio.paused) {
         toggle_image.classList.toggle("bi-music-note-beamed");
         toggle_image.classList.toggle("bi-pause-circle-fill");
-        toggle_image_text.textContent = "Now playing: Rouxl Kaard's Shop Theme";
+        toggle_image_text.textContent = "Now playing: Blue Archive Theme 228";
         myAudio.play();
     }
 }
