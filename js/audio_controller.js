@@ -18,7 +18,7 @@ function togglePlay(x) {
     if (myAudio.paused) {
         x.classList.toggle("bi-music-note-beamed");
         x.classList.toggle("bi-pause-circle-fill");
-        toggle_image_text.textContent = "Now playing: Rouxl Kaard's Shop Theme!";
+        toggle_image_text.textContent = "Now playing: Blue Archive Theme 228";
         myAudio.play();
         return;
     }
