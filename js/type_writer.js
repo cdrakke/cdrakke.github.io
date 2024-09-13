@@ -36,3 +36,7 @@ document.addEventListener('DOMContentLoaded', function(event) {
 function on_development() {
     alert("Currently in development!")
 }
+
+function go_to_quizzer() {
+    window.location.href = 'quizzer.html';
+}
