@@ -6,6 +6,21 @@ let shuffledChoices = [];
 let score = 0;
 let answers = [];
 
+var modal = document.getElementById("myModal");
+var invalidmodal = document.getElementById("secondmodal");
+var span = document.getElementsByClassName("close")[0];
+
+span.onclick = function() {
+  modal.style.display = "none";
+  invalidmodal.style.display = "none";
+}
+
+window.onclick = function(event) {
+  if (event.target == modal) {
+    modal.style.display = "none";
+  }
+}
+
 function shuffle(array) {
     for (let i = array.length - 1; i > 0; i--) {
         const j = Math.floor(Math.random() * (i + 1));
@@ -102,19 +117,33 @@ function showResults() {
 
 let cors_anywhere = "https://cors-anywhere.herokuapp.com/"
 let url = prompt("Enter your question source");
+let cors_url = cors_anywhere + url;
 
-fetch(cors_anywhere + url)
-  .then(response => {
-    if (!response.ok) {
-      throw new Error('Network response was not ok ' + response.statusText);
-    }
-    return response.json(); 
-  })
-  .then(jsonData => {
-    questions = jsonData;
-	startQuiz();
-  })
-  .catch(error => {
-    console.error('Error fetching or parsing data:', error);
-  }
- );
+function fetch_data(cors_url, url) {
+    fetch(cors_url).then(
+        response => {
+            if (!response.ok) {
+                modal.style.display = "block";
+                console.error('Network response was not ok ' + response.statusText);
+
+                fetch(url).then(
+                    response => {
+                        if (!response.ok) {
+                            console.error('Invalid Question Source' + response.statusText);
+                        }
+                            return response.json(); 
+                    }).then(
+                        jsonData => {
+                            questions = jsonData;
+                            startQuiz();
+                    })
+            }
+                return response.json(); 
+        }).then(
+            jsonData => {
+                questions = jsonData;
+                startQuiz();
+        })
+}
+
+fetch_data(cors_url, url);
