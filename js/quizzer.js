@@ -6,9 +6,12 @@ let shuffledChoices = [];
 let score = 0;
 let answers = [];
 
+let cors_anywhere = "https://cors-anywhere.herokuapp.com/"
+
 var modal = document.getElementById("myModal");
 var invalidmodal = document.getElementById("secondmodal");
 var span = document.getElementsByClassName("close")[0];
+var inputModal = document.getElementById("inputModal");
 
 span.onclick = function() {
   modal.style.display = "none";
@@ -98,26 +101,30 @@ function nextQuestion() {
 }
 
 function showResults() {
-	const body = document.body;
+    const body = document.body;
     body.innerHTML = `<h2>Your score: ${score} / ${shuffledQuestions.length}</h2>`;
 
-	answers.forEach(answer => {
+    answers.forEach(answer => {
         const answerElement = document.createElement('div');
         answerElement.className = 'answer-review';
         answerElement.innerHTML = `
             <p>Question: ${answer.question}</p>
             <p>Your answer: ${answer.selectedChoice}</p>
             <p>Correct answer: ${answer.correctAnswer}</p>
-            <p>${answer.isCorrect ? 'Correct' : 'Incorrect'}</p>
+            <p class="${answer.isCorrect ? 'correct' : 'incorrect'}">${answer.isCorrect ? 'Correct' : 'Incorrect'}</p>
             <hr>
         `;
         body.appendChild(answerElement);
     });
 }
 
-let cors_anywhere = "https://cors-anywhere.herokuapp.com/"
-let url = prompt("Enter your question source");
-let cors_url = cors_anywhere + url;
+
+function parseSource() {
+    var sourceInput = document.getElementById("source_link");
+    const link = sourceInput.value
+    let cors_url = cors_anywhere + link;
+    fetch_data(cors_url, link);
+}
 
 function fetch_data(cors_url, url) {
     fetch(cors_url).then(
@@ -136,6 +143,8 @@ function fetch_data(cors_url, url) {
                         jsonData => {
                             questions = jsonData;
                             startQuiz();
+                            inputModal.style.display = "none";
+
                     })
             }
                 return response.json(); 
@@ -143,7 +152,9 @@ function fetch_data(cors_url, url) {
             jsonData => {
                 questions = jsonData;
                 startQuiz();
-        })
+                inputModal.style.display = "none";
+        }
+    )
 }
 
-fetch_data(cors_url, url);
+inputModal.style.display = "block";
