@@ -46,11 +46,13 @@ function startQuiz() {
 }
 
 function displayQuestion() {
+    const questionNumberContainer = document.getElementById('question-number');
     const questionContainer = document.getElementById('question-container');
     const choicesContainer = document.getElementById('choices-container');
     const feedbackContainer = document.getElementById('feedback-container');
     const nextButton = document.getElementById('next-button');
 
+    questionNumberContainer.innerHTML = "Question #" + (currentQuestionIndex + 1);
     questionContainer.innerHTML = shuffledQuestions[currentQuestionIndex].question;
     choicesContainer.innerHTML = '';
     feedbackContainer.innerHTML = '';
@@ -79,7 +81,7 @@ function checkAnswer(selectedChoice) {
     const nextButton = document.getElementById('next-button');
     const correctAnswer = shuffledQuestions[currentQuestionIndex].answer;
 
-    const isCorrect = correctAnswers.includes(selectedChoice);
+    const isCorrect = correctAnswer.includes(selectedChoice);
 
     if (isCorrect) {
         feedbackContainer.innerHTML = '<p style="color: green;">Correct!</p>';
