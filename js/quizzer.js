@@ -79,7 +79,9 @@ function checkAnswer(selectedChoice) {
     const nextButton = document.getElementById('next-button');
     const correctAnswer = shuffledQuestions[currentQuestionIndex].answer;
 
-    if (selectedChoice === correctAnswer) {
+    const isCorrect = correctAnswers.includes(selectedChoice);
+
+    if (isCorrect) {
         feedbackContainer.innerHTML = '<p style="color: green;">Correct!</p>';
         score++;
     } else {
@@ -90,7 +92,7 @@ function checkAnswer(selectedChoice) {
         question: shuffledQuestions[currentQuestionIndex].question,
         selectedChoice: selectedChoice,
         correctAnswer: correctAnswer,
-        isCorrect: selectedChoice === correctAnswer
+        isCorrect: isCorrect
     });
 
     nextButton.style.display = '';
