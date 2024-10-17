@@ -102,7 +102,7 @@ button:hover {
     margin: 15% auto; 
     padding: 20px;
     border: 1px solid #888;
-    width: 40% !important;
+    width: 50% !important;
 }
 
 .close {
@@ -140,4 +140,34 @@ button:hover {
 
 #message {
     margin-top: 20px;
+}
+
+#cors-info {
+    margin-top: 20px;
+}
+
+@media screen and (max-width: 768px) {
+    .modal-content {
+        width: 90% !important;
+        margin: 10% auto;
+        padding: 15px;
+    }
+
+    #quiz-container {
+        width: 90%;
+        max-width: 300px;
+    }
+
+    body h2 {
+        font-size: 1.5em;
+        padding: 10px;
+    }
+
+    .choice-button {
+        font-size: 0.9em;
+    }
+
+    .answer-review {
+        font-size: 0.9em;
+    }
 }

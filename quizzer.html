@@ -14,9 +14,6 @@
             <span class="close">&times;</span>
             <p class="modal-paragraph">Please enter the data source link below: </p>
             <div class="input-group mb-3">
-                <div class="input-group-prepend">
-                  <span class="input-group-text" id="basic-addon1">Source Link: </span>
-                </div>
                 <input id="source_link" type="text" class="form-control" placeholder="Source Link" aria-label="Source Link" aria-describedby="basic-addon1">
             </div>
             <button class="btn btn-primary d-flex justify-content-center align-items-center" id="submit-source" onclick="parseSource()">
@@ -26,6 +23,10 @@
 
             <div id="message" class="alert alert-danger" role="alert" style="display: none">
                 This is a danger alert with <a href="#" class="alert-link">an example link</a>. Give it a click if you like.
+            </div>
+
+            <div id="cors-info" class="alert alert-info" role="alert">
+                If there are problems fetching your valid links, <a href="https://cors-anywhere.herokuapp.com/corsdemo" class="alert-link">click here</a> to request CORS access.
             </div>
         </div>
     </div>
