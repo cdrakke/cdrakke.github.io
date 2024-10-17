@@ -151,6 +151,15 @@ function isValidUrl(string) {
 }
 
 function fetch_data(cors_url, url) {
+    try {
+        questions = JSON.parse(url);
+        startQuiz();
+        inputModal.style.display = "none";
+    }
+    catch (err) {
+        console.log("Not raw data.")
+    }
+
     if (!isValidUrl(url)) {
         messageInputModal.innerText = "Invalid source link, please enter a proper link.";
         messageInputModal.style.display = "block";
