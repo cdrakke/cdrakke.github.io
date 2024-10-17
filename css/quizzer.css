@@ -132,3 +132,12 @@ button:hover {
 .incorrect {
     color: red;
 }
+
+#submit-source-text {
+    margin-bottom: 0;
+    margin-left: 5px;
+}
+
+#message {
+    margin-top: 20px;
+}

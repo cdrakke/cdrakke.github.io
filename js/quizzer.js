@@ -12,6 +12,11 @@ var modal = document.getElementById("myModal");
 var invalidmodal = document.getElementById("secondmodal");
 var span = document.getElementsByClassName("close")[0];
 var inputModal = document.getElementById("inputModal");
+var submitBtnSpinner = document.getElementById("submit-source-spinner");
+var submitBtnText = document.getElementById("submit-source-text");
+var submitBtn = document.getElementById("submit-source");
+var messageInputModal = document.getElementById("message");
+var sourceInput = document.getElementById("source_link");
 
 span.onclick = function() {
   modal.style.display = "none";
@@ -120,41 +125,72 @@ function showResults() {
 
 
 function parseSource() {
-    var sourceInput = document.getElementById("source_link");
+    
+    submitBtnSpinner.style.display = "flex";
+    submitBtnText.innerText = "Loading...";
+    submitBtn.disabled = true;
     const link = sourceInput.value
     let cors_url = cors_anywhere + link;
     fetch_data(cors_url, link);
 }
 
+function sleep(ms) {
+    return new Promise(resolve => setTimeout(resolve, ms));
+}
+
+function isValidUrl(string) {
+    const pattern = new RegExp('^(https?:\\/\\/)?' +
+        '((([a-z\\d]([a-z\\d-]*[a-z\\d])?)\\.)+[a-z]{2,}|localhost|' + 
+        '((\\d{1,3}\\.){3}\\d{1,3}))' +
+        '(\\:\\d+)?(\\/[-a-z\\d%_.~+]*)*' + 
+        '(\\?[;&a-z\\d%_.~+=-]*)?' +
+        '(\\#[-a-z\\d_]*)?$','i');
+    return !!pattern.test(string);
+}
+
 function fetch_data(cors_url, url) {
-    fetch(cors_url).then(
-        response => {
-            if (!response.ok) {
-                modal.style.display = "block";
-                console.error('Network response was not ok ' + response.statusText);
+    if (!isValidUrl(url)) {
+        messageInputModal.innerText = "Invalid source link, please enter a proper link.";
+        messageInputModal.style.display = "block";
+        submitBtnSpinner.style.display = "none";
+        submitBtnText.innerText = "Submit";
+        submitBtn.disabled = false;
+        sourceInput.value = "";
+        return;
+    }
 
-                fetch(url).then(
-                    response => {
-                        if (!response.ok) {
-                            console.error('Invalid Question Source' + response.statusText);
-                        }
-                            return response.json(); 
-                    }).then(
-                        jsonData => {
-                            questions = jsonData;
-                            startQuiz();
-                            inputModal.style.display = "none";
+    setTimeout(() => {
+        fetch(cors_url)
+            .then(response => {
+                if (!response.ok) {
+                    modal.style.display = "block";
+                    return Promise.reject('CORS request failed: ' + response.statusText);
+                }
 
-                    })
-            }
-                return response.json(); 
-        }).then(
-            jsonData => {
+                return response.json().catch(() => {
+                    messageInputModal.innerText = "Invalid source link, make sure it follows the [{}, {}] structure requirement.";
+                    messageInputModal.style.display = "block";
+                    submitBtnSpinner.style.display = "none";
+                    submitBtnText.innerText = "Submit";
+                    submitBtn.disabled = false;
+                    sourceInput.value = "";
+                    return Promise.reject('Invalid JSON format');
+                });
+            })
+            .then(jsonData => {
                 questions = jsonData;
                 startQuiz();
                 inputModal.style.display = "none";
-        }
-    )
+            })
+            .catch(error => {
+                if (error.message.includes('CORS request failed')) {
+                    console.error(error);
+                } else {
+                    messageInputModal.innerText = "Invalid source link, please enter a proper link.";
+                    messageInputModal.style.display = "block";
+                }
+            });
+    }, 1000);
 }
 
 inputModal.style.display = "block";
