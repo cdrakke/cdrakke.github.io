@@ -1,4 +1,5 @@
 let questions = [];
+let originalQuestions = [];
 
 let currentQuestionIndex = 0;
 let shuffledQuestions = [];
@@ -17,6 +18,7 @@ var submitBtnText = document.getElementById("submit-source-text");
 var submitBtn = document.getElementById("submit-source");
 var messageInputModal = document.getElementById("message");
 var sourceInput = document.getElementById("source_link");
+var originalBody = document.body.innerHTML;
 
 span.onclick = function() {
   modal.style.display = "none";
@@ -37,10 +39,12 @@ function shuffle(array) {
 }
 
 function startQuiz() {
-    shuffledQuestions = [...questions];
+    shuffledQuestions = JSON.parse(JSON.stringify(questions)); // Deep copy
     shuffle(shuffledQuestions);
     shuffledQuestions.forEach(question => {
-        question.choices = Object.entries(question.choices).sort(() => Math.random() - 0.5);
+        const entries = Object.entries(question.choices);
+        shuffle(entries);
+        question.shuffledChoices = entries;
     });
     displayQuestion();
 }
@@ -58,11 +62,11 @@ function displayQuestion() {
     feedbackContainer.innerHTML = '';
     nextButton.style.display = 'none';
 
-    shuffledQuestions[currentQuestionIndex].choices.forEach(choice => {
+    shuffledQuestions[currentQuestionIndex].shuffledChoices.forEach(([key, value]) => {
         const button = document.createElement('button');
         button.className = 'btn btn-primary choice-button';
-        button.innerText = choice[1];
-        button.onclick = () => checkAnswer(choice[1]);
+        button.innerText = `${value}`;
+        button.onclick = () => checkAnswer(value);
         choicesContainer.appendChild(button);
     });
 }
@@ -109,11 +113,34 @@ function nextQuestion() {
     }
 }
 
+function restartQuiz() {
+    document.querySelectorAll(".answer-review").forEach(el => el.remove());
+    document.querySelectorAll('h2').forEach(e => e.remove());
+    document.body.innerHTML = originalBody;
+
+    questions = JSON.parse(JSON.stringify(originalQuestions)); 
+
+    currentQuestionIndex = 0;
+    score = 0;
+    answers = [];
+
+    startQuiz();
+}
+
 function showResults() {
     const body = document.body;
     body.innerHTML = `<h2>Your score: ${score} / ${shuffledQuestions.length}</h2>`;
 
+    const restartButton = document.createElement('button');
+    restartButton.textContent = 'Restart Quiz';
+    restartButton.className = 'btn btn-success';
+    restartButton.id = 'restart-button';
+    restartButton.onclick = restartQuiz;
+
+    body.appendChild(restartButton);
+
     answers.forEach(answer => {
+        
         const answerElement = document.createElement('div');
         answerElement.className = 'answer-review';
         answerElement.innerHTML = `
@@ -155,10 +182,12 @@ function isValidUrl(string) {
 function fetch_data(cors_url, url) {
     try {
         questions = JSON.parse(url);
+        originalQuestions = JSON.parse(JSON.stringify(questions));
         startQuiz();
         inputModal.style.display = "none";
     }
     catch (err) {
+        console.log(err);
         console.log("Not raw data.")
     }
 
@@ -192,6 +221,7 @@ function fetch_data(cors_url, url) {
             })
             .then(jsonData => {
                 questions = jsonData;
+                originalQuestions = JSON.parse(JSON.stringify(questions));
                 startQuiz();
                 inputModal.style.display = "none";
             })
