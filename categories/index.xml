@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Categories on Drekyz</title>
+    <link>https://192.168.1.86/categories/</link>
+    <description>Recent content in Categories on Drekyz</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    <managingEditor>drekyz.business@gmail.com (Drekyz)</managingEditor>
+    <webMaster>drekyz.business@gmail.com (Drekyz)</webMaster>
+    <copyright>© 2025 Drekyz</copyright>
+    <atom:link href="https://192.168.1.86/categories/index.xml" rel="self" type="application/rss+xml" />
+    
+  </channel>
+</rss>
