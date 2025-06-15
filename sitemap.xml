@@ -3,78 +3,83 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
 
   <url>
-    <loc>https://192.168.1.86/tags/about/</loc>
+    <loc>https://cdrakke.github.io/tags/about/</loc>
     <lastmod>2025-06-14T00:00:00+00:00</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.5</priority>
   </url>
   <url>
-    <loc>https://192.168.1.86/about/me/</loc>
+    <loc>https://cdrakke.github.io/about/me/</loc>
     <lastmod>2025-06-14T00:00:00+00:00</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.5</priority>
   </url>
   <url>
-    <loc>https://192.168.1.86/series/about-me/</loc>
+    <loc>https://cdrakke.github.io/series/about-me/</loc>
     <lastmod>2025-06-14T00:00:00+00:00</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.5</priority>
   </url>
   <url>
-    <loc>https://192.168.1.86/about/</loc>
+    <loc>https://cdrakke.github.io/about/</loc>
     <lastmod>2025-06-14T00:00:00+00:00</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.5</priority>
   </url>
   <url>
-    <loc>https://192.168.1.86/</loc>
+    <loc>https://cdrakke.github.io/</loc>
     <lastmod>2025-06-14T00:00:00+00:00</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.5</priority>
   </url>
   <url>
-    <loc>https://192.168.1.86/about/education/</loc>
+    <loc>https://cdrakke.github.io/about/education/</loc>
     <lastmod>2025-06-14T00:00:00+00:00</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.5</priority>
   </url>
   <url>
-    <loc>https://192.168.1.86/posts/post_1/</loc>
+    <loc>https://cdrakke.github.io/posts/post_1/</loc>
     <lastmod>2025-06-14T00:00:00+00:00</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.5</priority>
   </url>
   <url>
-    <loc>https://192.168.1.86/tags/posts/</loc>
+    <loc>https://cdrakke.github.io/tags/posts/</loc>
     <lastmod>2025-06-14T00:00:00+00:00</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.5</priority>
   </url>
   <url>
-    <loc>https://192.168.1.86/posts/</loc>
+    <loc>https://cdrakke.github.io/posts/</loc>
     <lastmod>2025-06-14T00:00:00+00:00</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.5</priority>
   </url>
   <url>
-    <loc>https://192.168.1.86/series/</loc>
+    <loc>https://cdrakke.github.io/series/</loc>
     <lastmod>2025-06-14T00:00:00+00:00</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.5</priority>
   </url>
   <url>
-    <loc>https://192.168.1.86/tags/</loc>
+    <loc>https://cdrakke.github.io/tags/</loc>
     <lastmod>2025-06-14T00:00:00+00:00</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.5</priority>
   </url>
   <url>
-    <loc>https://192.168.1.86/authors/</loc>
+    <loc>https://cdrakke.github.io/tags/advanced/</loc>
     <changefreq>daily</changefreq>
     <priority>0.5</priority>
   </url>
   <url>
-    <loc>https://192.168.1.86/categories/</loc>
+    <loc>https://cdrakke.github.io/authors/</loc>
+    <changefreq>daily</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://cdrakke.github.io/categories/</loc>
     <changefreq>daily</changefreq>
     <priority>0.5</priority>
   </url>
