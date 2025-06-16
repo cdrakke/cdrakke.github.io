@@ -3,6 +3,66 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
 
   <url>
+    <loc>https://cdrakke.github.io/projects/a-web-management-system-for-gyocc/</loc>
+    <lastmod>2025-06-16T00:00:00+00:00</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://cdrakke.github.io/categories/</loc>
+    <lastmod>2025-06-16T00:00:00+00:00</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://cdrakke.github.io/contact/</loc>
+    <lastmod>2025-06-16T00:00:00+00:00</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://cdrakke.github.io/tags/django/</loc>
+    <lastmod>2025-06-16T00:00:00+00:00</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://cdrakke.github.io/</loc>
+    <lastmod>2025-06-16T00:00:00+00:00</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://cdrakke.github.io/tags/postgresql/</loc>
+    <lastmod>2025-06-16T00:00:00+00:00</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://cdrakke.github.io/categories/projects/</loc>
+    <lastmod>2025-06-16T00:00:00+00:00</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://cdrakke.github.io/projects/</loc>
+    <lastmod>2025-06-16T00:00:00+00:00</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://cdrakke.github.io/tags/social/</loc>
+    <lastmod>2025-06-16T00:00:00+00:00</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://cdrakke.github.io/tags/</loc>
+    <lastmod>2025-06-16T00:00:00+00:00</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
     <loc>https://cdrakke.github.io/tags/about/</loc>
     <lastmod>2025-06-14T00:00:00+00:00</lastmod>
     <changefreq>daily</changefreq>
@@ -27,19 +87,13 @@
     <priority>0.5</priority>
   </url>
   <url>
-    <loc>https://cdrakke.github.io/</loc>
-    <lastmod>2025-06-14T00:00:00+00:00</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.5</priority>
-  </url>
-  <url>
     <loc>https://cdrakke.github.io/about/education/</loc>
     <lastmod>2025-06-14T00:00:00+00:00</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.5</priority>
   </url>
   <url>
-    <loc>https://cdrakke.github.io/posts/post_1/</loc>
+    <loc>https://cdrakke.github.io/posts/1/</loc>
     <lastmod>2025-06-14T00:00:00+00:00</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.5</priority>
@@ -63,23 +117,12 @@
     <priority>0.5</priority>
   </url>
   <url>
-    <loc>https://cdrakke.github.io/tags/</loc>
-    <lastmod>2025-06-14T00:00:00+00:00</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.5</priority>
-  </url>
-  <url>
     <loc>https://cdrakke.github.io/tags/advanced/</loc>
     <changefreq>daily</changefreq>
     <priority>0.5</priority>
   </url>
   <url>
     <loc>https://cdrakke.github.io/authors/</loc>
-    <changefreq>daily</changefreq>
-    <priority>0.5</priority>
-  </url>
-  <url>
-    <loc>https://cdrakke.github.io/categories/</loc>
     <changefreq>daily</changefreq>
     <priority>0.5</priority>
   </url>

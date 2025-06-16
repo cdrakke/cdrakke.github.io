@@ -9,10 +9,40 @@
     <managingEditor>drekyz.business@gmail.com (Drekyz)</managingEditor>
     <webMaster>drekyz.business@gmail.com (Drekyz)</webMaster>
     <copyright>© 2025 Drekyz</copyright>
-    <lastBuildDate>Sat, 14 Jun 2025 00:00:00 +0000</lastBuildDate><atom:link href="https://cdrakke.github.io/tags/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Mon, 16 Jun 2025 00:00:00 +0000</lastBuildDate><atom:link href="https://cdrakke.github.io/tags/index.xml" rel="self" type="application/rss+xml" />
     
     <item>
-      <title>about</title>
+      <title>Django</title>
+      <link>https://cdrakke.github.io/tags/django/</link>
+      <pubDate>Mon, 16 Jun 2025 00:00:00 +0000</pubDate>
+      <author>drekyz.business@gmail.com (Drekyz)</author>
+      <guid>https://cdrakke.github.io/tags/django/</guid>
+      <description></description>
+      
+    </item>
+    
+    <item>
+      <title>PostgreSQL</title>
+      <link>https://cdrakke.github.io/tags/postgresql/</link>
+      <pubDate>Mon, 16 Jun 2025 00:00:00 +0000</pubDate>
+      <author>drekyz.business@gmail.com (Drekyz)</author>
+      <guid>https://cdrakke.github.io/tags/postgresql/</guid>
+      <description></description>
+      
+    </item>
+    
+    <item>
+      <title>Social</title>
+      <link>https://cdrakke.github.io/tags/social/</link>
+      <pubDate>Mon, 16 Jun 2025 00:00:00 +0000</pubDate>
+      <author>drekyz.business@gmail.com (Drekyz)</author>
+      <guid>https://cdrakke.github.io/tags/social/</guid>
+      <description></description>
+      
+    </item>
+    
+    <item>
+      <title>About</title>
       <link>https://cdrakke.github.io/tags/about/</link>
       <pubDate>Sat, 14 Jun 2025 00:00:00 +0000</pubDate>
       <author>drekyz.business@gmail.com (Drekyz)</author>
@@ -22,7 +52,7 @@
     </item>
     
     <item>
-      <title>posts</title>
+      <title>Posts</title>
       <link>https://cdrakke.github.io/tags/posts/</link>
       <pubDate>Sat, 14 Jun 2025 00:00:00 +0000</pubDate>
       <author>drekyz.business@gmail.com (Drekyz)</author>

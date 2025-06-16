@@ -9,7 +9,27 @@
     <managingEditor>drekyz.business@gmail.com (Drekyz)</managingEditor>
     <webMaster>drekyz.business@gmail.com (Drekyz)</webMaster>
     <copyright>© 2025 Drekyz</copyright>
-    <lastBuildDate>Sat, 14 Jun 2025 00:00:00 +0000</lastBuildDate><atom:link href="https://cdrakke.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Mon, 16 Jun 2025 00:00:00 +0000</lastBuildDate><atom:link href="https://cdrakke.github.io/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>A Web Management System for Gensan Youth Orchestra and Choir Corporation</title>
+      <link>https://cdrakke.github.io/projects/a-web-management-system-for-gyocc/</link>
+      <pubDate>Mon, 16 Jun 2025 00:00:00 +0000</pubDate>
+      <author>drekyz.business@gmail.com (Drekyz)</author>
+      <guid>https://cdrakke.github.io/projects/a-web-management-system-for-gyocc/</guid>
+      <description>Overview # This project is a capstone system developed for the Gensan Youth Orchestra and Choir Corporation (GYOCC), an arts and music organization based in General Santos City.</description>
+      <media:content xmlns:media="http://search.yahoo.com/mrss/" url="https://cdrakke.github.io/projects/a-web-management-system-for-gyocc/cover.png" />
+    </item>
+    
+    <item>
+      <title>Contact</title>
+      <link>https://cdrakke.github.io/contact/</link>
+      <pubDate>Mon, 16 Jun 2025 00:00:00 +0000</pubDate>
+      <author>drekyz.business@gmail.com (Drekyz)</author>
+      <guid>https://cdrakke.github.io/contact/</guid>
+      <description>📬 Let&amp;rsquo;s Connect # Have a question, collaboration idea, or feedback?</description>
+      
+    </item>
     
     <item>
       <title>About Me</title>
@@ -33,12 +53,12 @@
     
     <item>
       <title>Looking for a Stable Job</title>
-      <link>https://cdrakke.github.io/posts/post_1/</link>
+      <link>https://cdrakke.github.io/posts/1/</link>
       <pubDate>Sat, 14 Jun 2025 00:00:00 +0000</pubDate>
       <author>drekyz.business@gmail.com (Drekyz)</author>
-      <guid>https://cdrakke.github.io/posts/post_1/</guid>
+      <guid>https://cdrakke.github.io/posts/1/</guid>
       <description>Please give job thanks!</description>
-      <media:content xmlns:media="http://search.yahoo.com/mrss/" url="https://cdrakke.github.io/posts/post_1/cover.png" />
+      <media:content xmlns:media="http://search.yahoo.com/mrss/" url="https://cdrakke.github.io/posts/1/cover.png" />
     </item>
     
   </channel>

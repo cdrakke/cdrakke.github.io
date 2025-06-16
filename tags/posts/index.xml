@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>posts on Drekyz</title>
+    <title>Posts on Drekyz</title>
     <link>https://cdrakke.github.io/tags/posts/</link>
-    <description>Recent content in posts on Drekyz</description>
+    <description>Recent content in Posts on Drekyz</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
     <managingEditor>drekyz.business@gmail.com (Drekyz)</managingEditor>
@@ -13,12 +13,12 @@
     
     <item>
       <title>Looking for a Stable Job</title>
-      <link>https://cdrakke.github.io/posts/post_1/</link>
+      <link>https://cdrakke.github.io/posts/1/</link>
       <pubDate>Sat, 14 Jun 2025 00:00:00 +0000</pubDate>
       <author>drekyz.business@gmail.com (Drekyz)</author>
-      <guid>https://cdrakke.github.io/posts/post_1/</guid>
+      <guid>https://cdrakke.github.io/posts/1/</guid>
       <description>Please give job thanks!</description>
-      <media:content xmlns:media="http://search.yahoo.com/mrss/" url="https://cdrakke.github.io/posts/post_1/cover.png" />
+      <media:content xmlns:media="http://search.yahoo.com/mrss/" url="https://cdrakke.github.io/posts/1/cover.png" />
     </item>
     
   </channel>
