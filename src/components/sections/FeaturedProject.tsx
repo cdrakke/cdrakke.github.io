@@ -10,7 +10,7 @@ export function FeaturedProject() {
   const raidium = projects.find((p) => p.id === "raidium")!;
 
   return (
-    <section id="projects" className="py-20 px-4">
+    <section id="projects" className="py-20 px-4 overflow-x-hidden">
       <div className="mx-auto max-w-5xl">
         <AnimatedSection>
           <SectionHeading

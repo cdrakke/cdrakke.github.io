@@ -91,7 +91,7 @@ export function Contact() {
     "w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background placeholder:text-muted-foreground transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/50 focus-visible:border-primary/50 focus-visible:shadow-[0_0_12px_-3px] focus-visible:shadow-primary/20";
 
   return (
-    <section id="contact" className="py-20 px-4 bg-muted/30">
+    <section id="contact" className="py-20 px-4 bg-muted/30 overflow-x-hidden">
       <div className="mx-auto max-w-3xl">
         <AnimatedSection>
           <SectionHeading
