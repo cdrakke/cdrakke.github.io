@@ -1,3 +1,0 @@
-User-agent: *
-Allow: /
-Sitemap: https://cdrakke.github.io/sitemap.xml
