@@ -1,10 +1,30 @@
-import { StrictMode } from 'react'
-import { createRoot } from 'react-dom/client'
-import './index.css'
-import App from './App.tsx'
+import { StrictMode } from "react";
+import { createRoot } from "react-dom/client";
+import { BrowserRouter } from "react-router-dom";
+import { ThemeProvider } from "@/components/layout/ThemeProvider";
+import App from "./App";
+import "./index.css";
 
-createRoot(document.getElementById('root')!).render(
+// Easter egg for devs who inspect
+console.log(
+  "%c Hey, you're inspecting! 👀",
+  "color: #60a5fa; font-size: 16px; font-weight: bold;"
+);
+console.log(
+  "%c Built by Drekyz with React + Vite + ShadCN/ui + GSAP",
+  "color: #94a3b8; font-size: 12px;"
+);
+console.log(
+  "%c Want to work together? → drekyz.business@gmail.com",
+  "color: #60a5fa; font-size: 12px;"
+);
+
+createRoot(document.getElementById("root")!).render(
   <StrictMode>
-    <App />
-  </StrictMode>,
-)
+    <BrowserRouter>
+      <ThemeProvider>
+        <App />
+      </ThemeProvider>
+    </BrowserRouter>
+  </StrictMode>
+);
