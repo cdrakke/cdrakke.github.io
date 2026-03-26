@@ -1,6 +1,6 @@
 import { ExternalLink } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
-import { buttonVariants } from "@/components/ui/button";
+import { buttonVariants } from "@/components/ui/button-variants";
 import { AnimatedSection } from "@/components/shared/AnimatedSection";
 import { useTilt } from "@/hooks/useTilt";
 import { projects } from "@/data/projects";

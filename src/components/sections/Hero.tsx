@@ -1,7 +1,7 @@
 import { useRef, useLayoutEffect, useState, useEffect } from "react";
 import { ArrowDown, Send } from "lucide-react";
 import { gsap } from "@/lib/gsap";
-import { buttonVariants } from "@/components/ui/button";
+import { buttonVariants } from "@/components/ui/button-variants";
 import { ContourBackground } from "@/components/shared/ContourBackground";
 import { useTypewriter } from "@/hooks/useTypewriter";
 import { siteConfig } from "@/data/site-config";
