@@ -186,7 +186,7 @@ export function Hero() {
         </div>
       </div>
 
-      <div className="hero-scroll absolute bottom-8 left-1/2 -translate-x-1/2">
+      <div className="hero-scroll absolute bottom-16 left-1/2 -translate-x-1/2">
         <ArrowDown className="h-5 w-5 text-muted-foreground/50" />
       </div>
     </section>

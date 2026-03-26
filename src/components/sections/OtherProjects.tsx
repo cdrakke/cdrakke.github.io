@@ -1,4 +1,4 @@
-import { useState, useRef, useLayoutEffect, useEffect } from "react";
+import { useState, useRef, useLayoutEffect, useEffect, useCallback, type ReactNode } from "react";
 import { gsap } from "@/lib/gsap";
 import { Badge } from "@/components/ui/badge";
 import {
@@ -9,7 +9,11 @@ import {
 } from "@/components/ui/card";
 import { AnimatedSection } from "@/components/shared/AnimatedSection";
 import { SectionHeading } from "@/components/shared/SectionHeading";
-import { ProjectDialog } from "@/components/shared/ProjectDialog";
+import {
+  ProjectDetailPanel,
+  type ProjectDetailPanelHandle,
+} from "@/components/shared/ProjectDetailPanel";
+import { useGridColumns } from "@/hooks/useGridColumns";
 import { projects } from "@/data/projects";
 import type { Project } from "@/types";
 import { cn } from "@/lib/utils";
@@ -27,14 +31,21 @@ const categoryColors: Record<string, string> = {
 
 function CompactProjectCard({
   project,
+  isExpanded,
   onClick,
 }: {
   project: Project;
+  isExpanded: boolean;
   onClick: () => void;
 }) {
   return (
     <div
-      className="group cursor-pointer overflow-hidden rounded-xl border border-border bg-card text-card-foreground shadow-sm transition-all duration-300 hover:shadow-lg hover:shadow-primary/5 hover:-translate-y-1 hover:border-primary/20"
+      className={cn(
+        "group cursor-pointer overflow-hidden rounded-xl border bg-card text-card-foreground shadow-sm transition-all duration-300 hover:shadow-lg hover:shadow-primary/5 hover:-translate-y-1",
+        isExpanded
+          ? "border-primary/30 shadow-md shadow-primary/10"
+          : "border-border hover:border-primary/20"
+      )}
       onClick={onClick}
     >
       <div className="relative aspect-video overflow-hidden bg-muted flex items-center justify-center">
@@ -48,7 +59,6 @@ function CompactProjectCard({
             e.currentTarget.style.display = "none";
           }}
         />
-        {/* Fallback letter — always rendered behind the image */}
         <span className="absolute text-4xl font-bold text-muted-foreground/20 select-none">
           {project.title[0]}
         </span>
@@ -68,7 +78,7 @@ function CompactProjectCard({
         </div>
         <p className="text-xs text-muted-foreground">{project.role}</p>
       </CardHeader>
-      <CardContent>
+      <CardContent className="pb-5">
         <CardDescription className="line-clamp-2">
           {project.summary}
         </CardDescription>
@@ -90,10 +100,42 @@ function CompactProjectCard({
 }
 
 export function OtherProjects() {
-  const [selectedProject, setSelectedProject] = useState<Project | null>(null);
+  const [expandedId, setExpandedId] = useState<string | null>(null);
+  const [isAnimating, setIsAnimating] = useState(false);
   const gridRef = useRef<HTMLDivElement>(null);
+  const panelRef = useRef<ProjectDetailPanelHandle>(null);
+  const columns = useGridColumns(gridRef);
+
   const otherProjects = projects.filter(
     (p) => !FEATURED_IDS.includes(p.id)
+  );
+
+  const expandedIndex = expandedId
+    ? otherProjects.findIndex((p) => p.id === expandedId)
+    : -1;
+
+  const handleCardClick = useCallback(
+    async (projectId: string) => {
+      if (isAnimating) return;
+
+      if (expandedId === projectId) {
+        // Collapse current
+        setIsAnimating(true);
+        await panelRef.current?.collapse();
+        setExpandedId(null);
+        setIsAnimating(false);
+      } else if (expandedId) {
+        // Switch: collapse current, then open new
+        setIsAnimating(true);
+        await panelRef.current?.collapse();
+        setExpandedId(projectId);
+        setIsAnimating(false);
+      } else {
+        // Open new
+        setExpandedId(projectId);
+      }
+    },
+    [expandedId, isAnimating]
   );
 
   // Preload images on mount so they're cached before scroll
@@ -115,7 +157,7 @@ export function OtherProjects() {
 
     const ctx = gsap.context(() => {
       gsap.fromTo(
-        el.children,
+        el.querySelectorAll("[data-grid-card]"),
         { opacity: 0, y: 40 },
         {
           opacity: 1,
@@ -135,6 +177,43 @@ export function OtherProjects() {
     return () => ctx.revert();
   }, []);
 
+  // Build flat children with detail panel injected after the correct row
+  const gridChildren: ReactNode[] = [];
+  const insertAfterIndex =
+    expandedIndex >= 0
+      ? Math.min(
+          Math.ceil((expandedIndex + 1) / columns) * columns - 1,
+          otherProjects.length - 1
+        )
+      : -1;
+
+  let panelInserted = false;
+  for (let i = 0; i < otherProjects.length; i++) {
+    const project = otherProjects[i];
+    gridChildren.push(
+      <div key={project.id} data-grid-card>
+        <CompactProjectCard
+          project={project}
+          isExpanded={expandedId === project.id}
+          onClick={() => handleCardClick(project.id)}
+        />
+      </div>
+    );
+
+    if (i === insertAfterIndex && expandedId && !panelInserted) {
+      const expandedProject = otherProjects[expandedIndex];
+      panelInserted = true;
+      gridChildren.push(
+        <ProjectDetailPanel
+          key={`detail-${expandedId}`}
+          ref={panelRef}
+          project={expandedProject}
+          onClose={() => handleCardClick(expandedId)}
+        />
+      );
+    }
+  }
+
   return (
     <section className="py-20 px-4">
       <div className="mx-auto max-w-5xl">
@@ -143,21 +222,8 @@ export function OtherProjects() {
         </AnimatedSection>
 
         <div ref={gridRef} className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-          {otherProjects.map((project) => (
-            <div key={project.id}>
-              <CompactProjectCard
-                project={project}
-                onClick={() => setSelectedProject(project)}
-              />
-            </div>
-          ))}
+          {gridChildren}
         </div>
-
-        <ProjectDialog
-          project={selectedProject}
-          open={!!selectedProject}
-          onClose={() => setSelectedProject(null)}
-        />
       </div>
     </section>
   );
