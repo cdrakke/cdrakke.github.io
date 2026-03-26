@@ -3,7 +3,7 @@ import { SectionHeading } from "@/components/shared/SectionHeading";
 
 export function About() {
   return (
-    <section id="about" className="py-20 px-4">
+    <section id="about" className="py-20 px-4 overflow-x-hidden">
       <div className="mx-auto max-w-5xl">
         <AnimatedSection>
           <SectionHeading title="About Me" />

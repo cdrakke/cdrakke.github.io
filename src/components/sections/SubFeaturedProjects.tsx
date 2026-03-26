@@ -1,6 +1,6 @@
 import { ExternalLink } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
-import { buttonVariants } from "@/components/ui/button-variants";
+import { buttonVariants } from "@/components/ui/button";
 import { AnimatedSection } from "@/components/shared/AnimatedSection";
 import { useTilt } from "@/hooks/useTilt";
 import { projects } from "@/data/projects";
@@ -78,7 +78,7 @@ export function SubFeaturedProjects() {
   const pickleball = projects.find((p) => p.id === "pickleball")!;
 
   return (
-    <section className="py-16 px-4 bg-muted/30">
+    <section className="py-16 px-4 bg-muted/30 overflow-x-hidden">
       <div className="mx-auto max-w-5xl">
         <div className="grid gap-6 md:grid-cols-2">
           <AnimatedSection direction="left" delay={0}>

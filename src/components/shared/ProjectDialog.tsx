@@ -1,6 +1,6 @@
 import { ExternalLink, FileText, Users } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
-import { buttonVariants } from "@/components/ui/button-variants";
+import { buttonVariants } from "@/components/ui/button";
 import {
   Dialog,
   DialogContent,
