@@ -21,6 +21,7 @@ export function Experience() {
                 period={exp.period}
                 description={exp.description}
                 items={exp.responsibilities}
+                logo={exp.logo}
                 isLast={i === experiences.length - 1}
               />
             ))}

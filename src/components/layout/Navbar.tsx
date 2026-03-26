@@ -67,7 +67,7 @@ export function Navbar() {
   };
 
   return (
-    <header className="fixed top-0 left-0 right-0 z-50 border-b border-border/40 bg-background/80 backdrop-blur-md">
+    <header data-navbar className="fixed top-0 left-0 right-0 z-50 border-b border-border/40 bg-background/80 backdrop-blur-md">
       {/* Scroll progress bar */}
       <div
         className="absolute top-0 left-0 h-[2px] bg-primary"

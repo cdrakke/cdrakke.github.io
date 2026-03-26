@@ -2,6 +2,27 @@
 @import "tw-animate-css";
 @import "shadcn/tailwind.css";
 
+/* Hide scrollbar globally — Lenis handles smooth scrolling */
+html {
+  scrollbar-width: none;
+}
+html::-webkit-scrollbar {
+  display: none;
+}
+
+/* During intro: hide navbar, music player, and footer behind the fixed loader */
+html.intro-playing [data-navbar],
+html.intro-playing [data-music-player],
+html.intro-playing footer {
+  opacity: 0 !important;
+  pointer-events: none;
+}
+html.intro-done [data-navbar],
+html.intro-done [data-music-player],
+html.intro-done footer {
+  transition: opacity 0.5s ease;
+}
+
 @font-face {
   font-family: 'Euclid Circular B';
   src: url('/fonts/euclid-circular-b-light.ttf') format('truetype');

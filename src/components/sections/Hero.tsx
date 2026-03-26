@@ -1,51 +1,82 @@
-import { useRef, useLayoutEffect, useState, useEffect } from "react";
+import { useRef, useLayoutEffect, useState, useEffect, useCallback } from "react";
 import { ArrowDown, Send } from "lucide-react";
 import { gsap } from "@/lib/gsap";
 import { buttonVariants } from "@/components/ui/button";
 import { ContourBackground } from "@/components/shared/ContourBackground";
+import { TerminalIntro } from "@/components/shared/TerminalIntro";
 import { useTypewriter } from "@/hooks/useTypewriter";
+import { getLenis } from "@/hooks/useSmoothScroll";
 import { siteConfig } from "@/data/site-config";
 import { cn } from "@/lib/utils";
+import { hasIntroPlayed, markIntroPlayed } from "@/lib/intro-state";
 
 export function Hero() {
   const containerRef = useRef<HTMLDivElement>(null);
-  const [phase, setPhase] = useState<"drawing" | "name" | "reveal" | "done">("drawing");
+  const [phase, setPhase] = useState<"terminal" | "name" | "reveal" | "done">(
+    hasIntroPlayed() ? "done" : "terminal"
+  );
 
   const { textRef, cursorRef } = useTypewriter({
     lines: [
       "I build systems that people actually use.",
       "Backend developer from General Santos City.",
-      "Django was my first love. Next.js is my current one.",
       "Serving 6+ guilds on Raidium — and counting.",
       "I automate the boring stuff so you don't have to.",
       "If it can be a system, I'll build it.",
       "Shipped a capstone that cut workload by 80%.",
       "From Python scripts to SaaS platforms.",
-      "I think in REST endpoints and database schemas.",
       "Crypto payments? Built that. On-chain verification and all.",
       "TypeScript by day, C# for fun.",
-      "My Discord bot has been running for 5+ years.",
       "I deploy on Vercel, Render, and bare metal VPS.",
       "Backend-first. I collaborate on frontends when needed.",
       "Cum Laude. Best Capstone. Programmer of the Year.",
-      "Fire safety DSS? 217 tests. All passing.",
       "Socket.IO, Redis, real-time everything.",
       "OCR-verified attendance. Screenshot or it didn't happen.",
       "I don't just write code — I ship products.",
       "Currently building the next thing.",
+      "Always learning, always building, always improving.",
+      "Let's connect and build something amazing together.",
+      "I don't just build for today — I build for the future.",
+      "Driven by curiosity, fueled by soda, and obsessed with quality.",
+      "If it can be automated, it should be automated. That's my motto.",
+      "I turn ideas into reality, one line of code at a time.",
+      "From concept to deployment, I handle it all — because I love building things that work.",
+      "I don't just write code — I create solutions that make a difference."
     ],
     typeSpeed: 35,
     deleteSpeed: 20,
   });
 
-  // Phase timeline
+  // Scroll to top, block scrolling, hide UI until loading finishes
   useEffect(() => {
-    const timers = [
-      setTimeout(() => setPhase("name"), 1800),
-      setTimeout(() => setPhase("reveal"), 2800),
-      setTimeout(() => setPhase("done"), 3500),
-    ];
-    return () => timers.forEach(clearTimeout);
+    if (phase === "done") {
+      // Reveal navbar and music player via CSS transition
+      document.documentElement.classList.remove("intro-playing");
+      document.documentElement.classList.add("intro-done");
+      return;
+    }
+
+    // Force scroll to top before locking
+    window.scrollTo(0, 0);
+    const lenis = getLenis();
+    if (lenis) {
+      lenis.scrollTo(0, { immediate: true });
+      lenis.stop();
+    }
+
+    return () => {
+      lenis?.start();
+    };
+  }, [phase]);
+
+  // Terminal complete → start name/reveal/done sequence
+  const handleTerminalComplete = useCallback(() => {
+    setPhase("name");
+    setTimeout(() => setPhase("reveal"), 700);
+    setTimeout(() => {
+      setPhase("done");
+      markIntroPlayed();
+    }, 1200);
   }, []);
 
   // GSAP for hero elements (avatar, subtitle, cta, scroll)
@@ -57,11 +88,24 @@ export function Hero() {
 
     const ctx = gsap.context(() => {
       gsap.set(".hero-extras", { opacity: 0 });
+    }, containerRef);
 
+    return () => ctx.revert();
+  }, []);
+
+  // Fade in hero extras once done
+  useEffect(() => {
+    if (phase !== "done" || !containerRef.current) return;
+
+    const prefersReduced = window.matchMedia(
+      "(prefers-reduced-motion: reduce)"
+    ).matches;
+    if (prefersReduced) return;
+
+    const ctx = gsap.context(() => {
       gsap.to(".hero-extras", {
         opacity: 1,
         duration: 0.6,
-        delay: 3.0,
         ease: "power3.out",
       });
 
@@ -71,14 +115,14 @@ export function Hero() {
         repeat: -1,
         yoyo: true,
         ease: "sine.inOut",
-        delay: 4.5,
+        delay: 1,
       });
     }, containerRef);
 
     return () => ctx.revert();
-  }, []);
+  }, [phase]);
 
-  const showName = phase !== "drawing";
+  const showName = phase !== "terminal";
   const showLoader = phase !== "done";
 
   return (
@@ -86,42 +130,23 @@ export function Hero() {
       ref={containerRef}
       className="relative flex min-h-[100dvh] items-center justify-center px-4 overflow-hidden"
     >
-      {/* Loader backdrop — contours + solid bg */}
+      {/* Loader backdrop — terminal animation (z-[60] to cover navbar) */}
       {showLoader && (
         <div
           className={cn(
-            "absolute inset-0 z-20 transition-opacity duration-500",
+            "fixed inset-0 z-[60] transition-opacity duration-500",
             phase === "reveal" ? "opacity-0" : "opacity-100"
           )}
         >
           <div className="absolute inset-0 bg-background" />
-          <svg
-            className="absolute inset-0 w-full h-full text-primary/[0.18]"
-            xmlns="http://www.w3.org/2000/svg"
-            aria-hidden="true"
+          <div
+            className={cn(
+              "relative z-10 w-full h-full transition-opacity duration-500",
+              phase === "terminal" ? "opacity-100" : "opacity-0"
+            )}
           >
-            <defs>
-              <style>{`
-                .lc{fill:none;stroke:currentColor;stroke-width:1.5;stroke-linecap:round;stroke-dasharray:1600;stroke-dashoffset:1600;animation:di 1.8s cubic-bezier(.25,1,.5,1) forwards}
-                .lc2{animation-delay:.1s}.lc3{animation-delay:.2s}.lc4{animation-delay:.15s}
-                .lc5{animation-delay:.25s}.lc6{animation-delay:.3s}.lc7{animation-delay:.35s}
-                @keyframes di{to{stroke-dashoffset:0}}
-              `}</style>
-            </defs>
-            <path className="lc" d="M-100,200 Q200,100 400,250 T800,180 T1200,300 T1600,200" />
-            <path className="lc lc2" d="M-50,350 Q150,280 350,400 T750,320 T1150,450 T1550,350" />
-            <path className="lc lc3" d="M-80,500 Q180,420 380,550 T780,470 T1180,580 T1580,500" />
-            <path className="lc lc4" d="M-60,120 Q250,50 500,150 T900,80 T1300,180 T1700,100" opacity=".7" />
-            <path className="lc lc5" d="M-40,650 Q200,580 450,680 T850,600 T1250,720 T1650,640" opacity=".5" />
-            <path className="lc lc6" d="M100,280 Q300,220 500,310 T800,250 T1100,340" opacity=".6" />
-            <path className="lc lc7" d="M50,450 Q250,380 450,470 T750,400 T1050,490" opacity=".4" />
-            <ellipse className="lc lc2" cx="85%" cy="15%" rx="120" ry="80" opacity=".5" />
-            <ellipse className="lc lc4" cx="85%" cy="15%" rx="180" ry="120" opacity=".35" />
-            <ellipse className="lc lc6" cx="85%" cy="15%" rx="250" ry="170" opacity=".2" />
-            <ellipse className="lc lc3" cx="10%" cy="80%" rx="100" ry="70" opacity=".5" />
-            <ellipse className="lc lc5" cx="10%" cy="80%" rx="160" ry="110" opacity=".35" />
-            <ellipse className="lc lc7" cx="10%" cy="80%" rx="230" ry="160" opacity=".2" />
-          </svg>
+            <TerminalIntro onComplete={handleTerminalComplete} />
+          </div>
         </div>
       )}
 
@@ -139,7 +164,7 @@ export function Hero() {
           />
         </div>
 
-        {/* THE one Drekyz — always here, fades in during loader, stays */}
+        {/* THE one Drekyz — fades in after terminal, stays */}
         <h1
           className={cn(
             "text-3xl font-bold tracking-tight sm:text-4xl md:text-5xl lg:text-6xl transition-all duration-700",

@@ -14,6 +14,7 @@ export const experiences: Experience[] = [
       "Lead developer of Ultima Productivity, a time boxing mobile application.",
       "One of the maintainers of Better Teaching Solutions web application and Leaf to Life CRM web application.",
     ],
+    logo: "/images/logos/simply-expanding.png",
   },
   {
     id: "cmo-ictd",
@@ -29,5 +30,6 @@ export const experiences: Experience[] = [
       "Performed diagnostics and repair on government computer hardware.",
       "Collaborated in a team-based environment alongside staff and other interns.",
     ],
+    logo: "/images/logos/ictd-gensan.png",
   },
 ];

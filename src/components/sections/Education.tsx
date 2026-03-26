@@ -23,6 +23,7 @@ export function Education() {
                 period={edu.years}
                 description={edu.description}
                 items={edu.achievements}
+                logo={edu.logo}
                 isLast={i === education.length - 1}
               />
             ))}

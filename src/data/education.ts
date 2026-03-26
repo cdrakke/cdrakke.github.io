@@ -14,6 +14,7 @@ export const education: Education[] = [
       "Programmer of the Year Awardee",
     ],
     images: ["/images/education/medals.png"],
+    logo: "/images/logos/sti.png",
   },
   {
     id: "shs",
@@ -21,6 +22,7 @@ export const education: Education[] = [
     years: "2019 - 2021",
     institution: "General Santos City National High School",
     description: "Science, Technology, Engineering, and Mathematics strand.",
+    logo: "/images/logos/gscnhs.png",
   },
 ];
 

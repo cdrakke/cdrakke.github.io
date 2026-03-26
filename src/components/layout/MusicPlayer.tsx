@@ -40,6 +40,7 @@ export function MusicPlayer() {
 
   return (
     <div
+      data-music-player
       role="region"
       aria-label="Music player"
       className={cn(

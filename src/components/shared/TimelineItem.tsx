@@ -6,6 +6,7 @@ interface TimelineItemProps {
   period: string;
   description?: string;
   items?: string[];
+  logo?: string;
   isLast?: boolean;
 }
 
@@ -15,6 +16,7 @@ export function TimelineItem({
   period,
   description,
   items,
+  logo,
   isLast = false,
 }: TimelineItemProps) {
   return (
@@ -32,7 +34,18 @@ export function TimelineItem({
           <h3 className="font-semibold">{title}</h3>
           <span className="text-sm text-muted-foreground">{period}</span>
         </div>
-        <p className="text-sm text-muted-foreground">{subtitle}</p>
+        <div className="flex items-center gap-2.5 mt-0.5">
+          {logo && (
+            <img
+              src={logo}
+              alt=""
+              className="h-7 w-7 shrink-0 rounded-full object-cover bg-white"
+              loading="lazy"
+              decoding="async"
+            />
+          )}
+          <p className="text-sm text-muted-foreground">{subtitle}</p>
+        </div>
         {description && (
           <p className="mt-2 text-sm text-foreground/80">{description}</p>
         )}
