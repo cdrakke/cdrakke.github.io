@@ -1,9 +1,8 @@
-import { useRef, useLayoutEffect, useState, useEffect, useCallback } from "react";
-import { ArrowDown, Send } from "lucide-react";
+import { useRef, useLayoutEffect, useState, useEffect } from "react";
+import { ArrowDown, Download, Send } from "lucide-react";
 import { gsap } from "@/lib/gsap";
 import { buttonVariants } from "@/components/ui/button";
 import { ContourBackground } from "@/components/shared/ContourBackground";
-import { TerminalIntro } from "@/components/shared/TerminalIntro";
 import { useTypewriter } from "@/hooks/useTypewriter";
 import { getLenis } from "@/hooks/useSmoothScroll";
 import { siteConfig } from "@/data/site-config";
@@ -12,8 +11,8 @@ import { hasIntroPlayed, markIntroPlayed } from "@/lib/intro-state";
 
 export function Hero() {
   const containerRef = useRef<HTMLDivElement>(null);
-  const [phase, setPhase] = useState<"terminal" | "name" | "reveal" | "done">(
-    hasIntroPlayed() ? "done" : "terminal"
+  const [phase, setPhase] = useState<"drawing" | "name" | "reveal" | "done">(
+    hasIntroPlayed() ? "done" : "drawing"
   );
 
   const { textRef, cursorRef } = useTypewriter({
@@ -47,16 +46,12 @@ export function Hero() {
     deleteSpeed: 20,
   });
 
-  // Scroll to top, block scrolling, hide UI until loading finishes
+  // Mount-time scroll lock for the intro sequence.
+  // Empty deps so this fires once and cleans up on unmount — no repeated
+  // stop/start cycles on every phase transition.
   useEffect(() => {
-    if (phase === "done") {
-      // Reveal navbar and music player via CSS transition
-      document.documentElement.classList.remove("intro-playing");
-      document.documentElement.classList.add("intro-done");
-      return;
-    }
+    if (hasIntroPlayed()) return;
 
-    // Force scroll to top before locking
     window.scrollTo(0, 0);
     const lenis = getLenis();
     if (lenis) {
@@ -65,64 +60,83 @@ export function Hero() {
     }
 
     return () => {
-      lenis?.start();
+      // Re-fetch in cleanup so a stale closure can't act on a destroyed instance.
+      getLenis()?.start();
     };
+  }, []);
+
+  // Class coordination — fires once when the intro completes, swapping the
+  // intro-playing class for intro-done so the navbar/music player CSS
+  // transitions reveal them. Also unlocks Lenis as a belt-and-suspenders
+  // safety in case the mount-time cleanup hasn't run yet.
+  useEffect(() => {
+    if (phase !== "done") return;
+    document.documentElement.classList.remove("intro-playing");
+    document.documentElement.classList.add("intro-done");
+    getLenis()?.start();
   }, [phase]);
 
-  // Terminal complete → start name/reveal/done sequence
-  const handleTerminalComplete = useCallback(() => {
-    setPhase("name");
-    setTimeout(() => setPhase("reveal"), 700);
-    setTimeout(() => {
-      setPhase("done");
-      markIntroPlayed();
-    }, 1200);
-  }, []);
-
-  // GSAP for hero elements (avatar, subtitle, cta, scroll)
-  useLayoutEffect(() => {
-    const prefersReduced = window.matchMedia(
-      "(prefers-reduced-motion: reduce)"
-    ).matches;
-    if (prefersReduced || !containerRef.current) return;
-
-    const ctx = gsap.context(() => {
-      gsap.set(".hero-extras", { opacity: 0 });
-    }, containerRef);
-
-    return () => ctx.revert();
-  }, []);
-
-  // Fade in hero extras once done
+  // Phase timeline — drives the contour-loader transition.
+  // Empty deps so the timer chain runs once on mount and is NOT cancelled
+  // when intermediate phase changes trigger this effect's cleanup.
   useEffect(() => {
-    if (phase !== "done" || !containerRef.current) return;
+    if (hasIntroPlayed()) return;
+    const timers = [
+      setTimeout(() => setPhase("name"), 1500),
+      setTimeout(() => setPhase("reveal"), 2200),
+      setTimeout(() => {
+        setPhase("done");
+        markIntroPlayed();
+      }, 2900),
+    ];
+    return () => timers.forEach(clearTimeout);
+  }, []);
+
+  // GSAP timeline for hero extras + scroll indicator. Single useLayoutEffect
+  // with empty deps means ctx.revert() only runs on unmount, not on every
+  // phase change — so the fade-in persists instead of being undone.
+  useLayoutEffect(() => {
+    if (!containerRef.current) return;
 
     const prefersReduced = window.matchMedia(
       "(prefers-reduced-motion: reduce)"
     ).matches;
-    if (prefersReduced) return;
+
+    const introWasSkipped = hasIntroPlayed();
 
     const ctx = gsap.context(() => {
-      gsap.to(".hero-extras", {
-        opacity: 1,
-        duration: 0.6,
-        ease: "power3.out",
-      });
+      if (introWasSkipped || prefersReduced) {
+        // Snap visible immediately — no intro to wait for.
+        gsap.set(".hero-extras", { opacity: 1 });
+      } else {
+        // Hidden until the loader starts fading out.
+        gsap.set(".hero-extras", { opacity: 0 });
+        // Fade-in is timed to overlap with phase=reveal (loader fade-out
+        // begins at 2.2s) so the handoff is continuous, not sequential.
+        gsap.to(".hero-extras", {
+          opacity: 1,
+          duration: 0.6,
+          delay: 2.2,
+          ease: "power3.out",
+        });
+      }
 
+      // Scroll-arrow bobbing — start after the intro completes
+      // (or immediately if there is no intro).
       gsap.to(".hero-scroll", {
         y: 8,
         duration: 1,
         repeat: -1,
         yoyo: true,
         ease: "sine.inOut",
-        delay: 1,
+        delay: introWasSkipped || prefersReduced ? 0.3 : 3.0,
       });
     }, containerRef);
 
     return () => ctx.revert();
-  }, [phase]);
+  }, []);
 
-  const showName = phase !== "terminal";
+  const showName = phase !== "drawing";
   const showLoader = phase !== "done";
 
   return (
@@ -130,23 +144,45 @@ export function Hero() {
       ref={containerRef}
       className="relative flex min-h-[100dvh] items-center justify-center px-4 overflow-hidden"
     >
-      {/* Loader backdrop — terminal animation (z-[60] to cover navbar) */}
+      {/* Loader backdrop — contour drawing animation. z-20 sits BELOW the
+          hero content (z-30) so the "Drekyz" h1 can fade in on top of the
+          still-drawing contours. Navbar/music/footer are hidden via the
+          `intro-playing` CSS class, so we don't need z-60 to cover them. */}
       {showLoader && (
         <div
           className={cn(
-            "fixed inset-0 z-[60] transition-opacity duration-500",
+            "fixed inset-0 z-20 transition-opacity duration-500",
             phase === "reveal" ? "opacity-0" : "opacity-100"
           )}
         >
           <div className="absolute inset-0 bg-background" />
-          <div
-            className={cn(
-              "relative z-10 w-full h-full transition-opacity duration-500",
-              phase === "terminal" ? "opacity-100" : "opacity-0"
-            )}
+          <svg
+            className="absolute inset-0 w-full h-full text-primary/[0.18]"
+            xmlns="http://www.w3.org/2000/svg"
+            aria-hidden="true"
           >
-            <TerminalIntro onComplete={handleTerminalComplete} />
-          </div>
+            <defs>
+              <style>{`
+                .lc{fill:none;stroke:currentColor;stroke-width:1.5;stroke-linecap:round;stroke-dasharray:1600;stroke-dashoffset:1600;animation:di 1.8s cubic-bezier(.25,1,.5,1) forwards}
+                .lc2{animation-delay:.1s}.lc3{animation-delay:.2s}.lc4{animation-delay:.15s}
+                .lc5{animation-delay:.25s}.lc6{animation-delay:.3s}.lc7{animation-delay:.35s}
+                @keyframes di{to{stroke-dashoffset:0}}
+              `}</style>
+            </defs>
+            <path className="lc" d="M-100,200 Q200,100 400,250 T800,180 T1200,300 T1600,200" />
+            <path className="lc lc2" d="M-50,350 Q150,280 350,400 T750,320 T1150,450 T1550,350" />
+            <path className="lc lc3" d="M-80,500 Q180,420 380,550 T780,470 T1180,580 T1580,500" />
+            <path className="lc lc4" d="M-60,120 Q250,50 500,150 T900,80 T1300,180 T1700,100" opacity=".7" />
+            <path className="lc lc5" d="M-40,650 Q200,580 450,680 T850,600 T1250,720 T1650,640" opacity=".5" />
+            <path className="lc lc6" d="M100,280 Q300,220 500,310 T800,250 T1100,340" opacity=".6" />
+            <path className="lc lc7" d="M50,450 Q250,380 450,470 T750,400 T1050,490" opacity=".4" />
+            <ellipse className="lc lc2" cx="85%" cy="15%" rx="120" ry="80" opacity=".5" />
+            <ellipse className="lc lc4" cx="85%" cy="15%" rx="180" ry="120" opacity=".35" />
+            <ellipse className="lc lc6" cx="85%" cy="15%" rx="250" ry="170" opacity=".2" />
+            <ellipse className="lc lc3" cx="10%" cy="80%" rx="100" ry="70" opacity=".5" />
+            <ellipse className="lc lc5" cx="10%" cy="80%" rx="160" ry="110" opacity=".35" />
+            <ellipse className="lc lc7" cx="10%" cy="80%" rx="230" ry="160" opacity=".2" />
+          </svg>
         </div>
       )}
 
@@ -164,7 +200,7 @@ export function Hero() {
           />
         </div>
 
-        {/* THE one Drekyz — fades in after terminal, stays */}
+        {/* THE one Drekyz — fades in after loader, stays */}
         <h1
           className={cn(
             "text-3xl font-bold tracking-tight sm:text-4xl md:text-5xl lg:text-6xl transition-all duration-700",
@@ -196,6 +232,17 @@ export function Hero() {
             >
               View Projects
               <ArrowDown className="h-4 w-4" />
+            </a>
+            <a
+              href="/resume/Calvin_Drakke_Rulete_Resume.pdf"
+              download
+              className={cn(
+                buttonVariants({ variant: "outline", size: "lg" }),
+                "gap-2"
+              )}
+            >
+              Download CV
+              <Download className="h-4 w-4" />
             </a>
             <a
               href="#contact"
