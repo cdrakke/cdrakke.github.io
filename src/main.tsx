@@ -3,6 +3,8 @@ import { createRoot } from "react-dom/client";
 import { BrowserRouter } from "react-router-dom";
 import { ThemeProvider } from "@/components/layout/ThemeProvider";
 import { MusicProvider } from "@/components/layout/MusicProvider";
+import "@fontsource-variable/inter/wght.css";
+import "@fontsource-variable/inter/wght-italic.css";
 import App from "./App";
 import "./index.css";
 
