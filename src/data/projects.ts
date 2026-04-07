@@ -33,7 +33,7 @@ export const projects: Project[] = [
     ],
     coverImage: "/images/projects/raidium/cover.png",
     liveUrl: "https://raidium.quest",
-    date: "2025 - Present",
+    date: "Aug 2025 - Present",
     category: "saas",
   },
   {
@@ -99,7 +99,7 @@ export const projects: Project[] = [
       "/images/projects/ifs-dss/login.jpg",
       "/images/projects/ifs-dss/dashboard.jpg",
     ],
-    date: "2025",
+    date: "Feb 2026 - Present",
     category: "web",
     collaborative: true,
     collaborator: "dustgrau",

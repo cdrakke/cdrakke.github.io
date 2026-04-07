@@ -1,0 +1,492 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Calvin Drakke I. Rulete — Full Stack Developer</title>
+    <meta
+      name="description"
+      content="Resume of Calvin Drakke I. Rulete — Full Stack Developer (backend-focused) based in General Santos City, Philippines."
+    />
+    <style>
+      /* ---------- Page setup (PDF / print) ---------- */
+      @page {
+        size: A4;
+        margin: 11mm 14mm;
+      }
+
+      :root {
+        --ink: #0f0f10;
+        --muted: #4a4a52;
+        --line: #c9c9d1;
+        --accent: #1f4dbf;
+        --bg: #ffffff;
+      }
+
+      *,
+      *::before,
+      *::after {
+        box-sizing: border-box;
+      }
+
+      html,
+      body {
+        background: var(--bg);
+        color: var(--ink);
+        font-family: -apple-system, "Segoe UI", Helvetica, Arial, sans-serif;
+        font-size: 9.1pt;
+        line-height: 1.32;
+        margin: 0;
+        padding: 0;
+        -webkit-font-smoothing: antialiased;
+        text-rendering: optimizeLegibility;
+      }
+
+      a {
+        color: var(--accent);
+        text-decoration: none;
+      }
+      a:hover {
+        text-decoration: underline;
+      }
+
+      /* ---------- On-screen wrapper (mimics A4 in browser) ---------- */
+      .page {
+        max-width: 178mm; /* A4 width minus side margins */
+        margin: 0 auto;
+        padding: 14mm 0;
+      }
+
+      @media print {
+        .page {
+          max-width: none;
+          margin: 0;
+          padding: 0;
+        }
+        .screen-only {
+          display: none !important;
+        }
+      }
+
+      /* ---------- Header ---------- */
+      header {
+        margin-bottom: 6px;
+      }
+
+      .name {
+        font-size: 17pt;
+        font-weight: 700;
+        letter-spacing: 0.2px;
+        margin: 0 0 1px 0;
+        line-height: 1.1;
+      }
+
+      .role {
+        font-size: 10pt;
+        font-weight: 500;
+        color: var(--accent);
+        margin: 0 0 4px 0;
+        letter-spacing: 0.3px;
+      }
+
+      .meta {
+        font-size: 8.6pt;
+        color: var(--muted);
+        line-height: 1.45;
+      }
+
+      .meta .sep {
+        color: var(--line);
+        margin: 0 6px;
+      }
+
+      /* ---------- Section ---------- */
+      section {
+        margin-top: 7px;
+      }
+
+      h2 {
+        font-size: 9pt;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 1.3px;
+        color: var(--ink);
+        margin: 0 0 3px 0;
+        padding-bottom: 1px;
+        border-bottom: 1px solid var(--ink);
+      }
+
+      /* ---------- Summary ---------- */
+      .summary {
+        margin: 0;
+      }
+
+      /* ---------- Skills ---------- */
+      .skills {
+        margin: 0;
+        padding: 0;
+        list-style: none;
+      }
+      .skills li {
+        margin: 0;
+      }
+      .skills .label {
+        font-weight: 700;
+        color: var(--ink);
+      }
+
+      /* ---------- Entry (job / project / school) ---------- */
+      .entry {
+        margin-top: 4px;
+      }
+      .entry:first-child {
+        margin-top: 0;
+      }
+
+      .entry-head {
+        display: flex;
+        justify-content: space-between;
+        align-items: baseline;
+        gap: 12px;
+      }
+
+      .entry-title {
+        font-weight: 700;
+        font-size: 9.5pt;
+      }
+
+      .entry-sub {
+        font-size: 8.8pt;
+        color: var(--muted);
+        font-style: italic;
+      }
+
+      .entry-dates {
+        font-size: 8.8pt;
+        color: var(--muted);
+        white-space: nowrap;
+        font-variant-numeric: tabular-nums;
+      }
+
+      .entry ul {
+        margin: 1px 0 0 0;
+        padding-left: 13px;
+      }
+      .entry li {
+        margin: 0;
+      }
+
+      .stack {
+        margin: 1px 0 0 0;
+        font-size: 8.4pt;
+        color: var(--muted);
+      }
+      .stack .label {
+        font-weight: 700;
+        font-style: italic;
+      }
+
+      strong {
+        color: var(--ink);
+      }
+
+      /* ---------- Education / Certification compact rows ---------- */
+      .compact-row {
+        display: flex;
+        justify-content: space-between;
+        align-items: baseline;
+        gap: 12px;
+      }
+      .compact-row + .compact-row {
+        margin-top: 3px;
+      }
+
+      /* ---------- Screen-only download bar ---------- */
+      .download-bar {
+        max-width: 178mm;
+        margin: 14px auto 0 auto;
+        text-align: center;
+        font-size: 10pt;
+      }
+      .download-bar a {
+        display: inline-block;
+        padding: 8px 16px;
+        border: 1px solid var(--accent);
+        border-radius: 6px;
+        font-weight: 600;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="download-bar screen-only">
+      <a href="./Calvin_Drakke_Rulete_Resume.pdf" download>Download PDF</a>
+    </div>
+
+    <main class="page">
+      <header>
+        <h1 class="name">Calvin Drakke I. Rulete</h1>
+        <p class="role">Full Stack Developer</p>
+        <div class="meta">
+          General Santos City, Philippines
+           <span class="sep">·</span>Open to Remote
+          <br />
+          <a href="mailto:drekyz.business@gmail.com">drekyz.business@gmail.com</a>
+           <span class="sep">·</span>+63 908 160 0631
+           <span class="sep">·</span>
+          <a href="https://cdrakke.github.io">cdrakke.github.io</a>
+           <span class="sep">·</span>
+          <a href="https://github.com/cdrakke">github.com/cdrakke</a>
+           <span class="sep">·</span>
+          <a href="https://www.linkedin.com/in/calvin-drakke-r-94935b128/">linkedin.com/in/calvin-drakke-r</a>
+        </div>
+      </header>
+
+      <section>
+        <h2>Summary</h2>
+        <p class="summary">
+          Full stack developer with a backend-heavy focus, building production
+          SaaS, mobile, and web systems on Django, NestJS, Next.js, and React
+          Native. Owner of <strong>Raidium</strong> — a multi-tenant guild
+          management SaaS serving 6+ MMORPG communities with 71+ API endpoints
+          and on-chain crypto payments. BSIT <em>Cum Laude</em> graduate (Best
+          Capstone Project, Programmer of the Year).
+        </p>
+      </section>
+
+      <section>
+        <h2>Technical Skills</h2>
+        <ul class="skills">
+          <li>
+            <span class="label">Languages:</span> TypeScript, JavaScript, Python,
+            SQL, C#
+          </li>
+          <li>
+            <span class="label">Backend:</span> NestJS, Django, Node.js, Express,
+            REST API design
+          </li>
+          <li>
+            <span class="label">Frontend:</span> Next.js, React, React Native,
+            Expo, Tailwind CSS, ShadCN/ui
+          </li>
+          <li>
+            <span class="label">Databases:</span> PostgreSQL, MongoDB, Redis,
+            SQLite, Firebase RTDB
+          </li>
+          <li>
+            <span class="label">DevOps &amp; Infra:</span> Docker, Coolify,
+            NGINX, Certbot/SSL, Linux VPS, SSH hardening
+          </li>
+          <li>
+            <span class="label">Integrations:</span> Prisma, Socket.IO, Stripe,
+            PayMaya, KAIA blockchain, Azure OCR, Discord webhooks, Git/GitHub
+          </li>
+        </ul>
+      </section>
+
+      <section>
+        <h2>Professional Experience</h2>
+
+        <div class="entry">
+          <div class="entry-head">
+            <div>
+              <span class="entry-title">Software Developer</span>
+              <span class="entry-sub">
+                · Simply Expanding Digital Marketing Services · General Santos
+                City, PH
+              </span>
+            </div>
+            <span class="entry-dates">Aug 2025 – Present</span>
+          </div>
+          <ul>
+            <li>
+              Lead backend developer for <strong>Alertison</strong> — a
+              real-time React Native family-safety app with Socket.IO chat,
+              geofence-based safety alerts, SOS push notifications, and
+              background location tracking via expo-task-manager.
+            </li>
+            <li>
+              Lead backend for <strong>Ultima Productivity</strong>, a time-boxing
+              mobile app with location pinning and real-time notifications.
+            </li>
+            <li>
+              Maintainer of the <strong>Better Teaching Solutions</strong> web
+              app and <strong>Leaf to Life</strong> CRM.
+            </li>
+          </ul>
+          <p class="stack">
+            <span class="label">Stack:</span> NestJS, Node.js, Express, MongoDB,
+            Socket.IO, React Native, Expo, Firebase
+          </p>
+        </div>
+
+        <div class="entry">
+          <div class="entry-head">
+            <div>
+              <span class="entry-title">Hardware &amp; Network Support Intern</span>
+              <span class="entry-sub">
+                · CMO-ICTD, LGU General Santos City
+              </span>
+            </div>
+            <span class="entry-dates">Jan 2025 – May 2025</span>
+          </div>
+          <ul>
+            <li>
+              Maintained network systems across LGU offices and updated WordPress
+              sites — shipped a searchable executive order archive feature for
+              public access.
+            </li>
+            <li>
+              Performed diagnostics and repair on government workstations;
+              collaborated with staff and other interns in a team-based
+              environment.
+            </li>
+          </ul>
+        </div>
+      </section>
+
+      <section>
+        <h2>Selected Projects</h2>
+
+        <div class="entry">
+          <div class="entry-head">
+            <div>
+              <span class="entry-title">Raidium</span>
+              <span class="entry-sub">
+                · Lead Developer ·
+                <a href="https://raidium.quest">raidium.quest</a>
+              </span>
+            </div>
+            <span class="entry-dates">Aug 2025 – Present</span>
+          </div>
+          <ul>
+            <li>
+              Multi-tenant guild management SaaS serving
+              <strong>6+ MMORPG guilds</strong> in LordNine with full
+              guild-scoped data isolation and a 4-tier RBAC hierarchy.
+            </li>
+            <li>
+              Designed and shipped <strong>71+ REST API endpoints</strong>
+              spanning OCR-verified attendance (Azure OCR), points economy with
+              weekly rankings, marketplace with auctions, and red-boss tracking
+              with Discord webhook reminders.
+            </li>
+            <li>
+              Built <strong>on-chain payment verification on the KAIA blockchain</strong>
+              for a 5-tier USDt subscription system ($3–$10/mo) — eliminated
+              payment processor fees and chargebacks.
+            </li>
+          </ul>
+          <p class="stack">
+            <span class="label">Stack:</span> Next.js 15, React 19, MongoDB,
+            Tailwind, ShadCN/ui, KAIA blockchain, Azure OCR, QStash, Cloudinary
+          </p>
+        </div>
+
+        <div class="entry">
+          <div class="entry-head">
+            <div>
+              <span class="entry-title">Integrated Fire Services DSS</span>
+              <span class="entry-sub">· Lead Backend</span>
+            </div>
+            <span class="entry-dates">Feb 2026 – Present</span>
+          </div>
+          <ul>
+            <li>
+              Decision support system automating the fire safety project
+              lifecycle for compliance workflows, with a 6-rule decision engine
+              and a 15-model Prisma schema for RFI management and fee proposals.
+            </li>
+            <li>
+              Shipped <strong>57 documented API endpoints</strong> across 15
+              NestJS modules, backed by <strong>217 passing tests</strong>
+              across 20 test suites.
+            </li>
+          </ul>
+          <p class="stack">
+            <span class="label">Stack:</span> NestJS, TypeScript, Prisma,
+            PostgreSQL, Swagger, Bun
+          </p>
+        </div>
+
+        <div class="entry">
+          <div class="entry-head">
+            <div>
+              <span class="entry-title">GYOCC.online</span>
+              <span class="entry-sub">· Backend Programmer (Capstone)</span>
+            </div>
+            <span class="entry-dates">Apr 2024 – Nov 2024</span>
+          </div>
+          <ul>
+            <li>
+              First web management system for the Gensan Youth Orchestra &amp;
+              Choir Corporation — supports concert ticketing with QR validation,
+              lesson scheduling, and an analytics dashboard.
+            </li>
+            <li>
+              Reduced event coordination workload by <strong>80%</strong> by
+              replacing paper/Excel workflows; integrated PayMaya checkout and
+              SMS/email 2FA via the Google Email API.
+            </li>
+          </ul>
+          <p class="stack">
+            <span class="label">Stack:</span> Django, PostgreSQL, Bootstrap,
+            PayMaya API, Google Email API
+          </p>
+        </div>
+
+        <div class="entry">
+          <div class="entry-head">
+            <div>
+              <span class="entry-title">GLiberator</span>
+              <span class="entry-sub">· Solo Developer</span>
+            </div>
+            <span class="entry-dates">Apr 2020 – May 2025</span>
+          </div>
+          <ul>
+            <li>
+              Discord bot for automated emoji submission and community voting,
+              <strong>maintained for 5+ years</strong>. Implemented 13+ custom
+              commands including vote thresholds, expiration handling, and
+              image deduplication checks against a persistent SQLite store.
+            </li>
+          </ul>
+          <p class="stack">
+            <span class="label">Stack:</span> Python, discord.py, SQLite
+          </p>
+        </div>
+      </section>
+
+      <section>
+        <h2>Education</h2>
+        <div class="entry">
+          <div class="entry-head">
+            <div>
+              <span class="entry-title">
+                Bachelor of Science in Information Technology
+              </span>
+              <span class="entry-sub">· STI College, General Santos City</span>
+            </div>
+            <span class="entry-dates">2021 – 2025</span>
+          </div>
+          <ul>
+            <li>
+              <strong>Cum Laude</strong> · Best Capstone Project Awardee ·
+              Programmer of the Year Awardee
+            </li>
+          </ul>
+        </div>
+      </section>
+
+      <section>
+        <h2>Certifications</h2>
+        <div class="compact-row">
+          <span>
+            <strong>Civil Service Career Professional</strong>
+            <span class="entry-sub"> · Rating 82.4</span>
+          </span>
+          <span class="entry-dates">March 2, 2025</span>
+        </div>
+      </section>
+    </main>
+  </body>
+</html>
