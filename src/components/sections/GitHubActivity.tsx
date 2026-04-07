@@ -26,38 +26,21 @@ export function GitHubActivity() {
               />
             </a>
 
-            {/* Row 2 — Stats + Profile summary (2-col on sm+, stacked on mobile) */}
-            <div className="grid w-full gap-6 grid-cols-1 sm:grid-cols-2">
-              <a
-                href="https://github.com/cdrakke"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="flex items-center"
-              >
-                <img
-                  src={`https://github-readme-stats.vercel.app/api?username=cdrakke&show_icons=true&theme=${isDark ? "github_dark" : "default"}&hide_border=true&bg_color=00000000`}
-                  alt="GitHub Stats"
-                  className="h-auto w-full rounded-lg"
-                  loading="lazy"
-                  decoding="async"
-                />
-              </a>
-
-              <a
-                href="https://github.com/cdrakke"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="hidden sm:flex items-center"
-              >
-                <img
-                  src={`https://github-profile-summary-cards.vercel.app/api/cards/profile-details?username=cdrakke&theme=${isDark ? "aura_dark" : "default"}`}
-                  alt="GitHub Profile Summary"
-                  className="h-auto w-full rounded-lg"
-                  loading="lazy"
-                  decoding="async"
-                />
-              </a>
-            </div>
+            {/* Row 2 — Profile summary card */}
+            <a
+              href="https://github.com/cdrakke"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="w-full max-w-5xl flex items-center"
+            >
+              <img
+                src={`https://github-profile-summary-cards.vercel.app/api/cards/profile-details?username=cdrakke&theme=${isDark ? "aura_dark" : "default"}`}
+                alt="GitHub Profile Summary"
+                className="h-auto w-full rounded-lg"
+                loading="lazy"
+                decoding="async"
+              />
+            </a>
           </div>
         </AnimatedSection>
       </div>
