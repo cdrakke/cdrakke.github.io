@@ -3,7 +3,7 @@ import type { NavItem } from "@/types";
 export const siteConfig = {
   name: "Drekyz",
   fullName: "Calvin Drakke I. Rulete",
-  title: "Backend Developer",
+  title: "Full Stack Developer",
   description:
     "Backend-focused developer with hands-on experience building APIs, system architecture, and automation tools using Django, Next.js, and NestJS. Comfortable across the stack when needed, but my strength is in the logic, data, and infrastructure behind the product.",
   url: "https://cdrakke.github.io",
