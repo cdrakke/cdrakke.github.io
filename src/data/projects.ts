@@ -69,6 +69,7 @@ export const projects: Project[] = [
     category: "mobile",
     collaborative: true,
     collaborator: "dustgrau",
+    collaboratorUrl: "https://michaelpanizales.vercel.app/",
   },
   {
     id: "ifs-dss",
@@ -103,6 +104,7 @@ export const projects: Project[] = [
     category: "web",
     collaborative: true,
     collaborator: "dustgrau",
+    collaboratorUrl: "https://michaelpanizales.vercel.app/",
   },
   {
     id: "pickleball",
@@ -136,6 +138,7 @@ export const projects: Project[] = [
     category: "web",
     collaborative: true,
     collaborator: "dustgrau",
+    collaboratorUrl: "https://michaelpanizales.vercel.app/",
   },
   {
     id: "fm-lps-up",
@@ -157,6 +160,7 @@ export const projects: Project[] = [
     category: "mobile",
     collaborative: true,
     collaborator: "dustgrau",
+    collaboratorUrl: "https://michaelpanizales.vercel.app/",
   },
   {
     id: "gyocc",

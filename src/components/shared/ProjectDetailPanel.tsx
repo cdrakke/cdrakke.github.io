@@ -157,7 +157,23 @@ export const ProjectDetailPanel = forwardRef<
                 <Users className="h-4 w-4" />
                 <span>
                   Collaborative project
-                  {project.collaborator && ` with ${project.collaborator}`}
+                  {project.collaborator && (
+                    <>
+                      {" with "}
+                      {project.collaboratorUrl ? (
+                        <a
+                          href={project.collaboratorUrl}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="underline underline-offset-4 hover:text-foreground"
+                        >
+                          {project.collaborator}
+                        </a>
+                      ) : (
+                        project.collaborator
+                      )}
+                    </>
+                  )}
                 </span>
               </div>
             )}

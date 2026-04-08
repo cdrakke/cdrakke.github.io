@@ -15,6 +15,7 @@ export interface Project {
   category: "web" | "mobile" | "desktop" | "bot" | "tool" | "saas";
   collaborative?: boolean;
   collaborator?: string;
+  collaboratorUrl?: string;
 }
 
 export interface Education {
