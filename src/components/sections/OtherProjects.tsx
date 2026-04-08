@@ -41,7 +41,7 @@ function CompactProjectCard({
   return (
     <div
       className={cn(
-        "group cursor-pointer overflow-hidden rounded-xl border bg-card text-card-foreground shadow-sm transition-all duration-300 hover:shadow-lg hover:shadow-primary/5 hover:-translate-y-1",
+        "group flex h-full cursor-pointer flex-col overflow-hidden rounded-xl border bg-card text-card-foreground shadow-sm transition-all duration-300 hover:shadow-lg hover:shadow-primary/5 hover:-translate-y-1",
         isExpanded
           ? "border-primary/30 shadow-md shadow-primary/10"
           : "border-border hover:border-primary/20"
@@ -63,7 +63,7 @@ function CompactProjectCard({
           {project.title[0]}
         </span>
       </div>
-      <CardHeader className="pb-2">
+      <CardHeader className="pt-4 pb-2">
         <div className="flex items-center justify-between gap-2">
           <CardTitle className="text-lg">{project.title}</CardTitle>
           <Badge
@@ -78,7 +78,7 @@ function CompactProjectCard({
         </div>
         <p className="text-xs text-muted-foreground">{project.role}</p>
       </CardHeader>
-      <CardContent className="pb-5">
+      <CardContent className="flex flex-1 flex-col pb-5">
         <CardDescription className="line-clamp-2">
           {project.summary}
         </CardDescription>
@@ -191,7 +191,7 @@ export function OtherProjects() {
   for (let i = 0; i < otherProjects.length; i++) {
     const project = otherProjects[i];
     gridChildren.push(
-      <div key={project.id} data-grid-card>
+      <div key={project.id} data-grid-card className="h-full">
         <CompactProjectCard
           project={project}
           isExpanded={expandedId === project.id}
