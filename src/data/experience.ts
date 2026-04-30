@@ -6,13 +6,13 @@ export const experiences: Experience[] = [
     role: "Software Developer",
     organization: "Simply Expanding Digital Marketing Services",
     location: "General Santos City, Philippines",
-    period: "Aug 2025 - Present",
+    period: "Aug 2025 - Apr 2026",
     description:
       "Digital marketing agency providing SEO, software and online growth solutions.",
     responsibilities: [
-      "Lead developer of Alertison, a family tracking mobile application.",
-      "Lead developer of Ultima Productivity, a time boxing mobile application.",
-      "One of the maintainers of Better Teaching Solutions web application and Leaf to Life CRM web application.",
+      "Led development of Alertison, a family tracking mobile application.",
+      "Led development of Ultima Productivity, a time boxing mobile application.",
+      "Maintained Better Teaching Solutions web application and Leaf to Life CRM web application.",
     ],
     logo: "/images/logos/simply-expanding.png",
   },
