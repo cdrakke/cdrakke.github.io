@@ -2,6 +2,21 @@ import type { Experience } from "@/types";
 
 export const experiences: Experience[] = [
   {
+    id: "realty-one-group",
+    role: "Full Stack Developer (Backend-Focused)",
+    organization: "Realty ONE Group Philippines",
+    location: "General Santos, Soccsksargen, Philippines (Remote)",
+    period: "May 2026 - Present",
+    description:
+      "Real estate franchise serving the Philippine market under the Realty ONE Group brand.",
+    responsibilities: [
+      "Collaborate with a team building an internal operations platform for a real estate franchise.",
+      "Back-end-focused full stack work spanning office, brokerage, agent, listing, and transaction management.",
+      "Contract role — remote.",
+    ],
+    logo: "/images/logos/realty-one-group.png",
+  },
+  {
     id: "simply-expanding",
     role: "Software Developer",
     organization: "Simply Expanding Digital Marketing Services",
