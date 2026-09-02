@@ -17,7 +17,7 @@ const figures = (compact ? data.figures.slice(0, 3) : data.figures).map(figureTe
 const line = figures.length ? figures.join(" · ") : data.summary;
 ---
 
-<a class:list={["entry", compact && "compact"]} href={`/diary/${project.id}`}>
+<a class:list={["entry", compact && "compact"]} href={`/diary/${project.id}`} data-astro-prefetch="viewport">
   <span class:list={["yr", `tone-${yearTone(index)}`]}>{data.year}</span>
   <span class="body">
     <span class="head">
@@ -54,7 +54,8 @@ const line = figures.length ? figures.join(" · ") : data.summary;
     transform: translateY(-2px);
     box-shadow: var(--lift);
   }
-  .entry:active {
+  .entry:active,
+  .entry.going {
     transform: translateY(1px);
   }
 

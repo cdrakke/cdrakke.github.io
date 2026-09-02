@@ -6,6 +6,9 @@ export default defineConfig({
   site: "https://cdrakke.github.io",
   output: "static",
   trailingSlash: "ignore",
+  // Explicit so `astro:prefetch` can be imported (the room prefetches its links by hand, see Room.astro);
+  // these are the values the ClientRouter would otherwise set on its own.
+  prefetch: { prefetchAll: true, defaultStrategy: "hover" },
   integrations: [
     sitemap({
       filter: (page) => !page.endsWith("/og/") && !page.endsWith("/resume/"),

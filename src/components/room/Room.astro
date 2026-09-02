@@ -102,11 +102,19 @@ const byId = Object.fromEntries(roomObjects.map((o) => [o.id, o]));
 </svg>
 
 <script>
+  import { prefetch } from "astro:prefetch";
+
   // The record player in the room follows the real player, and can drive it.
   const wire = () => {
     document.querySelectorAll<SVGElement>(".room").forEach((room) => {
       if (room.dataset.wired) return;
       room.dataset.wired = "1";
+      // The furnishings are SVG links, which Astro's data-astro-prefetch strategies skip (they only match
+      // HTML anchors), so the room prefetches its pages itself once it is on screen. Absolute URLs so the
+      // prefetch dedupes against the legend chips below the room, which carry the same hrefs.
+      room.querySelectorAll<SVGAElement>("a.hit[href]").forEach((a) => {
+        prefetch(new URL(a.getAttribute("href")!, location.href).href);
+      });
       room.querySelectorAll<SVGGElement>("[data-event]").forEach((el) => {
         const fire = () => document.dispatchEvent(new Event(el.dataset.event!));
         el.addEventListener("click", fire);
@@ -151,12 +159,29 @@ const byId = Object.fromEntries(roomObjects.map((o) => [o.id, o]));
   .obj {
     transform-box: fill-box;
     transform-origin: 50% 100%;
-    transition: transform var(--dur-base) var(--ease-out);
+    transition:
+      transform var(--dur-base) var(--ease-out),
+      opacity var(--dur-fast) var(--ease-out);
   }
 
   .obj:hover,
-  .obj:focus-within {
+  .obj:focus-within,
+  .obj:has(> .going) {
     transform: translateY(-3px);
+  }
+
+  /* a real press: the object sinks while the button is held */
+  .obj:active {
+    transform: translateY(1px) scale(0.99);
+    transition-duration: var(--dur-fast);
+  }
+
+  /* going: the clicked object stays up with its label lit until the next page lands; the others step back */
+  .obj:has(> .going) :global(.rtag rect) {
+    fill: var(--butter);
+  }
+  :global(html[data-leaving]) .obj:not(:has(> .going)) {
+    opacity: 0.6;
   }
 
   .obj :global(.rtag) {
@@ -166,7 +191,9 @@ const byId = Object.fromEntries(roomObjects.map((o) => [o.id, o]));
   }
 
   .obj:hover :global(.rtag rect),
-  .obj:focus-within :global(.rtag rect) {
+  .obj:focus-within :global(.rtag rect),
+  .obj:active :global(.rtag rect),
+  .obj:has(> .going) :global(.rtag rect) {
     stroke-opacity: 1;
     stroke-width: 1.6;
   }
@@ -241,7 +268,9 @@ const byId = Object.fromEntries(roomObjects.map((o) => [o.id, o]));
       animation: none;
     }
     .obj:hover,
-    .obj:focus-within {
+    .obj:focus-within,
+    .obj:active,
+    .obj:has(> .going) {
       transform: none;
     }
   }

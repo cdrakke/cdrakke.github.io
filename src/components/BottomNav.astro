@@ -20,7 +20,7 @@ const isActive = (href: string) => (href === "/" ? path === "/" : path.startsWit
     {
       site.nav.map((item) => (
         <li>
-          <a class:list={["tab", isActive(item.href) && "on"]} href={item.href} aria-current={isActive(item.href) ? "page" : undefined}>
+          <a class:list={["tab", isActive(item.href) && "on"]} href={item.href} data-astro-prefetch="load" aria-current={isActive(item.href) ? "page" : undefined}>
             <Icon name={item.icon as IconName} size={18} />
             <span class="lbl">{item.label}</span>
             {counts[item.label] !== undefined && <span class="n">{counts[item.label]}</span>}
@@ -81,6 +81,13 @@ const isActive = (href: string) => (href === "/" ? path === "/" : path.startsWit
 
   .tab:hover {
     background: var(--field);
+  }
+
+  /* a real press, held (.going) from the click until the next page lands; the active tab keeps its mint */
+  .tab:active,
+  .tab.going {
+    background: var(--field);
+    transform: translateY(1px);
   }
 
   .tab.on {

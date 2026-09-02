@@ -143,6 +143,34 @@ const personLd = {
       };
       document.addEventListener("bgm:state", (e) => sync((e as CustomEvent).detail.playing));
       document.addEventListener("astro:page-load", () => document.dispatchEvent(new Event("bgm:query")));
+
+      // A click is acknowledged before the next page is fetched: the clicked link or button is marked .going
+      // (each control decides in its own CSS what that looks like: a held press, or the room object staying up
+      // with its label lit) and the page marks itself as leaving. Both clear on their own when the swap replaces
+      // <body> and <html>'s attributes, and a failed fetch falls back to a full load. Back/forward has no source
+      // element and gets neither, so a traversal never dims the room.
+      document.addEventListener("astro:before-preparation", (e) => {
+        document.querySelectorAll(".going").forEach((el) => el.classList.remove("going"));
+        const control = e.sourceElement?.closest("a, button");
+        if (!control) return;
+        control.classList.add("going");
+        document.documentElement.dataset.leaving = "";
+      });
+
+      // A failed fetch falls back to a full load with the markers still set on the old document; if the browser
+      // later restores that document from its back/forward cache, clear them so the room does not come back dimmed.
+      window.addEventListener("pageshow", (e) => {
+        if (!e.persisted) return;
+        document.querySelectorAll(".going").forEach((el) => el.classList.remove("going"));
+        delete document.documentElement.dataset.leaving;
+      });
+
+      // After a client-side navigation the click has already been acknowledged, so the settle runs tighter
+      // (global.css). astro:after-swap fires after <html>'s attributes were replaced and before the first paint;
+      // a hard reload clears the marker and the full entrance returns.
+      document.addEventListener("astro:after-swap", () => {
+        document.documentElement.dataset.nav = "client";
+      });
     </script>
   </body>
 </html>

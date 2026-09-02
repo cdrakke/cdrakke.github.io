@@ -129,7 +129,9 @@ ol {
   border: 0;
 }
 
-/* the "settle" entrance: one authored moment, staggered by --i, from an already-visible ground */
+/* the "settle" entrance: one authored moment, staggered by --i, from an already-visible ground.
+   Fill is backwards, not both: the end keyframe is the natural state, and a forwards fill would keep
+   overriding transform and opacity after landing, blocking the hover lift, the press, and the going state. */
 @keyframes settle {
   from {
     transform: translateY(-10px) scale(0.985);
@@ -142,8 +144,20 @@ ol {
 }
 
 .settle {
-  animation: settle var(--dur-settle) var(--ease-settle) both;
-  animation-delay: calc(var(--i, 0) * 70ms);
+  animation: settle var(--dur-settle) var(--ease-settle) backwards;
+  animation-delay: calc(var(--i, 0) * var(--settle-stagger));
+}
+
+/* after a client-side navigation the click has already been acknowledged, so the same settle runs tighter
+   (Base.astro marks <html> on astro:after-swap; a hard reload clears it and the full entrance returns) */
+html[data-nav="client"] {
+  --dur-settle: 360ms;
+  --settle-stagger: 35ms;
+}
+
+/* leaving: set the moment a link is clicked, before the next page is fetched; the swap clears it */
+html[data-leaving] {
+  cursor: progress;
 }
 
 @media (prefers-reduced-motion: reduce) {

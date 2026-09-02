@@ -81,6 +81,7 @@
   --dur-fast: 160ms;
   --dur-base: 260ms;
   --dur-settle: 620ms;
+  --settle-stagger: 70ms;
 
   --nav-height: 62px;
   --frame-pad: 22px;

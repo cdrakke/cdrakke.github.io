@@ -207,7 +207,7 @@ components:
 
 The site is a room you visit, not a hero you scroll past. Everything sits on one committed sky field printed with a tiny diamond motif; a cream paper sheet floats on it inside a plum line, and every panel, control, chip, and label on that sheet is a sticker: an outlined pastel shape with a hard 2-4px lift underneath. The centre of the home page is an isometric SVG room drawn in the same hand (plum outlines, pastel fills, soft drop shadows), and its furnishings are the site's links. Density is high and friendly: three columns of small type, many stickers, few empty areas. The look is a single light scheme; there is no dark mode and no dark hero.
 
-The build refuses the dark hero, the skill cloud, and the card grid. Depth is physical rather than atmospheric: offset lifts, not diffuse glows; a real press on every control (up 1px on hover, down 2px on active). Motion is one authored moment, the "settle", in which the room and panels land from 10px above with a 70ms stagger, and after that the only things that move are the record when music plays and the object you are pointing at.
+The build refuses the dark hero, the skill cloud, and the card grid. Depth is physical rather than atmospheric: offset lifts, not diffuse glows; a real press on every control (up 1px on hover, down 2px on active), and a click is answered in the same frame: the control holds its press and the page marks itself as leaving before the next page is even fetched. Motion is one authored moment, the "settle", in which the room and panels land from 10px above with a 70ms stagger on first visit (360ms with a 35ms stagger after a client-side navigation), and after that the only things that move are the record when music plays and the object you are pointing at.
 
 **Key Characteristics:**
 - Sky-field ground, paper sheet, sticker whites: the palette is committed at page scale, not accents on grey.
@@ -319,6 +319,7 @@ Every control is a rounded sticker with a real press.
 - **Default:** sticker white fill, ink text, `9px 16px`, Lift shadow.
 - **Tones:** mint (primary "go" action), sky (write / email), butter (take / send), field, peach. Mint, sky, and butter lighten to their `-hover` tints under the pointer.
 - **Hover / Active:** rises 1px with a 4px lift; sinks 2px with a 1px lift; 160ms `--ease-out`.
+- **Going:** a clicked control keeps its active pose (`.going`, set on the clicked link or button at `astro:before-preparation`) until the next page lands, so the click is acknowledged before the fetch returns. Back/forward sets nothing.
 - **Small:** `6px 12px`, 13px, icon at 15px.
 - **Count pill:** Nunito 900 at 11px, veil fill, 1px line, full pill, `1px 7px`.
 
@@ -357,10 +358,10 @@ Authored for this world: a 16-unit grid, 1.4 stroke in plum ink (`#3A2E3F`), `cu
 A field-tone pill (44px min height, 2px line, Lift) holding a 32px white play circle, five 4px level bars that animate 4-16px in a 900ms alternate loop while playing, the track title in Fredoka 500 with the artist in ink-soft below, five 12px volume dots that fill butter, and a 28px mute circle. Persists across page navigations; the topbar chip and the room's turntable mirror its state. Meta and volume hide at ≤720px.
 
 ### The Room (Room + draw.ts)
-A 700x630 isometric SVG: striped sky walls, a checker floor in paper and `#E9EFF5`, wood furniture, a plum server rack and monitors, and a butter-ringed rug. Every visitable object is a link (or a button for the turntable) wrapped in `.obj` (the "Desk · 2 monitors" label belongs to the terminal monitor, which links to /diary), rising 3px on hover or focus-within with its `tag()` label brightening; keyboard focus thickens the label stroke to 2.4. Pieces land with the settle stagger, stage first. While music plays, `.vinyl` spins (2.4s linear) and `.notes` float; the rack lamp pulses on a 2.8s loop at all times. All loops and hover lifts stop under reduced motion.
+A 700x630 isometric SVG: striped sky walls, a checker floor in paper and `#E9EFF5`, wood furniture, a plum server rack and monitors, and a butter-ringed rug. Every visitable object is a link (or a button for the turntable) wrapped in `.obj` (the "Desk · 2 monitors" label belongs to the terminal monitor, which links to /diary), rising 3px on hover or focus-within with its `tag()` label brightening, sinking 1px while held; keyboard focus thickens the label stroke to 2.4. Once clicked (`.going`) the object stays up with its label filled butter while the other objects step back to 60% until the next page lands. Every link in the room, the phone legend, and the tab bar prefetches its page on load, and diary entries prefetch as they scroll into view, so the click never waits on the network. Pieces land with the settle stagger, stage first. While music plays, `.vinyl` spins (2.4s linear) and `.notes` float; the rack lamp pulses on a 2.8s loop at all times. All loops and hover lifts stop under reduced motion.
 
 ### Motion
-One ease for everything that settles: `cubic-bezier(.22,1,.36,1)` over 620ms, `translateY(-10px) scale(.985)` to rest, delayed `--i * 70ms`. State transitions use `cubic-bezier(.16,1,.3,1)` at 160ms (press, tint) or 260ms (object lift). `prefers-reduced-motion` collapses every animation and transition to 0.001ms and removes the object lift.
+One ease for everything that settles: `cubic-bezier(.22,1,.36,1)` over 620ms, `translateY(-10px) scale(.985)` to rest, delayed `--i * --settle-stagger` (70ms). After a client-side navigation `<html data-nav="client">` (set on `astro:after-swap`) tightens the same settle to 360ms with a 35ms stagger, because the click has already been answered; a hard reload restores the full entrance. State transitions use `cubic-bezier(.16,1,.3,1)` at 160ms (press, tint) or 260ms (object lift). `prefers-reduced-motion` collapses every animation and transition to 0.001ms and removes the object lift.
 
 ### Browser Surfaces
 Selection is butter with ink text; carets are peach-deep; `:focus-visible` is a 3px ink outline at 3px offset with a 10px corner; scrollbars are thin, ink-2 thumb on a field track (10px, pill, 2px field inset on WebKit). `color-scheme: light` is declared.
@@ -373,10 +374,10 @@ The print resume (`/resume`) and the social card (`/og`) render with `bare`: no 
 ### Do:
 - **Do** put content on the paper sheet and keep the sky field as the margin, with the diamond motif at 36px tiles.
 - **Do** give every raised surface a plum line and a hard lift: 2px line + `0 3px 0` on controls, 2px + `0 4px 0` on panels, 1.6px + `0 2px 0` on chips.
-- **Do** make every button press: up 1px on hover, down 2px on active.
+- **Do** make every button press: up 1px on hover, down 2px on active, and hold its going pose (`.going`, set on the clicked link or button) from the click until the next page lands.
 - **Do** use a pastel as the whole fill of an outlined sticker, and pick the tone by habit (mint go, butter take, sky write, peach warn).
 - **Do** set titles and controls in Fredoka 600 and everything readable in Nunito 700-900 with tabular numerals.
-- **Do** enter with one settle (620ms, `--ease-settle`, 70ms stagger via `--i`) and honour reduced motion.
+- **Do** enter with one settle (620ms, `--ease-settle`, 70ms stagger via `--i`; 360ms / 35ms after a client-side navigation) and honour reduced motion.
 - **Do** draw icons and room objects on the 16-grid in plum ink with `currentColor` fills.
 - **Do** keep the room reachable on phones: sideways scroll at ≥620px width plus the legend chips.
 - **Do** use the veils (55 / 72 / 86% white) for translucent paper and the hover tints for pastel hovers instead of new alpha or hex values.
