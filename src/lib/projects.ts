@@ -15,14 +15,14 @@ export const statusLabel: Record<Status, string> = {
   retired: "retired",
 };
 
-export const statusTone: Record<Status, "mint" | "sky" | "butter" | "blossom" | "blush" | "white"> = {
+export const statusTone: Record<Status, "mint" | "sky" | "butter" | "peach" | "field" | "white"> = {
   live: "mint",
   "in-service": "mint",
   "in-development": "sky",
-  "handed-off": "blush",
+  "handed-off": "field",
   delivered: "butter",
-  paused: "blossom",
-  retired: "blush",
+  paused: "peach",
+  retired: "field",
 };
 
 /** Shown beside the status when Calvin is no longer on the project. */
@@ -66,5 +66,5 @@ export async function featuredProjects(): Promise<Project[]> {
 }
 
 /** The year-pill colour cycles so the diary reads as a stack of stickers, not a table. */
-export const yearTones = ["butter", "sky", "blush", "mint", "blossom"] as const;
+export const yearTones = ["butter", "sky", "field", "mint", "peach"] as const;
 export const yearTone = (i: number) => yearTones[i % yearTones.length];

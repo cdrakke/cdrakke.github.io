@@ -51,8 +51,8 @@ export interface Palette {
 
 export const WOOD: Palette = { top: "#E2C4A2", left: "#C9A27E", right: "#B88E6B" };
 export const PLUM: Palette = { top: "#5A4A60", left: "#3A2E3F", right: "#2E2432" };
-export const CREAM: Palette = { top: "#FFFDF8", left: "#F3E6EE", right: "#E6D3DF" };
-export const ROSE: Palette = { top: "#F3E6EE", left: "#E6D3DF", right: "#D9C3CF" };
+export const CREAM: Palette = { top: "#FFFDF8", left: "#E9EFF5", right: "#D2DEEA" };
+export const FROST: Palette = { top: "#E9EFF5", left: "#D2DEEA", right: "#BFCFDF" };
 
 const STROKE = `stroke="${INK}" stroke-opacity=".55" stroke-width="1.3" stroke-linejoin="round"`;
 

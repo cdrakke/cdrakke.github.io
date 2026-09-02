@@ -6,7 +6,7 @@ import type { IconName } from "./Icon.astro";
 interface Props {
   title?: string;
   icon?: IconName;
-  tone?: "sky" | "butter" | "mint" | "blush" | "blossom";
+  tone?: "sky" | "butter" | "mint" | "field" | "peach";
   as?: "section" | "aside" | "div" | "article" | "nav";
   class?: string;
   id?: string;
@@ -92,10 +92,10 @@ const {
   .tone-mint {
     background: var(--mint);
   }
-  .tone-blush {
-    background: var(--blush);
+  .tone-field {
+    background: var(--field);
   }
-  .tone-blossom {
-    background: var(--blossom);
+  .tone-peach {
+    background: var(--peach);
   }
 </style>

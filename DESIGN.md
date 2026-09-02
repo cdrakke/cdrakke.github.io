@@ -1,15 +1,15 @@
 ---
 name: Drekyz's minihompy
-description: A blush-field minihompy room with paper panels, plum lines, pastel sticker controls, and an isometric SVG room you visit.
+description: A sky-field minihompy room with paper panels, plum lines, pastel sticker controls, and an isometric SVG room you visit.
 colors:
-  blush: "#f7e6e8"
+  field: "#e3edf7"
   sky: "#bfd9f2"
   sky-deep: "#9dc4ec"
   butter: "#f7d58b"
   butter-deep: "#e9c15f"
   mint: "#cde8d8"
-  blossom: "#f3b8ac"
-  blossom-deep: "#e67a8a"
+  peach: "#f2c29d"
+  peach-deep: "#d9663f"
   wood: "#c9a27e"
   paper: "#fff8f1"
   white: "#fffdf8"
@@ -167,7 +167,7 @@ components:
     rounded: "{rounded.pill}"
     padding: "7px 16px"
   nav-tab-hover:
-    backgroundColor: "{colors.blush}"
+    backgroundColor: "{colors.field}"
   lightbox-button:
     backgroundColor: "{colors.butter}"
     textColor: "{colors.ink}"
@@ -191,7 +191,7 @@ components:
     rounded: "{rounded.pill}"
     padding: "6px 16px 6px 12px"
   bgm-player:
-    backgroundColor: "{colors.blush}"
+    backgroundColor: "{colors.field}"
     textColor: "{colors.ink}"
     typography: "{typography.body-sm}"
     rounded: "{rounded.pill}"
@@ -202,6 +202,8 @@ components:
 # Design System: Drekyz's minihompy
 
 ## Overview
+
+> 2026-09-02: the ground changed from blush (#f7e6e8) to a pale sky field (#e3edf7) and the blossom accent to peach; token names are now `field` and `peach`. Prose below still says "blush" and "blossom", quotes the old token names, and hard-codes the old room-floor hex; it is due for `/impeccable document`, as is `.impeccable/design.json`.
 
 **Creative North Star: "The Minihompy Room"**
 

@@ -1,15 +1,15 @@
-/* Minihompy world tokens. Palette is committed at page scale: the blush field owns the ground,
+/* Minihompy world tokens. Palette is committed at page scale: the sky field owns the ground,
    sticker whites float on it, and the four pastels are role colours, not accents on grey. */
 :root {
   /* palette */
-  --blush: #f7e6e8;
+  --field: #e3edf7; /* the page ground; --sky below is the sticker tone, not the ground */
   --sky: #bfd9f2;
   --sky-deep: #9dc4ec;
   --butter: #f7d58b;
   --butter-deep: #e9c15f;
   --mint: #cde8d8;
-  --blossom: #f3b8ac;
-  --blossom-deep: #e67a8a;
+  --peach: #f2c29d;
+  --peach-deep: #d9663f;
   --wood: #c9a27e;
   --paper: #fff8f1;
   --white: #fffdf8;
@@ -24,7 +24,7 @@
   --sky-hover: #cbe1f6;
   --butter-hover: #f9dea2;
 
-  /* translucent paper laid over the blush field (panels, tab bar, count pills) */
+  /* translucent paper laid over the field (panels, tab bar, count pills) */
   --veil-soft: rgba(255, 255, 255, 0.55);
   --veil: rgba(255, 255, 255, 0.72);
   --veil-strong: rgba(255, 255, 255, 0.86);

@@ -4,9 +4,9 @@ import Icon from "./Icon.astro";
 import type { IconName } from "./Icon.astro";
 
 interface Props {
-  tone?: "white" | "sky" | "butter" | "mint" | "blush" | "blossom";
+  tone?: "white" | "sky" | "butter" | "mint" | "field" | "peach";
   icon?: IconName;
-  dot?: "success" | "butter" | "blossom" | "ink";
+  dot?: "success" | "butter" | "peach" | "ink";
   href?: string;
   external?: boolean;
   size?: "sm" | "xs";
@@ -76,8 +76,8 @@ const Tag = href ? "a" : "span";
   .dot-butter {
     background: var(--butter);
   }
-  .dot-blossom {
-    background: var(--blossom-deep);
+  .dot-peach {
+    background: var(--peach-deep);
   }
   .dot-ink {
     background: var(--ink);
@@ -92,10 +92,10 @@ const Tag = href ? "a" : "span";
   .tone-mint {
     background: var(--mint);
   }
-  .tone-blush {
-    background: var(--blush);
+  .tone-field {
+    background: var(--field);
   }
-  .tone-blossom {
-    background: var(--blossom);
+  .tone-peach {
+    background: var(--peach);
   }
 </style>

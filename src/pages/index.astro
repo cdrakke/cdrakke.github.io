@@ -86,7 +86,7 @@ const counts = { Diary: projects.length, Shelf: 4 };
       <div class="group">
         <div class="lbl">Shelf · stack</div>
         <div class="srow">
-          {shelf.map((n, i) => <StickerChip size="xs" tone={(["mint", "sky", "blush"] as const)[i % 3]}>{n}</StickerChip>)}
+          {shelf.map((n, i) => <StickerChip size="xs" tone={(["mint", "sky", "field"] as const)[i % 3]}>{n}</StickerChip>)}
         </div>
       </div>
     </Panel>

@@ -22,11 +22,11 @@ const gscnhs = education.find((e) => e.id === "gscnhs");
 const civil = certificates.find((c) => c.id === "civil-service");
 const capstoneAward = certificates.find((c) => c.id === "outstanding-capstone");
 
-const groups: Array<{ key: (typeof skills)[number]["data"]["category"]; label: string; tone: "mint" | "sky" | "blush" | "butter" | "white" }> = [
+const groups: Array<{ key: (typeof skills)[number]["data"]["category"]; label: string; tone: "mint" | "sky" | "field" | "butter" | "white" }> = [
   { key: "language", label: "Languages", tone: "butter" },
   { key: "framework", label: "Frameworks", tone: "sky" },
   { key: "database", label: "Databases", tone: "mint" },
-  { key: "tool", label: "Tools", tone: "blush" },
+  { key: "tool", label: "Tools", tone: "field" },
   { key: "other", label: "Practices", tone: "white" },
 ];
 
@@ -52,7 +52,7 @@ const counts = { Diary: projects.length, Shelf: 4 };
     <Panel title="About" icon="home" tone="sky" id="about" i={1}>
       <p class="intro">{copy.intro}</p>
       <div class="practices">
-        {copy.whatIDo.map((w, i) => <StickerChip tone={(["butter", "sky", "mint", "blossom"] as const)[i % 4]}>{w.title}</StickerChip>)}
+        {copy.whatIDo.map((w, i) => <StickerChip tone={(["butter", "sky", "mint", "peach"] as const)[i % 4]}>{w.title}</StickerChip>)}
       </div>
       <dl class="whatido">
         {
@@ -81,7 +81,7 @@ const counts = { Diary: projects.length, Shelf: 4 };
             <div class="medal">
               <svg viewBox="0 0 64 80" aria-hidden="true">
                 <path d="M23 4 L32 30 L41 4" fill="none" stroke="#3A2E3F" stroke-opacity=".6" stroke-width="12" stroke-linejoin="round" stroke-linecap="round" />
-                <path d="M23 4 L32 30 L41 4" fill="none" stroke="#E67A8A" stroke-width="8" stroke-linejoin="round" stroke-linecap="round" />
+                <path d="M23 4 L32 30 L41 4" fill="none" stroke="#D9663F" stroke-width="8" stroke-linejoin="round" stroke-linecap="round" />
                 <circle cx="32" cy="50" r="22" fill={m.tone} stroke="#3A2E3F" stroke-opacity=".7" stroke-width="2" />
                 <circle cx="32" cy="50" r="15" fill="none" stroke={m.ring} stroke-width="2.4" />
                 <path d="M32 39 l3.2 6.8 7.5 .9 -5.5 5.1 1.4 7.4 -6.6 -3.7 -6.6 3.7 1.4 -7.4 -5.5 -5.1 7.5 -.9z" fill={m.ring} />
@@ -137,7 +137,7 @@ const counts = { Diary: projects.length, Shelf: 4 };
       </div>
     </Panel>
 
-    <Panel title="Education" icon="book" tone="blush" id="education" i={4}>
+    <Panel title="Education" icon="book" tone="field" id="education" i={4}>
       <ol class="timeline">
         {
           [sti, gscnhs].filter(Boolean).map((e) => (
@@ -214,7 +214,7 @@ const counts = { Diary: projects.length, Shelf: 4 };
               <ul class="figures" role="list" aria-label="Server figures">
                 {server.data.figures.map((f, i) => (
                   <li>
-                    <StickerChip tone={(["mint", "sky", "butter", "blush"] as const)[i % 4]}>
+                    <StickerChip tone={(["mint", "sky", "butter", "field"] as const)[i % 4]}>
                       <b>{f.value}</b>&nbsp;{figureLabel(f)}
                     </StickerChip>
                   </li>
@@ -354,7 +354,7 @@ const counts = { Diary: projects.length, Shelf: 4 };
   }
   .mindset {
     margin-top: var(--space-4);
-    background: var(--blush);
+    background: var(--field);
     border: var(--border-thin);
     border-radius: var(--radius-md);
     padding: 12px 14px;
@@ -460,8 +460,8 @@ const counts = { Diary: projects.length, Shelf: 4 };
     font-weight: 700;
     font-size: var(--text-xl);
     letter-spacing: 2px;
-    color: var(--blossom-deep);
-    border: 2.5px solid var(--blossom-deep);
+    color: var(--peach-deep);
+    border: 2.5px solid var(--peach-deep);
     border-radius: var(--radius-tight);
     padding: 2px 12px;
     transform: rotate(-6deg);
@@ -529,7 +529,7 @@ const counts = { Diary: projects.length, Shelf: 4 };
     max-width: 68ch;
   }
   .resp li::marker {
-    color: var(--blossom-deep);
+    color: var(--peach-deep);
   }
   .chips {
     display: flex;

@@ -26,7 +26,7 @@ const line = figures.length ? figures.join(" · ") : data.summary;
         {statusLabel[data.status]}
       </StickerChip>
       {!compact && <StickerChip size="xs">{kindLabel[data.kind]}</StickerChip>}
-      {data.former && !compact && <StickerChip size="xs" tone="blush">{formerLabel}</StickerChip>}
+      {data.former && !compact && <StickerChip size="xs" tone="field">{formerLabel}</StickerChip>}
     </span>
     <span class="line">{line}</span>
     {!compact && data.collaborator && <span class="with">with {data.collaborator.name}</span>}
@@ -75,14 +75,14 @@ const line = figures.length ? figures.join(" · ") : data.summary;
   .tone-sky {
     background: var(--sky);
   }
-  .tone-blush {
-    background: var(--blush);
+  .tone-field {
+    background: var(--field);
   }
   .tone-mint {
     background: var(--mint);
   }
-  .tone-blossom {
-    background: var(--blossom);
+  .tone-peach {
+    background: var(--peach);
   }
 
   .body {

@@ -3,7 +3,7 @@
  * Furniture is authored here in the world's own hand: plum outlines, pastel fills, soft drop shadows.
  * Room.astro wraps the visitable pieces in links; this file only draws.
  */
-import { P, pts, faceU, faceV, floorAt, box, tag, WOOD, PLUM, CREAM, ROSE, INK, WALL_H, ROOM } from "./iso";
+import { P, pts, faceU, faceV, floorAt, box, tag, WOOD, PLUM, CREAM, FROST, INK, WALL_H, ROOM } from "./iso";
 
 export const VIEWBOX = "0 0 700 630";
 
@@ -11,7 +11,7 @@ export function defs(): string {
   return `<defs>
   <pattern id="floorChk" patternUnits="userSpaceOnUse" width="2" height="2">
     <rect width="2" height="2" fill="#FFF8F1"/>
-    <rect width="1" height="1" fill="#F3E6EE"/><rect x="1" y="1" width="1" height="1" fill="#F3E6EE"/>
+    <rect width="1" height="1" fill="#E9EFF5"/><rect x="1" y="1" width="1" height="1" fill="#E9EFF5"/>
     <rect width="1" height="1" fill="none" stroke="${INK}" stroke-opacity=".12" stroke-width="1" vector-effect="non-scaling-stroke"/>
     <rect x="1" y="1" width="1" height="1" fill="none" stroke="${INK}" stroke-opacity=".12" stroke-width="1" vector-effect="non-scaling-stroke"/>
   </pattern>
@@ -45,10 +45,10 @@ export function stage(): string {
   // walls
   s += `<g transform="matrix(-${T} ${T / 2} 0 -1 ${OX} ${OY})"><rect x="0" y="0" width="${ROOM}" height="${WALL_H}" fill="url(#wallStripeL)"/>
   <rect x="0" y="0" width="${ROOM}" height="12" fill="#FFFDF8"/><rect x="0" y="${WALL_H - 14}" width="${ROOM}" height="14" fill="#FFFDF8"/>
-  <rect x="0" y="${WALL_H - 16}" width="${ROOM}" height="2" fill="#E9C3D3"/></g>`;
+  <rect x="0" y="${WALL_H - 16}" width="${ROOM}" height="2" fill="#C9D8E8"/></g>`;
   s += `<g transform="matrix(${T} ${T / 2} 0 -1 ${OX} ${OY})"><rect x="0" y="0" width="${ROOM}" height="${WALL_H}" fill="url(#wallStripeR)"/>
   <rect x="0" y="0" width="${ROOM}" height="12" fill="#FFFDF8"/><rect x="0" y="${WALL_H - 14}" width="${ROOM}" height="14" fill="#FFFDF8"/>
-  <rect x="0" y="${WALL_H - 16}" width="${ROOM}" height="2" fill="#E9C3D3"/></g>`;
+  <rect x="0" y="${WALL_H - 16}" width="${ROOM}" height="2" fill="#C9D8E8"/></g>`;
   s += `<polyline points="${pts(P(0, ROOM, WALL_H), P(0, ROOM, 0), P(0, 0, 0), P(ROOM, 0, 0), P(ROOM, 0, WALL_H), P(0, 0, WALL_H), P(0, ROOM, WALL_H))}" fill="none" stroke="${INK}" stroke-opacity=".6" stroke-width="1.6" stroke-linejoin="round"/>`;
   s += `<line x1="${bx}" y1="${by}" x2="${bx}" y2="${by - WALL_H}" stroke="${INK}" stroke-opacity=".45" stroke-width="1.4"/>`;
   // floor
@@ -56,7 +56,7 @@ export function stage(): string {
   s += `<polygon points="${pts(P(0, 0), P(ROOM, 0), P(ROOM, ROOM), P(0, ROOM))}" fill="none" stroke="${INK}" stroke-opacity=".6" stroke-width="1.6" stroke-linejoin="round"/>`;
   // rug
   s += `<g transform="${floorAt(4.4, 4.9, 0)}">
-  <ellipse cx="0" cy="0" rx="92" ry="70" fill="#F3E6EE" stroke="${INK}" stroke-opacity=".5" stroke-width="1.3"/>
+  <ellipse cx="0" cy="0" rx="92" ry="70" fill="#E9EFF5" stroke="${INK}" stroke-opacity=".5" stroke-width="1.3"/>
   <ellipse cx="0" cy="0" rx="70" ry="50" fill="none" stroke="#F7D58B" stroke-width="7"/>
   <ellipse cx="0" cy="0" rx="34" ry="22" fill="#CDE8D8" stroke="${INK}" stroke-opacity=".35" stroke-width="1"/>
 </g>`;
@@ -84,7 +84,7 @@ export function shelfMedals(): Drawn {
     const [mx, my] = P(u, 0.17, 137);
     s += `<g filter="url(#soft)">
     <path d="M${mx - 9} ${my - 50} L${mx} ${my - 30} L${mx + 9} ${my - 50}" fill="none" stroke="${INK}" stroke-opacity=".6" stroke-width="7.5" stroke-linejoin="round" stroke-linecap="round"/>
-    <path d="M${mx - 9} ${my - 50} L${mx} ${my - 30} L${mx + 9} ${my - 50}" fill="none" stroke="#E67A8A" stroke-width="5" stroke-linejoin="round" stroke-linecap="round"/>
+    <path d="M${mx - 9} ${my - 50} L${mx} ${my - 30} L${mx + 9} ${my - 50}" fill="none" stroke="#D9663F" stroke-width="5" stroke-linejoin="round" stroke-linecap="round"/>
     <path d="M${mx - 9} ${my - 50} L${mx} ${my - 30} L${mx + 9} ${my - 50}" fill="none" stroke="#FFF8F1" stroke-width="1.2" stroke-linejoin="round" stroke-dasharray="1.5 2"/>
     <circle cx="${mx}" cy="${my - 18}" r="12" fill="${c}" stroke="${INK}" stroke-opacity=".7" stroke-width="1.3"/>
     <circle cx="${mx}" cy="${my - 18}" r="8" fill="none" stroke="${c2}" stroke-width="1.6"/>
@@ -103,7 +103,7 @@ export function shelfMedals(): Drawn {
   const label =
     tag(a1, b1, "Cum Laude", { align: "left", size: 9.5, fill: "#F7D58B" }) +
     tag(a2, b2, "Best Capstone", { align: "left", size: 9.5 }) +
-    tag(a3, b3, "Programmer of the Year", { align: "left", size: 9.5, fill: "#F3E6EE" });
+    tag(a3, b3, "Programmer of the Year", { align: "left", size: 9.5, fill: "#E9EFF5" });
   return { svg: s, label };
 }
 
@@ -113,8 +113,8 @@ export function certificate(): Drawn {
   <rect x="5" y="5" width="72" height="50" rx="2" fill="#FFFDF8" stroke="${INK}" stroke-opacity=".3" stroke-width=".8"/>
   <text x="41" y="17" text-anchor="middle" font-size="6.6" font-weight="800" letter-spacing=".6" fill="${INK}">CIVIL SERVICE</text>
   <text x="41" y="26" text-anchor="middle" font-size="6.2" font-weight="700" fill="${INK}" fill-opacity=".7">Professional</text>
-  <rect x="17" y="33" width="48" height="14" rx="3" fill="none" stroke="#E67A8A" stroke-width="1.6" transform="rotate(-6 41 40)"/>
-  <text x="41" y="43.5" text-anchor="middle" font-size="9" font-weight="900" letter-spacing="1" fill="#E67A8A" transform="rotate(-6 41 40)">PASSED</text>
+  <rect x="17" y="33" width="48" height="14" rx="3" fill="none" stroke="#D9663F" stroke-width="1.6" transform="rotate(-6 41 40)"/>
+  <text x="41" y="43.5" text-anchor="middle" font-size="9" font-weight="900" letter-spacing="1" fill="#D9663F" transform="rotate(-6 41 40)">PASSED</text>
   <circle cx="67" cy="49" r="4" fill="#F7D58B" stroke="${INK}" stroke-opacity=".5" stroke-width=".8"/>
 </g>`;
   const [a, b] = P(5.5, 0, 231);
@@ -168,7 +168,7 @@ export function desk(): string {
   s += box(0.3, 4.05, 0.47, 4.22, 0, 56, WOOD);
   s += box(0.22, 0.7, 1.5, 4.32, 56, 64, WOOD);
   s += box(1.05, 1.5, 1.35, 3.1, 64, 67, CREAM);
-  s += box(1.0, 3.55, 1.25, 3.8, 64, 76, { top: "#F3E6EE", left: "#E67A8A", right: "#D3687A" });
+  s += box(1.0, 3.55, 1.25, 3.8, 64, 76, { top: "#E9EFF5", left: "#D9663F", right: "#C0532F" });
   return s;
 }
 
@@ -179,7 +179,7 @@ export function monitorRaidium(): Drawn {
   s += `<g transform="${faceV(0.66, 2.85, 132)}">
   <rect x="3" y="3" width="68" height="52" rx="2" fill="#241B29"/>
   <rect x="3" y="3" width="68" height="9" fill="#3A2E3F"/>
-  <circle cx="8" cy="7.5" r="1.6" fill="#E67A8A"/><circle cx="13" cy="7.5" r="1.6" fill="#F7D58B"/><circle cx="18" cy="7.5" r="1.6" fill="#7FE0A0"/>
+  <circle cx="8" cy="7.5" r="1.6" fill="#D9663F"/><circle cx="13" cy="7.5" r="1.6" fill="#F7D58B"/><circle cx="18" cy="7.5" r="1.6" fill="#7FE0A0"/>
   <text x="37" y="10" text-anchor="middle" font-size="5.6" font-weight="800" fill="#FFF8F1">raidium.quest</text>
   <text x="8" y="22" font-size="5" font-weight="700" fill="#BFD9F2">RED BOSS · NEXT SPAWN</text>
   <rect x="8" y="26" width="58" height="5" rx="2.5" fill="#3A2E3F"/><rect x="8" y="26" width="41" height="5" rx="2.5" fill="#F7D58B"/>
@@ -226,7 +226,7 @@ export function serverRack(): Drawn {
 export function recordPlayer(): Drawn {
   let s = "";
   s += box(4.65, 0.45, 5.85, 1.65, 0, 44, WOOD);
-  s += box(4.72, 0.55, 5.78, 1.55, 44, 54, ROSE);
+  s += box(4.72, 0.55, 5.78, 1.55, 44, 54, FROST);
   s += `<g transform="${floorAt(5.2, 1.05, 54)}">
   <g class="vinyl">
     <circle cx="0" cy="0" r="19" fill="#241B29" stroke="${INK}" stroke-width="1.2"/>
@@ -236,7 +236,7 @@ export function recordPlayer(): Drawn {
   </g>
 </g>`;
   const [ax, ay] = P(5.75, 0.6, 58);
-  s += `<circle cx="${ax}" cy="${ay}" r="3.5" fill="#E6D3DF" stroke="${INK}" stroke-opacity=".6" stroke-width="1"/><path d="M${ax} ${ay} l-14 8 l-3 5" fill="none" stroke="${INK}" stroke-opacity=".7" stroke-width="1.6" stroke-linecap="round"/>`;
+  s += `<circle cx="${ax}" cy="${ay}" r="3.5" fill="#D2DEEA" stroke="${INK}" stroke-opacity=".6" stroke-width="1"/><path d="M${ax} ${ay} l-14 8 l-3 5" fill="none" stroke="${INK}" stroke-opacity=".7" stroke-width="1.6" stroke-linecap="round"/>`;
   const [nx, ny] = P(5.2, 1.05, 54);
   s += `<g class="notes" fill="${INK}" fill-opacity=".8"><path d="M${nx + 28} ${ny - 40} v-12 l7 -2 v10 a3 3 0 1 1 -2 -2.8 v-4.5 l-3 .9 v8 a3 3 0 1 1 -2 -2.8z"/><path d="M${nx + 40} ${ny - 62} v-9 l2 -.6 v7 a2.4 2.4 0 1 1 -2 -2.3z"/></g>`;
   const cx = nx - 34;
@@ -245,7 +245,7 @@ export function recordPlayer(): Drawn {
   <g class="ico-pause"><rect x="${cx - 6}" y="${cy - 6}" width="4" height="12" rx="1.2" fill="${INK}"/><rect x="${cx + 2}" y="${cy - 6}" width="4" height="12" rx="1.2" fill="${INK}"/></g>
   <path class="ico-play" d="M${cx - 5} ${cy - 7} v14 l11 -7 z" fill="${INK}"/></g>`;
   const [a, b] = P(5.25, 1.05, -40);
-  return { svg: s, label: tag(a, b, "Hip Shop · Rouxls Kaard", { size: 9.5, fill: "#F3E6EE" }) };
+  return { svg: s, label: tag(a, b, "Hip Shop · Rouxls Kaard", { size: 9.5, fill: "#E9EFF5" }) };
 }
 
 export function plant(): string {
@@ -253,7 +253,7 @@ export function plant(): string {
   return `<g filter="url(#soft)">
     <ellipse cx="${px}" cy="${py + 2}" rx="15" ry="6" fill="${INK}" fill-opacity=".12"/>
     <path d="M${px - 13} ${py - 22} h26 l-4 24 h-18 z" fill="#E6A79A" stroke="${INK}" stroke-opacity=".65" stroke-width="1.3" stroke-linejoin="round"/>
-    <rect x="${px - 15}" y="${py - 26}" width="30" height="7" rx="3" fill="#F3B8AC" stroke="${INK}" stroke-opacity=".65" stroke-width="1.3"/>
+    <rect x="${px - 15}" y="${py - 26}" width="30" height="7" rx="3" fill="#F2C29D" stroke="${INK}" stroke-opacity=".65" stroke-width="1.3"/>
     <g fill="#8FC7A6" stroke="${INK}" stroke-opacity=".6" stroke-width="1.2" stroke-linejoin="round">
       <path d="M${px} ${py - 26} c-20 -6 -26 -24 -14 -40 c10 8 16 24 14 40z"/>
       <path d="M${px} ${py - 26} c20 -6 26 -24 14 -40 c-10 8 -16 24 -14 40z"/>
@@ -272,14 +272,14 @@ export function botPlush(): Drawn {
     <ellipse cx="${qx - 9}" cy="${qy - 2}" rx="7" ry="4" fill="#9DC4EC" stroke="${INK}" stroke-opacity=".65" stroke-width="1.2"/>
     <ellipse cx="${qx + 9}" cy="${qy - 2}" rx="7" ry="4" fill="#9DC4EC" stroke="${INK}" stroke-opacity=".65" stroke-width="1.2"/>
     <line x1="${qx}" y1="${cy - 22}" x2="${qx}" y2="${cy - 30}" stroke="${INK}" stroke-opacity=".65" stroke-width="1.4"/>
-    <circle cx="${qx}" cy="${cy - 32}" r="3.5" fill="#E67A8A" stroke="${INK}" stroke-opacity=".65" stroke-width="1.2"/>
+    <circle cx="${qx}" cy="${cy - 32}" r="3.5" fill="#D9663F" stroke="${INK}" stroke-opacity=".65" stroke-width="1.2"/>
     <circle cx="${qx}" cy="${cy}" r="22" fill="#BFD9F2" stroke="${INK}" stroke-opacity=".7" stroke-width="1.4"/>
     <ellipse cx="${qx - 25}" cy="${cy + 4}" rx="5" ry="7" fill="#BFD9F2" stroke="${INK}" stroke-opacity=".65" stroke-width="1.2"/>
     <ellipse cx="${qx + 25}" cy="${cy + 4}" rx="5" ry="7" fill="#BFD9F2" stroke="${INK}" stroke-opacity=".65" stroke-width="1.2"/>
     <rect x="${qx - 15}" y="${cy - 9}" width="30" height="16" rx="8" fill="#3A2E3F"/>
     <circle cx="${qx - 6}" cy="${cy - 1}" r="2.6" fill="#F7D58B"/><circle cx="${qx + 6}" cy="${cy - 1}" r="2.6" fill="#F7D58B"/>
     <path d="M${qx - 3} ${cy + 3.5} q3 2.5 6 0" fill="none" stroke="#F7D58B" stroke-width="1.2" stroke-linecap="round"/>
-    <circle cx="${qx - 15}" cy="${cy + 9}" r="2.5" fill="#F3B8AC"/><circle cx="${qx + 15}" cy="${cy + 9}" r="2.5" fill="#F3B8AC"/>
+    <circle cx="${qx - 15}" cy="${cy + 9}" r="2.5" fill="#F2C29D"/><circle cx="${qx + 15}" cy="${cy + 9}" r="2.5" fill="#F2C29D"/>
   </g>`;
   return { svg: s, label: tag(qx + 2, qy + 22, "GLiberator · 5 yrs", { size: 9.5, fill: "#BFD9F2" }) };
 }
@@ -290,10 +290,10 @@ export function guestbook(): Drawn {
   const s = `<g filter="url(#soft)">
     <ellipse cx="${gx}" cy="${gy + 3}" rx="22" ry="8" fill="${INK}" fill-opacity=".1"/>
     <g transform="${floorAt(3.4, 7.3, 3)}">
-      <path d="M-22 -14 h22 v28 h-22 q-3 0 -3 -3 v-22 q0 -3 3 -3 z" fill="#F3E6EE" stroke="${INK}" stroke-opacity=".7" stroke-width="1.3"/>
+      <path d="M-22 -14 h22 v28 h-22 q-3 0 -3 -3 v-22 q0 -3 3 -3 z" fill="#E9EFF5" stroke="${INK}" stroke-opacity=".7" stroke-width="1.3"/>
       <path d="M0 -14 h22 q3 0 3 3 v22 q0 3 -3 3 h-22 z" fill="#FFFDF8" stroke="${INK}" stroke-opacity=".7" stroke-width="1.3"/>
       <path d="M-17 -6 h13 M-17 0 h13 M-17 6 h9 M5 -6 h13 M5 0 h13 M5 6 h7" stroke="${INK}" stroke-opacity=".35" stroke-width="1.2" stroke-linecap="round"/>
-      <path d="M8 -9 l6 3" stroke="#E67A8A" stroke-width="2" stroke-linecap="round"/>
+      <path d="M8 -9 l6 3" stroke="#D9663F" stroke-width="2" stroke-linecap="round"/>
       <path d="M26 -4 l10 -14" stroke="#F7D58B" stroke-width="4" stroke-linecap="round"/><path d="M26 -4 l10 -14" stroke="${INK}" stroke-opacity=".6" stroke-width="1" fill="none"/><path d="M25 -2 l2 -3 l2 2z" fill="${INK}"/>
     </g>
   </g>`;

@@ -37,9 +37,9 @@ const counts = { Diary: (await allProjects()).length, Shelf: 4 };
         <div class="meta">
           <StickerChip tone={statusTone[data.status]} dot={data.status === "live" || data.status === "in-service" ? "success" : undefined}>{statusLabel[data.status]}</StickerChip>
           <StickerChip>{kindLabel[data.kind]}</StickerChip>
-          <StickerChip tone="blush">{data.period}</StickerChip>
+          <StickerChip tone="field">{data.period}</StickerChip>
           <StickerChip tone="sky">{data.role}</StickerChip>
-          {data.former && <StickerChip tone="blush" icon="warn">I'm no longer active on this project</StickerChip>}
+          {data.former && <StickerChip tone="field" icon="warn">I'm no longer active on this project</StickerChip>}
         </div>
       </div>
     </header>
@@ -50,7 +50,7 @@ const counts = { Diary: (await allProjects()).length, Shelf: 4 };
         <ul class="figures settle" style="--i:2" role="list" aria-label="Figures">
           {data.figures.map((f, i) => (
             <li>
-              <StickerChip tone={(["mint", "sky", "butter", "blush"] as const)[i % 4]}>
+              <StickerChip tone={(["mint", "sky", "butter", "field"] as const)[i % 4]}>
                 <b>{f.value}</b>&nbsp;{figureLabel(f)}
               </StickerChip>
             </li>
@@ -150,11 +150,11 @@ const counts = { Diary: (await allProjects()).length, Shelf: 4 };
           }
         </div>
 
-        <Panel title="Built with" icon="server" tone="blush" id="tech" i={6}>
+        <Panel title="Built with" icon="server" tone="field" id="tech" i={6}>
           <ul class="tech" role="list">
             {data.tech.map((t, i) => (
               <li>
-                <StickerChip size="xs" tone={(["mint", "sky", "blush", "butter"] as const)[i % 4]}>{t}</StickerChip>
+                <StickerChip size="xs" tone={(["mint", "sky", "field", "butter"] as const)[i % 4]}>{t}</StickerChip>
               </li>
             ))}
           </ul>
@@ -276,14 +276,14 @@ const counts = { Diary: (await allProjects()).length, Shelf: 4 };
   .tone-sky {
     background: var(--sky);
   }
-  .tone-blush {
-    background: var(--blush);
+  .tone-field {
+    background: var(--field);
   }
   .tone-mint {
     background: var(--mint);
   }
-  .tone-blossom {
-    background: var(--blossom);
+  .tone-peach {
+    background: var(--peach);
   }
   h1 {
     font-size: var(--text-3xl);
@@ -519,7 +519,7 @@ const counts = { Diary: (await allProjects()).length, Shelf: 4 };
     flex-wrap: wrap;
   }
   .with :global(.heart) {
-    color: var(--blossom);
+    color: var(--peach-deep);
   }
   .links {
     display: flex;

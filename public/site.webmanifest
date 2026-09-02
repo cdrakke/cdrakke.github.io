@@ -4,7 +4,7 @@
   "description": "Calvin Drakke I. Rulete, full stack developer. His room, his diary of shipped products, and a guest ledger.",
   "start_url": "/",
   "display": "standalone",
-  "theme_color": "#F3E6EE",
+  "theme_color": "#E3EDF7",
   "background_color": "#FFF8F1",
   "icons": [
     { "src": "/android-chrome-192x192.png", "sizes": "192x192", "type": "image/png" },

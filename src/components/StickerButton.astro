@@ -5,7 +5,7 @@ import type { IconName } from "./Icon.astro";
 
 interface Props {
   href?: string;
-  tone?: "mint" | "sky" | "butter" | "blush" | "blossom" | "white";
+  tone?: "mint" | "sky" | "butter" | "field" | "peach" | "white";
   icon?: IconName;
   /** Small pill at the far right, e.g. "11 entries". */
   kicker?: string;
@@ -127,11 +127,11 @@ const attrs = href
   .tone-butter {
     background: var(--butter);
   }
-  .tone-blush {
-    background: var(--blush);
+  .tone-field {
+    background: var(--field);
   }
-  .tone-blossom {
-    background: var(--blossom);
+  .tone-peach {
+    background: var(--peach);
   }
   .tone-mint:hover {
     background: var(--mint-hover);
