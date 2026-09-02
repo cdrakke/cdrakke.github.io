@@ -13,6 +13,11 @@ const figure = z.object({
   value: z.string(),
 });
 
+const collaborator = z.object({
+  name: z.string(),
+  url: z.string().url().optional(),
+});
+
 const projects = defineCollection({
   loader: file("./src/content/projects.json"),
   schema: ({ image }) =>
@@ -47,9 +52,8 @@ const projects = defineCollection({
       /** Public source repository, shown as a "Source on GitHub" action. */
       repoUrl: z.string().url().optional(),
       documentUrl: z.string().optional(),
-      collaborator: z
-        .object({ name: z.string(), url: z.string().url().optional() })
-        .optional(),
+      /** People the entry was built with, in credit order. */
+      collaborators: z.array(collaborator).default([]),
       /** True for work that must stay unnamed (no product name, URL, or images). */
       generic: z.boolean().default(false),
       /** Lower comes first among featured entries; undefined = not featured. */

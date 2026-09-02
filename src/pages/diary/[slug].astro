@@ -6,7 +6,7 @@ import StickerChip from "@/components/StickerChip.astro";
 import { site } from "@/data/site";
 import StickerButton from "@/components/StickerButton.astro";
 import Icon from "@/components/Icon.astro";
-import { allProjects, statusLabel, statusTone, kindLabel, yearTone, figureLabel } from "@/lib/projects";
+import { allProjects, statusLabel, statusTone, kindLabel, yearTone, figureLabel, listSeparator } from "@/lib/projects";
 
 export async function getStaticPaths() {
   const projects = await allProjects();
@@ -159,17 +159,24 @@ const counts = { Diary: (await allProjects()).length, Shelf: 4 };
             ))}
           </ul>
           {
-            data.collaborator && (
+            data.collaborators.length > 0 && (
               <p class="with">
                 <Icon name="heart" size={14} class="heart" />
-                Built with{" "}
-                {data.collaborator.url ? (
-                  <a href={data.collaborator.url} target="_blank" rel="noopener noreferrer">
-                    {data.collaborator.name}
-                  </a>
-                ) : (
-                  data.collaborator.name
-                )}
+                <span>
+                  Built with{" "}
+                  {data.collaborators.map((c, i) => (
+                    <>
+                      {listSeparator(i, data.collaborators.length)}
+                      {c.url ? (
+                        <a href={c.url} target="_blank" rel="noopener noreferrer">
+                          {c.name}
+                        </a>
+                      ) : (
+                        c.name
+                      )}
+                    </>
+                  ))}
+                </span>
               </p>
             )
           }
@@ -514,9 +521,12 @@ const counts = { Diary: (await allProjects()).length, Shelf: 4 };
     margin-top: var(--space-3);
     font-size: var(--text-sm);
     display: flex;
-    align-items: center;
+    align-items: flex-start;
     gap: 6px;
-    flex-wrap: wrap;
+  }
+  .with :global(.heart) {
+    flex: none;
+    margin-top: 2px;
   }
   .with :global(.heart) {
     color: var(--peach-deep);

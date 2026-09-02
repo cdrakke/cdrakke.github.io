@@ -109,6 +109,16 @@
         "value": "3"
       }
     ],
+    "collaborators": [
+      {
+        "name": "Michael Panizales",
+        "url": "https://michaelpanizales.vercel.app/"
+      },
+      {
+        "name": "Casey Sinoy",
+        "url": "https://caseysinoy.dev/projects"
+      }
+    ],
     "generic": true,
     "featured": 2
   },
@@ -191,10 +201,12 @@
     ],
     "cover": "../assets/images/projects/alertison/cover.png",
     "liveUrl": "https://alertison.com.au",
-    "collaborator": {
-      "name": "Michael Panizales",
-      "url": "https://michaelpanizales.vercel.app/"
-    },
+    "collaborators": [
+      {
+        "name": "Michael Panizales",
+        "url": "https://michaelpanizales.vercel.app/"
+      }
+    ],
     "featured": 3,
     "former": true
   },
@@ -239,10 +251,12 @@
       "../assets/images/projects/ifs-dss/login.jpg",
       "../assets/images/projects/ifs-dss/dashboard.jpg"
     ],
-    "collaborator": {
-      "name": "Michael Panizales",
-      "url": "https://michaelpanizales.vercel.app/"
-    },
+    "collaborators": [
+      {
+        "name": "Michael Panizales",
+        "url": "https://michaelpanizales.vercel.app/"
+      }
+    ],
     "former": true
   },
   {
@@ -276,10 +290,12 @@
     ],
     "cover": "../assets/images/projects/pickleball/cover.png",
     "liveUrl": "https://pickleballgensan.vercel.app",
-    "collaborator": {
-      "name": "Michael Panizales",
-      "url": "https://michaelpanizales.vercel.app/"
-    },
+    "collaborators": [
+      {
+        "name": "Michael Panizales",
+        "url": "https://michaelpanizales.vercel.app/"
+      }
+    ],
     "featured": 4,
     "screenshots": [
       "../assets/images/projects/pickleball/courts.png",
@@ -308,10 +324,12 @@
       "Node.js",
       "Express"
     ],
-    "collaborator": {
-      "name": "Michael Panizales",
-      "url": "https://michaelpanizales.vercel.app/"
-    },
+    "collaborators": [
+      {
+        "name": "Michael Panizales",
+        "url": "https://michaelpanizales.vercel.app/"
+      }
+    ],
     "former": true
   },
   {

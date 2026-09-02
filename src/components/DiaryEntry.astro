@@ -1,7 +1,7 @@
 ---
 /** One diary line: a dated sticker, the title with its status, and the real figures. Whole card is the link. */
 import StickerChip from "./StickerChip.astro";
-import { statusLabel, statusTone, kindLabel, yearTone, figureText, formerLabel, type Project } from "@/lib/projects";
+import { statusLabel, statusTone, kindLabel, yearTone, figureText, formerLabel, joinNames, type Project } from "@/lib/projects";
 
 interface Props {
   project: Project;
@@ -29,7 +29,7 @@ const line = figures.length ? figures.join(" · ") : data.summary;
       {data.former && !compact && <StickerChip size="xs" tone="field">{formerLabel}</StickerChip>}
     </span>
     <span class="line">{line}</span>
-    {!compact && data.collaborator && <span class="with">with {data.collaborator.name}</span>}
+    {!compact && data.collaborators.length > 0 && <span class="with">with {joinNames(data.collaborators.map((c) => c.name))}</span>}
   </span>
 </a>
 

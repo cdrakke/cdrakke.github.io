@@ -65,6 +65,18 @@ export async function featuredProjects(): Promise<Project[]> {
   return list.sort((a, b) => (a.data.featured ?? 99) - (b.data.featured ?? 99));
 }
 
+/** The separator before item i of n in a spoken list: "A and B", "A, B, and C". */
+export function listSeparator(i: number, n: number): string {
+  if (i === 0) return "";
+  if (i < n - 1) return ", ";
+  return n > 2 ? ", and " : " and ";
+}
+
+/** "Michael" · "Michael and Casey" · "Michael, Casey, and Sam". */
+export function joinNames(names: string[]): string {
+  return names.map((name, i) => listSeparator(i, names.length) + name).join("");
+}
+
 /** The year-pill colour cycles so the diary reads as a stack of stickers, not a table. */
 export const yearTones = ["butter", "sky", "field", "mint", "peach"] as const;
 export const yearTone = (i: number) => yearTones[i % yearTones.length];
