@@ -36,7 +36,7 @@ const sti = education.find((e) => e.id === "sti-college");
       </div>
       <address>
         <a href={`mailto:${site.email}`}>{site.email}</a>
-        <span>{site.phone}</span>
+        <span>{site.phone} · WhatsApp · Viber</span>
         <a href={site.github}>github.com/cdrakke</a>
         <a href={site.url}>{site.url.replace("https://", "")}</a>
         <span>{site.location} · Open to remote</span>
@@ -140,6 +140,13 @@ const sti = education.find((e) => e.id === "sti-college");
     size: A4;
     margin: 12mm 14mm;
   }
+  /* The resume prints on plain white: no field, no motif, no ruled paper. */
+  html:has(body.bare),
+  body.bare,
+  .bare .frame,
+  .bare .paper {
+    background: #fff;
+  }
 </style>
 
 <style>
@@ -170,7 +177,7 @@ const sti = education.find((e) => e.id === "sti-college");
   .role {
     font-size: 11pt;
     font-weight: 800;
-    color: #3a2e3f;
+    color: #111;
     margin-top: 2px;
   }
   address {
@@ -215,7 +222,7 @@ const sti = education.find((e) => e.id === "sti-college");
   }
   .org {
     font-size: 9.4pt;
-    color: #3a2e3f;
+    color: #111;
   }
   .url {
     font-weight: 700;
@@ -248,7 +255,7 @@ const sti = education.find((e) => e.id === "sti-college");
   }
   .skill strong {
     display: block;
-    color: #3a2e3f;
+    color: #111;
   }
   .foot {
     margin-top: 14px;

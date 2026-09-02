@@ -2,5 +2,7 @@
   { "id": "github", "platform": "GitHub", "url": "https://github.com/cdrakke", "username": "@cdrakke" },
   { "id": "x", "platform": "X", "url": "https://x.com/CDrakke", "username": "@CDrakke" },
   { "id": "linkedin", "platform": "LinkedIn", "url": "https://www.linkedin.com/in/calvin-drakke-r-94935b128/", "username": "calvin-drakke-r" },
-  { "id": "discord", "platform": "Discord", "url": "#", "username": "Drekyz" }
+  { "id": "discord", "platform": "Discord", "url": "#", "username": "Drekyz" },
+  { "id": "whatsapp", "platform": "WhatsApp", "url": "https://wa.me/639081600631", "username": "+63 908 160 0631" },
+  { "id": "viber", "platform": "Viber", "url": "viber://chat?number=%2B639081600631", "username": "+63 908 160 0631" }
 ]
