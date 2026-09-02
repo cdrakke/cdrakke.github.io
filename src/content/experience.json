@@ -1,0 +1,54 @@
+[
+  {
+    "id": "realty-one-group",
+    "role": "Full Stack Developer",
+    "organization": "Realty ONE Group Philippines",
+    "location": "General Santos City, Philippines (Remote)",
+    "period": "May 2026 – present",
+    "start": "2026-05",
+    "end": null,
+    "description": "Real estate franchise serving the Philippine market.",
+    "responsibilities": [
+      "Build and run an internal operations platform for a real estate franchise with a small team.",
+      "Full stack work spanning office, brokerage, agent, listing, and transaction management: schema, row-level security, commission logic, document pipelines, and CI/CD.",
+      "Contract role, remote."
+    ],
+    "tech": ["Next.js", "TypeScript", "Supabase", "PostgreSQL"],
+    "logo": "../assets/images/logos/realty-one-group.png"
+  },
+  {
+    "id": "simply-expanding",
+    "role": "Software Developer",
+    "organization": "Simply Expanding Digital Marketing Services",
+    "location": "General Santos City, Philippines",
+    "period": "Aug 2025 – Apr 2026",
+    "start": "2025-08",
+    "end": "2026-04",
+    "description": "Digital marketing agency providing SEO, software, and online growth solutions.",
+    "responsibilities": [
+      "Led development of Alertison, a family tracking mobile application.",
+      "Led development of Ultima Productivity, a time boxing mobile application.",
+      "Maintained the Better Teaching Solutions web application and the Leaf to Life CRM web application."
+    ],
+    "tech": ["NestJS", "Node.js", "Express", "MongoDB", "Socket.IO", "React Native", "Expo", "Firebase"],
+    "logo": "../assets/images/logos/simply-expanding.png"
+  },
+  {
+    "id": "cmo-ictd",
+    "role": "Hardware & Network Support IT Intern",
+    "organization": "CMO-ICTD (LGU General Santos City)",
+    "location": "General Santos City, Philippines",
+    "period": "Jan 2025 – May 2025",
+    "start": "2025-01",
+    "end": "2025-05",
+    "description": "CMO-ICTD manages IT operations and connectivity for LGU General Santos City.",
+    "responsibilities": [
+      "Assisted in maintaining network systems across LGU offices.",
+      "Updated LGU WordPress websites; added features such as searchable executive order archives.",
+      "Performed diagnostics and repair on government computer hardware.",
+      "Collaborated in a team-based environment alongside staff and other interns."
+    ],
+    "tech": ["WordPress", "Networking", "Hardware diagnostics"],
+    "logo": "../assets/images/logos/ictd-gensan.png"
+  }
+]

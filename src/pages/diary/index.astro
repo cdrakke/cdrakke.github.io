@@ -1,0 +1,156 @@
+---
+import Base from "@/layouts/Base.astro";
+import Panel from "@/components/Panel.astro";
+import DiaryEntry from "@/components/DiaryEntry.astro";
+import StickerChip from "@/components/StickerChip.astro";
+import { allProjects, kindLabel, type Kind } from "@/lib/projects";
+
+const projects = await allProjects();
+const kinds = Array.from(new Set(projects.map((p) => p.data.kind))) as Kind[];
+const counts = { Diary: projects.length, Shelf: 4 };
+---
+
+<Base title="Diary" description="Every product Calvin Drakke I. Rulete (Drekyz) has shipped, newest first: SaaS, web, mobile, desktop, bots, and tools." counts={counts}>
+  <div class="wrap">
+    <header class="head settle" style="--i:0">
+      <h1>Diary</h1>
+      <p class="lede">Everything I've shipped, newest first. Each entry opens to what it does, what it's built on, and the real figures behind it.</p>
+      <div class="filters" role="group" aria-label="Filter by kind">
+        <button class="chip on" type="button" data-kind="all" aria-pressed="true">All <span class="n">{projects.length}</span></button>
+        {
+          kinds.map((k) => (
+            <button class="chip" type="button" data-kind={k} aria-pressed="false">
+              {kindLabel[k]} <span class="n">{projects.filter((p) => p.data.kind === k).length}</span>
+            </button>
+          ))
+        }
+      </div>
+    </header>
+
+    <Panel title="Entries" icon="book" tone="butter" aside="newest first" id="entries" i={1}>
+      <ol class="list" data-list>
+        {
+          projects.map((p, i) => (
+            <li data-kind={p.data.kind}>
+              <DiaryEntry project={p} index={i} />
+            </li>
+          ))
+        }
+      </ol>
+      <p class="empty" data-empty hidden>Nothing of that kind in the diary yet.</p>
+    </Panel>
+
+    <p class="foot settle" style="--i:2">
+      <StickerChip tone="blush" icon="spark">Some of these were built with LLM-assisted development. The architecture, the decisions, and the shipped products are mine.</StickerChip>
+    </p>
+  </div>
+</Base>
+
+<script>
+  const wire = () => {
+    const group = document.querySelector<HTMLElement>(".filters");
+    const list = document.querySelector<HTMLElement>("[data-list]");
+    const empty = document.querySelector<HTMLElement>("[data-empty]");
+    if (!group || !list || !empty || group.dataset.wired) return;
+    group.dataset.wired = "1";
+    group.addEventListener("click", (e) => {
+      const btn = (e.target as HTMLElement).closest<HTMLButtonElement>("[data-kind]");
+      if (!btn) return;
+      const kind = btn.dataset.kind!;
+      group.querySelectorAll<HTMLButtonElement>("[data-kind]").forEach((b) => {
+        const on = b === btn;
+        b.classList.toggle("on", on);
+        b.setAttribute("aria-pressed", String(on));
+      });
+      let shown = 0;
+      list.querySelectorAll<HTMLLIElement>("li").forEach((li) => {
+        const show = kind === "all" || li.dataset.kind === kind;
+        li.hidden = !show;
+        if (show) shown++;
+      });
+      empty.hidden = shown > 0;
+    });
+  };
+  document.addEventListener("astro:page-load", wire);
+  wire();
+</script>
+
+<style>
+  .wrap {
+    max-width: 860px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-6);
+  }
+  .head {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-3);
+    padding: var(--space-2) var(--space-2) 0;
+  }
+  h1 {
+    font-size: var(--text-3xl);
+  }
+  .lede {
+    max-width: 62ch;
+    font-size: var(--text-md);
+    color: var(--ink-2);
+  }
+  .filters {
+    display: flex;
+    gap: 6px;
+    flex-wrap: wrap;
+    margin-top: var(--space-2);
+  }
+  .chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    border: var(--border-thin);
+    border-radius: var(--radius-pill);
+    padding: 5px 12px;
+    background: var(--white);
+    font-family: var(--font-display-stack);
+    font-weight: 600;
+    font-size: var(--text-sm);
+    box-shadow: var(--lift-sm);
+    transition: background var(--dur-fast) var(--ease-out);
+  }
+  .chip:hover {
+    background: var(--blush);
+  }
+  .chip.on {
+    background: var(--mint);
+  }
+  .n {
+    font-family: var(--font-body-stack);
+    font-size: var(--text-xs);
+    font-weight: 900;
+    background: var(--veil-strong);
+    border: 1px solid var(--line);
+    border-radius: var(--radius-pill);
+    padding: 0 6px;
+  }
+  .list {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin-top: 6px;
+  }
+  .empty {
+    padding: var(--space-4);
+    text-align: center;
+    color: var(--ink-soft);
+  }
+  .foot {
+    display: flex;
+    justify-content: center;
+  }
+  .foot :global(.chip) {
+    white-space: normal;
+    text-align: left;
+    line-height: 1.35;
+    max-width: 62ch;
+  }
+</style>

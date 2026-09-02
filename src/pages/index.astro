@@ -1,0 +1,300 @@
+---
+import { getCollection } from "astro:content";
+import Base from "@/layouts/Base.astro";
+import Panel from "@/components/Panel.astro";
+import ProfilePanel from "@/components/ProfilePanel.astro";
+import Room from "@/components/room/Room.astro";
+import DiaryEntry from "@/components/DiaryEntry.astro";
+import LedgerForm from "@/components/LedgerForm.astro";
+import StickerChip from "@/components/StickerChip.astro";
+import Icon from "@/components/Icon.astro";
+import { allProjects } from "@/lib/projects";
+import { site } from "@/data/site";
+import { roomObjects } from "@/data/room";
+
+const projects = await allProjects();
+const recent = projects.slice(0, 5);
+const skills = await getCollection("skills");
+const shelf = ["TypeScript", "Python", "C#", "NestJS", "Next.js", "Django", "React Native / Expo", "PostgreSQL", "MongoDB", "Redis", "Docker", "Coolify", "NGINX"]
+  .map((n) => skills.find((s) => s.data.name === n)?.data.name)
+  .filter((n): n is string => Boolean(n));
+
+// Flagship commits: Raidium (505) + the ops platform (56% of 2,004 = 1,122), rounded down to the hundred.
+const raidium = projects.find((p) => p.id === "raidium");
+const guilds = raidium?.data.figures.find((f) => /guild/i.test(f.label))?.value ?? "6+";
+const flagshipCommits = `${Math.floor((505 + Math.round(2004 * 0.56)) / 100) * 100}`.replace(/\B(?=(\d{3})+(?!\d))/g, ",") + "+";
+
+const counts = { Diary: projects.length, Shelf: 4 };
+---
+
+<Base person counts={counts}>
+  <div class="grid">
+    <ProfilePanel projectCount={projects.length} flagshipCommits={flagshipCommits} guilds={guilds} i={0} />
+
+    <Panel title="Room" icon="home" tone="mint" class="roompanel" id="room" i={1}>
+      <div class="roomwrap">
+        <Room />
+      </div>
+      <p class="swipe" aria-hidden="true"><Icon name="back" size={12} /> swipe to look around the room <Icon name="arrow" size={12} /></p>
+      <!-- On phones the drawn labels are too small to read or tap; the same furnishings are listed as stickers. -->
+      <ul class="legend" aria-label="Things in the room">
+        {
+          roomObjects
+            .filter((o) => "href" in o.action)
+            .map((o) => (
+              <li>
+                <a class="lchip" href={"href" in o.action ? o.action.href : "/"}>
+                  {o.label}
+                </a>
+              </li>
+            ))
+        }
+        <li>
+          <button class="lchip" type="button" data-bgm-legend>Hip Shop · play / pause</button>
+        </li>
+      </ul>
+    </Panel>
+
+    <Panel title="Diary" icon="book" tone="butter" aside="newest first" class="diarypanel" id="diary" i={2}>
+      <ol class="diary">
+        {
+          recent.map((p, i) => (
+            <li>
+              <DiaryEntry project={p} index={i} compact />
+            </li>
+          ))
+        }
+      </ol>
+      <a class="all" href="/diary">All {projects.length} entries <Icon name="arrow" size={14} /></a>
+
+      <LedgerForm teaser />
+
+      <div class="group">
+        <div class="lbl">Friends</div>
+        <div class="frow">
+          {
+            site.friends.map((f, i) => (
+              <a class="fchip" href={f.url} target="_blank" rel="noopener noreferrer">
+                <span class:list={["av", i % 2 === 1 && "gh"]}>{f.initial}</span>
+                {f.name}
+              </a>
+            ))
+          }
+        </div>
+      </div>
+
+      <div class="group">
+        <div class="lbl">Shelf · stack</div>
+        <div class="srow">
+          {shelf.map((n, i) => <StickerChip size="xs" tone={(["mint", "sky", "blush"] as const)[i % 3]}>{n}</StickerChip>)}
+        </div>
+      </div>
+    </Panel>
+  </div>
+</Base>
+
+<script>
+  const wire = () => {
+    // Phones: start the sideways-scrolling room centred on the desk, not on the left wall.
+    const centre = () =>
+      document.querySelectorAll<HTMLElement>(".roomwrap").forEach((w) => {
+        if (w.scrollWidth > w.clientWidth) w.scrollLeft = (w.scrollWidth - w.clientWidth) * 0.45;
+      });
+    centre();
+    requestAnimationFrame(centre);
+    window.addEventListener("load", centre, { once: true });
+    document.querySelectorAll<HTMLButtonElement>("[data-bgm-legend]").forEach((b) => {
+      if (b.dataset.wired) return;
+      b.dataset.wired = "1";
+      b.addEventListener("click", () => document.dispatchEvent(new Event("bgm:toggle")));
+    });
+  };
+  document.addEventListener("astro:page-load", wire);
+  wire();
+</script>
+
+<style>
+  .grid {
+    display: grid;
+    grid-template-columns: 290px minmax(0, 1fr) 322px;
+    gap: 14px;
+    align-items: start;
+  }
+
+  .roompanel {
+    padding: 14px 10px 6px;
+    background: var(--veil-soft);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    min-height: 100%;
+  }
+  .roomwrap {
+    width: 100%;
+  }
+  .swipe {
+    display: none;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    font-size: var(--text-xs);
+    font-weight: 900;
+    color: var(--ink-soft);
+    letter-spacing: 0.3px;
+    text-transform: uppercase;
+    padding: 6px 0 2px;
+  }
+  .legend {
+    display: none;
+    gap: 6px;
+    flex-wrap: wrap;
+    padding: 10px 4px 6px;
+  }
+  .lchip {
+    display: inline-flex;
+    align-items: center;
+    min-height: 44px;
+    padding: 8px 14px;
+    border: var(--border-thin);
+    border-radius: var(--radius-pill);
+    background: var(--white);
+    font-size: var(--text-sm);
+    font-weight: 800;
+    text-decoration: none;
+    box-shadow: var(--lift-sm);
+  }
+  .lchip:nth-child(3n + 1) {
+    background: var(--mint);
+  }
+  li:nth-child(3n + 2) .lchip {
+    background: var(--sky);
+  }
+  li:nth-child(3n) .lchip {
+    background: var(--butter);
+  }
+
+  .diary {
+    display: flex;
+    flex-direction: column;
+    gap: 7px;
+    margin-top: 6px;
+  }
+
+  .all {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    margin: 10px 0 14px 4px;
+    font-size: var(--text-sm);
+    font-weight: 900;
+  }
+
+  .group {
+    margin-top: 12px;
+  }
+  .lbl {
+    font-size: var(--text-2xs);
+    font-weight: 900;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    color: var(--ink-soft);
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+  .lbl::after {
+    content: "";
+    flex: 1;
+    border-top: 1.5px dotted var(--line);
+  }
+  .frow {
+    display: flex;
+    gap: 7px;
+    margin-top: 7px;
+    flex-wrap: wrap;
+  }
+  .fchip {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    background: var(--white);
+    border: var(--border-thin);
+    border-radius: var(--radius-pill);
+    padding: 4px 11px 4px 5px;
+    font-size: var(--text-xs);
+    font-weight: 800;
+    box-shadow: var(--lift-sm);
+    text-decoration: none;
+  }
+  .av {
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background: var(--sky);
+    border: 1.4px solid var(--line);
+    display: grid;
+    place-items: center;
+    font-family: var(--font-display-stack);
+    font-size: var(--text-xs);
+    font-weight: 600;
+  }
+  .av.gh {
+    background: var(--butter);
+  }
+  .srow {
+    display: flex;
+    gap: 5px;
+    margin-top: 7px;
+    flex-wrap: wrap;
+  }
+
+  @media (max-width: 1180px) {
+    .grid {
+      grid-template-columns: 270px minmax(0, 1fr);
+    }
+    .diarypanel {
+      grid-column: 1 / -1;
+    }
+  }
+
+  @media (max-width: 860px) {
+    .grid {
+      grid-template-columns: minmax(0, 1fr);
+      gap: 22px;
+    }
+    .diarypanel {
+      grid-column: auto;
+    }
+    .roompanel {
+      min-height: 0;
+    }
+  }
+
+  /* Phones: the room scrolls sideways at near-desktop scale, and every object is also a tappable sticker below. */
+  @media (max-width: 640px) {
+    .roompanel {
+      padding: 14px 0 6px;
+    }
+    .roomwrap {
+      overflow-x: auto;
+      overscroll-behavior-x: contain;
+      scrollbar-width: none;
+      padding: 0 8px;
+    }
+    .roomwrap::-webkit-scrollbar {
+      display: none;
+    }
+    .roomwrap :global(.room) {
+      min-width: 620px;
+    }
+    /* soft edges say "there is more room this way" */
+    .roomwrap {
+      mask-image: linear-gradient(90deg, transparent, #000 6%, #000 94%, transparent);
+      -webkit-mask-image: linear-gradient(90deg, transparent, #000 6%, #000 94%, transparent);
+    }
+    .swipe,
+    .legend {
+      display: flex;
+    }
+  }
+</style>

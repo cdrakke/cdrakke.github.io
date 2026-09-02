@@ -1,0 +1,250 @@
+---
+/** The guest ledger: a real contact form through web3forms, with a honeypot and honest states. */
+import StickerButton from "./StickerButton.astro";
+import Icon from "./Icon.astro";
+import { site } from "@/data/site";
+
+interface Props {
+  /** Compact teaser on the home page (one field + Send that leads to /ledger). */
+  teaser?: boolean;
+}
+const { teaser = false } = Astro.props;
+---
+
+{
+  teaser ? (
+    <form class="ledger teaser" action="/ledger" method="get">
+      <div class="lh">
+        <h3><Icon name="ledger" size={15} />Guest ledger</h3>
+        <span class="sub">this is the contact form</span>
+      </div>
+      <div class="field">
+        <input class="input" type="text" name="note" placeholder="Leave a note..." aria-label="Start a note" autocomplete="off" />
+        <button class="send" type="submit">Send</button>
+      </div>
+      <p class="mail"><Icon name="mail" size={13} />or write to <a href={`mailto:${site.email}`}>{site.email}</a></p>
+    </form>
+  ) : (
+    <form class="ledger full" data-ledger action="https://api.web3forms.com/submit" method="POST" novalidate>
+      <input type="hidden" name="access_key" value={site.web3formsKey} />
+      <input type="hidden" name="subject" value="New note in the guest ledger" />
+      <input type="hidden" name="from_name" value="Drekyz's minihompy" />
+      <input type="checkbox" name="botcheck" class="visually-hidden" tabindex="-1" autocomplete="off" aria-hidden="true" />
+
+      <div class="row">
+        <label class="lbl" for="ledger-name">Your name</label>
+        <input class="input" id="ledger-name" name="name" type="text" required autocomplete="name" placeholder="Who's visiting?" />
+      </div>
+      <div class="row">
+        <label class="lbl" for="ledger-email">Your email</label>
+        <input class="input" id="ledger-email" name="email" type="email" required autocomplete="email" placeholder="So I can write back" />
+      </div>
+      <div class="row">
+        <label class="lbl" for="ledger-message">Your note</label>
+        <textarea class="input area" id="ledger-message" name="message" rows="6" required placeholder="A role, a project, or just hello."></textarea>
+      </div>
+
+      <p class="status" data-status role="status" aria-live="polite"></p>
+
+      <div class="actions">
+        <StickerButton type="submit" tone="butter" icon="note" full={false}>
+          <span data-label>Sign the ledger</span>
+        </StickerButton>
+        <a class="alt" href={`mailto:${site.email}`}><Icon name="mail" size={14} />or email {site.email}</a>
+      </div>
+    </form>
+  )
+}
+
+<script>
+  const wire = () => {
+    document.querySelectorAll<HTMLFormElement>("form[data-ledger]").forEach((form) => {
+      if (form.dataset.wired) return;
+      form.dataset.wired = "1";
+      const status = form.querySelector<HTMLElement>("[data-status]")!;
+      const label = form.querySelector<HTMLElement>("[data-label]")!;
+      const submit = form.querySelector<HTMLButtonElement>("button[type=submit]")!;
+
+      // The home page teaser sends its note here as ?note=; carry it into the textarea.
+      const note = new URLSearchParams(location.search).get("note");
+      const area = form.querySelector<HTMLTextAreaElement>("textarea[name=message]");
+      if (note && area && !area.value) {
+        area.value = note;
+        area.focus();
+        history.replaceState(null, "", location.pathname);
+      }
+
+      const say = (text: string, kind: "ok" | "bad" | "") => {
+        status.textContent = text;
+        status.dataset.kind = kind;
+      };
+
+      form.addEventListener("submit", async (e) => {
+        e.preventDefault();
+        if (!form.checkValidity()) {
+          form.reportValidity();
+          say("The ledger needs a name, an email, and a note before it takes the entry.", "bad");
+          return;
+        }
+        submit.disabled = true;
+        label.textContent = "Writing it in...";
+        say("", "");
+        try {
+          const res = await fetch(form.action, {
+            method: "POST",
+            headers: { "Content-Type": "application/json", Accept: "application/json" },
+            body: JSON.stringify(Object.fromEntries(new FormData(form).entries())),
+          });
+          const json = await res.json().catch(() => ({}));
+          if (res.ok && json.success !== false) {
+            form.reset();
+            label.textContent = "Signed";
+            say("Your note is in the ledger. I read every entry and I'll write back to your email.", "ok");
+          } else {
+            throw new Error(json.message || `web3forms answered ${res.status}`);
+          }
+        } catch (err) {
+          label.textContent = "Sign the ledger";
+          say(`The ledger didn't take it (${(err as Error).message}). Email me directly instead; the address is right there.`, "bad");
+        } finally {
+          submit.disabled = false;
+        }
+      });
+    });
+  };
+  document.addEventListener("astro:page-load", wire);
+  wire();
+</script>
+
+<style>
+  .ledger {
+    background: var(--blush);
+    border: var(--border-thin);
+    border-radius: var(--radius-md);
+    padding: 12px 11px 11px;
+    position: relative;
+  }
+  .full {
+    padding: var(--space-5) var(--space-4);
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-3);
+  }
+
+  .lh {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 8px;
+    flex-wrap: wrap;
+  }
+  h3 {
+    font-size: var(--text-md);
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+  .sub {
+    font-size: var(--text-xs);
+    font-weight: 700;
+    color: var(--ink-soft);
+  }
+
+  .field {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-top: 9px;
+  }
+  .input {
+    flex: 1;
+    min-width: 0;
+    background: var(--white);
+    border: var(--border-thin);
+    border-radius: var(--radius-pill);
+    padding: 8px 14px;
+    font-size: var(--text-sm);
+    font-weight: 700;
+    color: var(--ink);
+    box-shadow: inset 0 2px 0 rgba(58, 46, 63, 0.06);
+    width: 100%;
+  }
+  .input::placeholder {
+    color: var(--ink-soft);
+    font-weight: 700;
+  }
+  .input:focus-visible {
+    outline: 3px solid var(--sky-deep);
+    outline-offset: 1px;
+  }
+  .area {
+    border-radius: var(--radius-md);
+    resize: vertical;
+    min-height: 120px;
+    line-height: 1.45;
+  }
+  .send {
+    background: var(--butter);
+    border: var(--border);
+    border-radius: var(--radius-pill);
+    padding: 6px 14px;
+    font-family: var(--font-display-stack);
+    font-weight: 600;
+    font-size: var(--text-sm);
+    box-shadow: var(--lift);
+  }
+  .send:active {
+    transform: translateY(2px);
+    box-shadow: 0 1px 0 rgba(58, 46, 63, 0.18);
+  }
+  .mail {
+    margin-top: 8px;
+    font-size: var(--text-xs);
+    font-weight: 800;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    flex-wrap: wrap;
+  }
+
+  .row {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+  .lbl {
+    font-size: var(--text-xs);
+    font-weight: 900;
+    letter-spacing: 0.4px;
+    text-transform: uppercase;
+    color: var(--ink-soft);
+    padding-left: 12px;
+  }
+
+  .status {
+    min-height: 1.4em;
+    font-size: var(--text-sm);
+    font-weight: 800;
+    padding: 0 4px;
+  }
+  .status[data-kind="ok"] {
+    color: var(--ok-ink);
+  }
+  .status[data-kind="bad"] {
+    color: var(--bad-ink);
+  }
+
+  .actions {
+    display: flex;
+    align-items: center;
+    gap: var(--space-3);
+    flex-wrap: wrap;
+  }
+  .alt {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-size: var(--text-sm);
+    font-weight: 800;
+  }
+</style>

@@ -1,0 +1,481 @@
+[
+  {
+    "id": "raidium",
+    "title": "Raidium",
+    "kind": "saas",
+    "year": 2025,
+    "period": "Aug 2025 – present",
+    "status": "live",
+    "role": "Lead Developer",
+    "summary": "Multi-tenant guild management SaaS for MMORPG communities, monetized through on-chain USDt payments on the Kaia blockchain.",
+    "description": "A multi-tenant guild management platform I built alone for MMORPG communities. It tracks red boss spawns with Discord reminders, verifies attendance from screenshots via OCR, runs a points economy with weekly rankings, and hosts a marketplace with an auction system, all behind a 4-tier guild RBAC with complete per-guild data isolation. It serves 6+ guilds and is monetized through a 5-tier modular subscription ($3–$10 USDt/month) on the Kaia blockchain with automatic on-chain transaction verification, plus PayMongo for fiat. Since analytics went live in May 2026 it has drawn 16,700+ visitors from 76 countries (66,000+ pageviews), most of them through its public game tools and guides.",
+    "features": [
+      "Red Boss tracking with spawn scheduling and Discord reminders through a QStash chain",
+      "Attendance system with screenshot verification via OCR",
+      "Points economy with weekly rankings and leaderboards",
+      "Marketplace with listing-based and auction system",
+      "Kaia USDt crypto payments (5-tier subscriptions with on-chain verification) plus PayMongo for fiat",
+      "Multi-tenancy with complete guild-scoped data isolation",
+      "4-tier RBAC with comprehensive audit logging",
+      "Self-hosted on my bare-metal server via Docker + Coolify",
+      "Android app with push notifications",
+      "Discord bot with slash commands and webhook alerts",
+      "Two-tier OCR: OCR.space first, then a self-hosted EasyOCR service I wrote",
+      "Public game tools and guides (relic calculator, class guides) that bring most of the traffic",
+      "GlitchTip error tracking, Umami analytics, and uptime checks on my own server",
+      "Community forum on Discourse",
+      "Jest unit and integration tests"
+    ],
+    "tech": [
+      "Next.js 15",
+      "React 19",
+      "TypeScript",
+      "MongoDB",
+      "Kaia USDt payments",
+      "Capacitor (Android)",
+      "Self-hosted OCR (FastAPI + EasyOCR)",
+      "Docker + Coolify"
+    ],
+    "figures": [
+      {
+        "label": "Commits, ~98% mine",
+        "value": "505"
+      },
+      {
+        "label": "API routes",
+        "value": "~225"
+      },
+      {
+        "label": "Data models",
+        "value": "33"
+      },
+      {
+        "label": "Guilds served",
+        "value": "6+"
+      },
+      {
+        "label": "visitors from 76 countries since May 2026",
+        "value": "16,700+"
+      }
+    ],
+    "cover": "../assets/images/projects/raidium/cover.png",
+    "liveUrl": "https://raidium.quest",
+    "featured": 1,
+    "screenshots": [
+      "../assets/images/projects/raidium/dashboard.png",
+      "../assets/images/projects/raidium/red-bosses.png",
+      "../assets/images/projects/raidium/attendance.png",
+      "../assets/images/projects/raidium/marketplace.png"
+    ]
+  },
+  {
+    "id": "ops-platform",
+    "title": "Operations platform for a real estate franchise",
+    "kind": "web",
+    "year": 2026,
+    "period": "May 2026 – present",
+    "status": "in-service",
+    "role": "Full Stack Developer (contract)",
+    "summary": "Internal operations platform for a real estate franchise: offices, brokerage, agents, listings, and transactions in one system.",
+    "description": "With a small team I build and run the internal operations platform of a real estate franchise, covering offices, brokerage, agents, listings, and transactions. It is a Next.js app on Supabase/Postgres with a 9-role RBAC enforced in row-level security, a concurrency-safe commission engine, e-signature and document pipelines, a multi-phase onboarding workflow, and three-environment CI/CD with migration gates and integration tests. I have authored 56% of its commits.",
+    "features": [
+      "9-role RBAC enforced in Postgres row-level security",
+      "Concurrency-safe commission engine",
+      "E-signature and document pipelines",
+      "Multi-phase onboarding workflow",
+      "Three-environment CI/CD with migration gates and integration tests"
+    ],
+    "tech": [
+      "Next.js",
+      "TypeScript",
+      "Supabase",
+      "PostgreSQL"
+    ],
+    "figures": [
+      {
+        "label": "Commits",
+        "value": "56% of 2,004"
+      },
+      {
+        "label": "Pull requests",
+        "value": "730"
+      },
+      {
+        "label": "RBAC roles",
+        "value": "9"
+      },
+      {
+        "label": "Environments",
+        "value": "3"
+      }
+    ],
+    "generic": true,
+    "featured": 2
+  },
+  {
+    "id": "server",
+    "title": "My bare‑metal server",
+    "kind": "infra",
+    "year": 2026,
+    "period": "Feb 2026 – present",
+    "status": "live",
+    "role": "Built and run by me",
+    "summary": "One dedicated box that runs everything I ship: Raidium, its OCR service, the Pickleball GenSan backend, Nextmarket Sniper, and the monitoring, error tracking, analytics, and invoicing behind them.",
+    "description": "A dedicated 8-core server with two SSDs in a RAID1 mirror, running Debian, that I set up in February 2026 and have run since. Coolify deploys my apps from a git push to main and builds them in Docker; NGINX and Certbot terminate TLS in front of 17 sites. Uptime Kuma, GlitchTip, and Umami are self-hosted on the same box, so I get uptime checks, Sentry-style error reports, and visitor analytics without paying a vendor. Freelance invoicing runs on InvoicePlane, which has no webhooks, so a small bash script on a systemd timer polls its database every 5 minutes and posts new payments into Sure, my finance tracker. SSH is key-only on a non-default port.",
+    "features": [
+      "Coolify deploys from a git push: build, container, domain, and TLS in one step",
+      "NGINX reverse proxy with Certbot certificates in front of 17 sites",
+      "Self-hosted OCR microservice (FastAPI + EasyOCR) for Raidium's attendance screenshots",
+      "Uptime Kuma, GlitchTip (Sentry-compatible), and Umami, all self-hosted",
+      "InvoicePlane to Sure payment sync: a bash script on a 5-minute systemd timer",
+      "PostgreSQL, MariaDB, and Valkey behind the apps, with pgAdmin over them",
+      "Two SSDs in a RAID1 mirror"
+    ],
+    "tech": [
+      "Debian",
+      "Docker",
+      "Coolify",
+      "NGINX + Certbot",
+      "systemd",
+      "Uptime Kuma",
+      "GlitchTip",
+      "Umami"
+    ],
+    "figures": [
+      {
+        "label": "services running",
+        "value": "41"
+      },
+      {
+        "label": "sites behind one proxy",
+        "value": "17"
+      },
+      {
+        "label": "RAM on 8 cores",
+        "value": "32 GB"
+      },
+      {
+        "label": "of my own products live here",
+        "value": "4"
+      }
+    ]
+  },
+  {
+    "id": "alertison",
+    "title": "Alertison",
+    "kind": "mobile",
+    "year": 2025,
+    "period": "2025 – Apr 2026",
+    "status": "live",
+    "role": "Lead Backend + Co-dev Frontend (former)",
+    "summary": "Family location tracking and emergency management mobile app with real-time communication.",
+    "description": "A family safety mobile app with real-time location tracking, geofence-based safety alerts, SOS emergency functionality, and real-time chat. I led the Node.js/Express backend and co-developed the React Native/Expo frontend, including background location tracking and Firebase Cloud Messaging push notifications.",
+    "features": [
+      "Real-time family location tracking with multiple intensity modes",
+      "Geofence-based safety alerts (Safe Zones, Trusted Locations)",
+      "SOS emergency functionality with push notifications",
+      "Real-time chat with typing indicators and read receipts",
+      "Family group management with invitation codes",
+      "Background location tracking with expo-task-manager"
+    ],
+    "tech": [
+      "React Native",
+      "Expo",
+      "Node.js",
+      "Express",
+      "MongoDB",
+      "Socket.IO",
+      "Firebase",
+      "NativeWind",
+      "Zustand"
+    ],
+    "cover": "../assets/images/projects/alertison/cover.png",
+    "liveUrl": "https://alertison.com.au",
+    "collaborator": {
+      "name": "Michael Panizales",
+      "url": "https://michaelpanizales.vercel.app/"
+    },
+    "featured": 3,
+    "former": true
+  },
+  {
+    "id": "ifs-dss",
+    "title": "Integrated Fire Services DSS",
+    "kind": "web",
+    "year": 2026,
+    "period": "Feb 2026 – 2026",
+    "status": "handed-off",
+    "role": "Lead Backend (former)",
+    "summary": "Decision support system automating the fire safety project lifecycle, from client inquiry to Design Report.",
+    "description": "A decision support system for Integrated Fire Services that automates the fire safety project lifecycle from client inquiry through analysis to Design Report generation. I built the backend on NestJS and Prisma: a decision engine with 6 rules for automated fire safety measure determination, RFI management, and fee proposals, with comprehensive test coverage.",
+    "features": [
+      "Decision engine with 6 automated fire safety rules",
+      "57 API endpoints with Swagger documentation",
+      "217 passing tests across 20 test suites",
+      "15 NestJS modules with dependency injection",
+      "RFI management and fee proposal system",
+      "15 database models with Prisma ORM"
+    ],
+    "tech": [
+      "NestJS",
+      "TypeScript",
+      "Prisma",
+      "PostgreSQL",
+      "Swagger",
+      "Bun"
+    ],
+    "figures": [
+      {
+        "label": "API endpoints",
+        "value": "57"
+      },
+      {
+        "label": "Tests",
+        "value": "217"
+      }
+    ],
+    "cover": "../assets/images/projects/ifs-dss/dashboard.jpg",
+    "screenshots": [
+      "../assets/images/projects/ifs-dss/login.jpg",
+      "../assets/images/projects/ifs-dss/dashboard.jpg"
+    ],
+    "collaborator": {
+      "name": "Michael Panizales",
+      "url": "https://michaelpanizales.vercel.app/"
+    },
+    "former": true
+  },
+  {
+    "id": "pickleball-gensan",
+    "title": "Pickleball GenSan",
+    "kind": "web",
+    "year": 2025,
+    "period": "2025 – present",
+    "status": "live",
+    "role": "Lead Backend + Co-dev Frontend",
+    "summary": "Court matchmaking and leaderboard platform for the General Santos pickleball community.",
+    "description": "A matchmaking and leaderboard platform for the General Santos pickleball community. I built real-time court availability, the player matchmaking algorithm, live match notifications via Socket.IO with Redis, club management, and rankings, delivered as a Progressive Web App with offline support.",
+    "features": [
+      "Court management and real-time availability",
+      "Player matchmaking algorithm",
+      "Real-time match notifications via Socket.IO + Redis",
+      "Club management and rankings system",
+      "Player leaderboards and attendance tracking",
+      "PWA with offline support",
+      "Backend in Docker on my server through Coolify, Prisma migrations run on deploy"
+    ],
+    "tech": [
+      "Next.js",
+      "NestJS",
+      "PostgreSQL",
+      "Prisma",
+      "Socket.IO",
+      "Redis",
+      "Better Auth",
+      "Bun"
+    ],
+    "cover": "../assets/images/projects/pickleball/cover.png",
+    "liveUrl": "https://pickleballgensan.vercel.app",
+    "collaborator": {
+      "name": "Michael Panizales",
+      "url": "https://michaelpanizales.vercel.app/"
+    },
+    "featured": 4,
+    "screenshots": [
+      "../assets/images/projects/pickleball/courts.png",
+      "../assets/images/projects/pickleball/feed.png"
+    ]
+  },
+  {
+    "id": "ultima-productivity",
+    "title": "Ultima Productivity (FM-LPS-UP)",
+    "kind": "mobile",
+    "year": 2025,
+    "period": "2025 – Apr 2026",
+    "status": "paused",
+    "role": "Lead Backend + Co-dev Frontend (former)",
+    "summary": "Time boxing mobile application with location-based features for productivity management.",
+    "description": "A time boxing mobile app with location pinning that I led the backend for during my time at Simply Expanding Digital Marketing Services. Development is paused awaiting client direction.",
+    "features": [
+      "Time boxing functionality",
+      "Location pinning and tracking",
+      "Real-time notifications",
+      "Family group management"
+    ],
+    "tech": [
+      "React Native",
+      "Expo",
+      "Node.js",
+      "Express"
+    ],
+    "collaborator": {
+      "name": "Michael Panizales",
+      "url": "https://michaelpanizales.vercel.app/"
+    },
+    "former": true
+  },
+  {
+    "id": "gyocc-online",
+    "title": "GYOCC.online",
+    "kind": "web",
+    "year": 2024,
+    "period": "Apr 2024 – Nov 2024",
+    "status": "delivered",
+    "role": "Backend Programmer (Capstone)",
+    "summary": "Web management system for the Gensan Youth Orchestra & Choir Corporation. Capstone project.",
+    "description": "The first web management system for the Gensan Youth Orchestra and Choir Corporation, supporting appointment booking, lesson scheduling, and ticketing for concerts and performances. I replaced their paper and Excel workflows, which cut internal tracking work by 80%, integrated the PayMaya API for online checkout, and added 2FA security.",
+    "features": [
+      "Online ticketing with QR codes and 2FA validation",
+      "Lesson scheduling by instrument, instructor, and availability",
+      "Analytics dashboard with event stats and payment logs",
+      "User roles and permissions (Admin, Instructor, Organizer, Member)",
+      "Resource and repertoire management",
+      "80% reduction in manual event scheduling workload"
+    ],
+    "tech": [
+      "Django",
+      "PostgreSQL",
+      "Bootstrap",
+      "PayMaya API",
+      "Google Email API"
+    ],
+    "figures": [
+      {
+        "label": "Tracking workload reduced",
+        "value": "80%"
+      }
+    ],
+    "cover": "../assets/images/projects/gyocc/cover.png",
+    "screenshots": [
+      "../assets/images/projects/gyocc/showcase/home.png",
+      "../assets/images/projects/gyocc/showcase/dashboard.png",
+      "../assets/images/projects/gyocc/showcase/admin.png",
+      "../assets/images/projects/gyocc/showcase/payment-sample.png",
+      "../assets/images/projects/gyocc/showcase/payment-success-1.png",
+      "../assets/images/projects/gyocc/showcase/payment-success-2.png"
+    ],
+    "documentUrl": "/documents/A_Web_Management_System_for_Gensan_Youth_Orchestra_and_Choir_Corporation_S.Y.2024_2025.pdf"
+  },
+  {
+    "id": "se-scraper",
+    "title": "SE Scraper",
+    "kind": "desktop",
+    "year": 2025,
+    "period": "2025",
+    "status": "delivered",
+    "role": "Solo Developer",
+    "summary": "SEO keyword miner with multi-engine autocomplete scraping and a modern dark-themed GUI.",
+    "description": "An autocomplete keyword miner I built for SEO research. It scrapes suggestion data from Google, YouTube, and Amazon through a dark-themed PySide6 GUI, with multi-engine concurrent scraping via threading, advanced expansion modes, and real-time filtering with deduplication.",
+    "features": [
+      "Multi-engine support (Google, YouTube, Amazon) with regional variants",
+      "Advanced expansion modes with configurable delays",
+      "Real-time filtering and deduplication with O(1) lookup",
+      "Export to CSV/JSON",
+      "Dark-themed professional GUI with colored engine badges"
+    ],
+    "tech": [
+      "Python",
+      "PySide6",
+      "Selenium",
+      "Threading"
+    ],
+    "cover": "../assets/images/projects/se-scraper/dashboard.png",
+    "screenshots": [
+      "../assets/images/projects/se-scraper/dashboard.png",
+      "../assets/images/projects/se-scraper/scraping.png"
+    ]
+  },
+  {
+    "id": "gliberator",
+    "title": "GLiberator",
+    "kind": "bot",
+    "year": 2020,
+    "period": "Apr 2020 – May 2025",
+    "status": "retired",
+    "role": "Solo Developer",
+    "summary": "Discord bot for automated emoji submission and voting, maintained over 5 years.",
+    "description": "A Discord bot I built for automated emoji submission and voting, improving community moderation for a large Discord server. It has 13+ custom management commands and persistent SQLite tracking, and I maintained and updated it over 5 years as the server's needs changed.",
+    "features": [
+      "Automated emoji polling and approval process",
+      "Persistent SQLite database for submission tracking",
+      "13+ custom management commands",
+      "Submission expiration, vote thresholds, image duplication checks",
+      "Maintained over 5 years with continuous updates"
+    ],
+    "tech": [
+      "Python",
+      "discord.py",
+      "SQLite"
+    ],
+    "figures": [
+      {
+        "label": "Years maintained",
+        "value": "5"
+      },
+      {
+        "label": "Commands",
+        "value": "13+"
+      }
+    ]
+  },
+  {
+    "id": "nextmarket-sniper",
+    "title": "Nextmarket Sniper",
+    "kind": "tool",
+    "year": 2025,
+    "period": "2025",
+    "status": "live",
+    "role": "Solo Developer",
+    "summary": "Discord webhook sniper tool for market listing alerts in LordNine's marketplace.",
+    "description": "A tool I built to snipe item listings via Discord webhook alerts in LordNine's next market. It has user authentication, SKU management and indexing, notification settings, and a clean dashboard built with ShadCN components.",
+    "features": [
+      "Discord webhook alert integration",
+      "SKU management and indexing",
+      "User authentication with NextAuth",
+      "Notification settings configuration",
+      "Clean dark-mode dashboard",
+      "Shipped as a container image on GHCR, deployed with a prod Compose file behind NGINX"
+    ],
+    "tech": [
+      "Next.js",
+      "React",
+      "Prisma",
+      "NextAuth",
+      "ShadCN/ui",
+      "Tailwind CSS",
+      "Docker",
+      "GHCR"
+    ],
+    "cover": "../assets/images/projects/nextmarket-sniper/cover.png",
+    "screenshots": [
+      "../assets/images/projects/nextmarket-sniper/dashboard.png",
+      "../assets/images/projects/nextmarket-sniper/notifications.png"
+    ],
+    "liveUrl": "https://sniper.raidium.quest/"
+  },
+  {
+    "id": "wuwa-fps-unlock",
+    "title": "WUWA FPS Unlock",
+    "kind": "desktop",
+    "year": 2025,
+    "period": "2025",
+    "status": "delivered",
+    "role": "Solo Developer",
+    "summary": "Desktop utility to unlock the FPS cap in Wuthering Waves by modifying the game config.",
+    "description": "A .NET desktop utility I built to unlock the frame rate limit in Wuthering Waves. It modifies the game's SQLite configuration database to set custom FPS values (75, 90, 120), with a simple Windows Forms GUI, path selection, and persistent settings.",
+    "features": [
+      "FPS limit adjustment (75, 90, 120 FPS options)",
+      "Direct SQLite database modification",
+      "Persistent settings and path configuration",
+      "Single-file self-contained executable",
+      "Open source, MIT licensed"
+    ],
+    "tech": [
+      "C#",
+      ".NET 8",
+      "Windows Forms",
+      "SQLite"
+    ],
+    "repoUrl": "https://github.com/cdrakke/WUWA_FPSUnlock"
+  }
+]

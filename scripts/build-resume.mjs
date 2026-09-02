@@ -1,55 +1,46 @@
-// Generates a print-ready PDF from public/resume/index.html using Puppeteer.
-// Run with: npm run resume:pdf
+// Prints the built /resume page to public/resume/Calvin_Drakke_Rulete_Resume.pdf (A4).
+// Run `astro build` first, then `npm run resume:pdf`. Commit the PDF; the site links to it.
 import { fileURLToPath, pathToFileURL } from "node:url";
 import { dirname, resolve } from "node:path";
-import { existsSync } from "node:fs";
+import { existsSync, copyFileSync, mkdirSync } from "node:fs";
 import puppeteer from "puppeteer";
 
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = dirname(__filename);
-const projectRoot = resolve(__dirname, "..");
+const root = resolve(dirname(fileURLToPath(import.meta.url)), "..");
+const html = resolve(root, "dist/resume/index.html");
+const out = resolve(root, "public/resume/Calvin_Drakke_Rulete_Resume.pdf");
 
-const htmlPath = resolve(projectRoot, "public/resume/index.html");
-const pdfPath = resolve(
-  projectRoot,
-  "public/resume/Calvin_Drakke_Rulete_Resume.pdf",
-);
-
-if (!existsSync(htmlPath)) {
-  console.error(`[resume] source HTML not found: ${htmlPath}`);
+if (!existsSync(html)) {
+  console.error(`[resume] built page not found: ${html}. Run \`astro build\` first.`);
   process.exit(1);
 }
 
-console.log("[resume] launching headless Chromium...");
 const browser = await puppeteer.launch({
   headless: true,
+  executablePath: process.env.PUPPETEER_EXECUTABLE_PATH || undefined,
   args: ["--no-sandbox", "--disable-setuid-sandbox"],
 });
 
 try {
   const page = await browser.newPage();
-  const url = pathToFileURL(htmlPath).toString();
-
-  console.log(`[resume] loading ${url}`);
-  await page.goto(url, { waitUntil: "networkidle0" });
-
-  // Force a print-media render so @media print rules apply.
+  await page.setRequestInterception(true);
+  page.on("request", (req) => {
+    const url = req.url();
+    if (url.startsWith("file:///_astro/")) {
+      req.continue({ url: pathToFileURL(resolve(root, "dist" + url.replace("file://", ""))).toString() });
+    } else req.continue();
+  });
+  await page.goto(pathToFileURL(html).toString(), { waitUntil: "networkidle0" });
+  await page.evaluate(() => document.fonts.ready);
   await page.emulateMediaType("print");
-
-  console.log(`[resume] writing ${pdfPath}`);
   await page.pdf({
-    path: pdfPath,
+    path: out,
     format: "A4",
     printBackground: true,
     preferCSSPageSize: true,
   });
-
-  console.log("[resume] done.");
+  mkdirSync(resolve(root, "dist/resume"), { recursive: true });
+  copyFileSync(out, resolve(root, "dist/resume/Calvin_Drakke_Rulete_Resume.pdf"));
+  console.log(`[resume] wrote ${out}`);
 } finally {
-  // Swallow close-time errors so they can't mask the original failure.
-  try {
-    await browser.close();
-  } catch {
-    // ignore — we're already in cleanup
-  }
+  await browser.close();
 }

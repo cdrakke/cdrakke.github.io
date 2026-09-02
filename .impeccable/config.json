@@ -1,0 +1,72 @@
+{
+  "buildPath": "code",
+  "detector": {
+    "ignoreRules": [],
+    "ignoreFiles": [],
+    "ignoreValues": [
+      {
+        "rule": "design-system-color",
+        "value": "#fff8e8",
+        "files": [
+          "src/components/room/draw.ts"
+        ],
+        "createdAt": "2026-09-02T01:10:13.961Z",
+        "reason": "assistant decided: the barong illustration's piña cloth colour, part of the drawn room, not a UI token"
+      },
+      {
+        "rule": "design-system-color",
+        "value": "#000",
+        "files": [
+          "src/pages/index.astro"
+        ],
+        "createdAt": "2026-09-02T01:10:13.999Z",
+        "reason": "assistant decided: opaque stop in a mask-image gradient, not a painted colour"
+      },
+      {
+        "rule": "design-system-color",
+        "value": "*",
+        "files": [
+          "src/pages/og.astro"
+        ],
+        "createdAt": "2026-09-02T01:10:14.040Z",
+        "reason": "assistant decided: bare 1200x630 social card rendered to PNG; sizes are scaled for the card, not the site"
+      },
+      {
+        "rule": "design-system-radius",
+        "value": "*",
+        "files": [
+          "src/pages/og.astro"
+        ],
+        "createdAt": "2026-09-02T01:10:14.081Z",
+        "reason": "assistant decided: bare 1200x630 social card rendered to PNG; sizes are scaled for the card, not the site"
+      },
+      {
+        "rule": "design-system-font-size",
+        "value": "*",
+        "files": [
+          "src/pages/og.astro"
+        ],
+        "createdAt": "2026-09-02T01:10:14.130Z",
+        "reason": "assistant decided: bare 1200x630 social card rendered to PNG; sizes are scaled for the card, not the site"
+      },
+      {
+        "rule": "design-system-color",
+        "value": "*",
+        "files": [
+          "src/pages/resume.astro"
+        ],
+        "createdAt": "2026-09-02T01:10:14.170Z",
+        "reason": "assistant decided: bare print resume uses neutral ink greys and a link blue for paper, deliberately outside the room palette"
+      },
+      {
+        "rule": "broken-image",
+        "value": "*",
+        "files": [
+          "src/pages/diary/[slug].astro"
+        ],
+        "createdAt": "2026-09-02T01:12:23.209Z",
+        "reason": "assistant decided: the lightbox <img> gets its src from the clicked screenshot at runtime; it is empty by design until opened"
+      }
+    ]
+  }
+}

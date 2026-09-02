@@ -1,0 +1,688 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-09-02T01:14:12.526302+00:00",
+  "title": "Design System: Drekyz's minihompy",
+  "extensions": {
+    "colorMeta": {
+      "blush": {
+        "role": "primary",
+        "displayName": "Blush",
+        "canonical": "oklch(93.9% 0.019 9.3)",
+        "tonalRamp": [
+          "#11090a",
+          "#2d2425",
+          "#4d4243",
+          "#706264",
+          "#948587",
+          "#b9a9ab",
+          "#ddccce",
+          "#fbeaec"
+        ]
+      },
+      "sky": {
+        "role": "secondary",
+        "displayName": "Sky",
+        "canonical": "oklch(87.4% 0.044 247.3)",
+        "tonalRamp": [
+          "#010c19",
+          "#182837",
+          "#364757",
+          "#52697f",
+          "#748ca3",
+          "#98b1c9",
+          "#bad4ed",
+          "#d8f2ff"
+        ]
+      },
+      "sky-deep": {
+        "role": "secondary",
+        "displayName": "Sky Deep",
+        "canonical": "oklch(80.6% 0.071 249.4)",
+        "tonalRamp": [
+          "#000b21",
+          "#0d2841",
+          "#2c4762",
+          "#45698d",
+          "#688db3",
+          "#8cb2d9",
+          "#aed5fe",
+          "#cbf3ff"
+        ]
+      },
+      "butter": {
+        "role": "secondary",
+        "displayName": "Butter",
+        "canonical": "oklch(88.6% 0.100 85.8)",
+        "tonalRamp": [
+          "#190500",
+          "#382200",
+          "#584100",
+          "#80610d",
+          "#a4843a",
+          "#caa960",
+          "#eecd83",
+          "#ffeaa0"
+        ]
+      },
+      "butter-deep": {
+        "role": "secondary",
+        "displayName": "Butter Deep",
+        "canonical": "oklch(82.7% 0.125 87.2)",
+        "tonalRamp": [
+          "#1b0400",
+          "#3a2100",
+          "#5b4000",
+          "#836000",
+          "#a8841d",
+          "#cea94b",
+          "#f3cc6f",
+          "#ffea8d"
+        ]
+      },
+      "mint": {
+        "role": "secondary",
+        "displayName": "Mint",
+        "canonical": "oklch(90.7% 0.036 159.6)",
+        "tonalRamp": [
+          "#020f07",
+          "#1a2b21",
+          "#384a40",
+          "#556d5f",
+          "#779082",
+          "#9bb5a6",
+          "#bed9c9",
+          "#dbf6e6"
+        ]
+      },
+      "blossom": {
+        "role": "secondary",
+        "displayName": "Blossom",
+        "canonical": "oklch(83.3% 0.071 31.7)",
+        "tonalRamp": [
+          "#1e0100",
+          "#3e1b14",
+          "#603932",
+          "#8a574c",
+          "#b0796e",
+          "#d79e92",
+          "#fcc1b4",
+          "#ffded1"
+        ]
+      },
+      "blossom-deep": {
+        "role": "secondary",
+        "displayName": "Blossom Deep",
+        "canonical": "oklch(70.5% 0.134 11.7)",
+        "tonalRamp": [
+          "#270003",
+          "#4a081a",
+          "#6f2b37",
+          "#9e4454",
+          "#c66876",
+          "#ef8d9a",
+          "#ffb0bc",
+          "#ffcdd9"
+        ]
+      },
+      "wood": {
+        "role": "tertiary",
+        "displayName": "Wood",
+        "canonical": "oklch(73.9% 0.067 64.2)",
+        "tonalRamp": [
+          "#1a0500",
+          "#382005",
+          "#593f25",
+          "#815e3c",
+          "#a6815e",
+          "#cda581",
+          "#f1c8a3",
+          "#ffe6c0"
+        ]
+      },
+      "paper": {
+        "role": "primary",
+        "displayName": "Paper",
+        "canonical": "oklch(98.3% 0.012 67.7)",
+        "tonalRamp": [
+          "#0e0a07",
+          "#2a2622",
+          "#494440",
+          "#6b655f",
+          "#8e8882",
+          "#b3ada6",
+          "#d6d0c9",
+          "#f4ede6"
+        ]
+      },
+      "white": {
+        "role": "primary",
+        "displayName": "Sticker White",
+        "canonical": "oklch(99.4% 0.007 88.6)",
+        "tonalRamp": [
+          "#0c0b09",
+          "#272623",
+          "#464542",
+          "#686662",
+          "#8b8984",
+          "#b0aea9",
+          "#d3d1cc",
+          "#f0eee9"
+        ]
+      },
+      "ink": {
+        "role": "neutral",
+        "displayName": "Plum Ink",
+        "canonical": "oklch(32.1% 0.034 315.9)",
+        "tonalRamp": [
+          "#100813",
+          "#2c222f",
+          "#4b414f",
+          "#6e6073",
+          "#918397",
+          "#b6a8bd",
+          "#dacbe0",
+          "#f8e8fe"
+        ]
+      },
+      "ink-2": {
+        "role": "neutral",
+        "displayName": "Ink 2",
+        "canonical": "oklch(43.4% 0.041 316.7)",
+        "tonalRamp": [
+          "#110714",
+          "#2d2131",
+          "#4c4051",
+          "#705f76",
+          "#93829a",
+          "#b9a6c0",
+          "#dcc9e3",
+          "#fae7ff"
+        ]
+      },
+      "success": {
+        "role": "tertiary",
+        "displayName": "Success",
+        "canonical": "oklch(83.0% 0.130 153.7)",
+        "tonalRamp": [
+          "#001400",
+          "#00330d",
+          "#06532c",
+          "#187944",
+          "#459e67",
+          "#6cc48a",
+          "#90e8ac",
+          "#adffc9"
+        ]
+      },
+      "ink-soft": {
+        "role": "neutral",
+        "displayName": "Ink Soft",
+        "canonical": "rgba(58, 46, 63, 0.68)",
+        "tonalRamp": [
+          "#100813",
+          "#2c222f",
+          "#4b414f",
+          "#6e6073",
+          "#918397",
+          "#b6a8bd",
+          "#dacbe0",
+          "#f8e8fe"
+        ]
+      },
+      "line": {
+        "role": "neutral",
+        "displayName": "Line",
+        "canonical": "rgba(58, 46, 63, 0.45)",
+        "tonalRamp": [
+          "#100813",
+          "#2c222f",
+          "#4b414f",
+          "#6e6073",
+          "#918397",
+          "#b6a8bd",
+          "#dacbe0",
+          "#f8e8fe"
+        ]
+      },
+      "mint-hover": {
+        "role": "tertiary",
+        "displayName": "Mint Hover",
+        "canonical": "oklch(93.2% 0.030 161.1)",
+        "tonalRamp": [
+          "#030e08",
+          "#1c2a23",
+          "#3a4941",
+          "#576c61",
+          "#7a8f83",
+          "#9eb4a8",
+          "#c1d7cb",
+          "#def5e8"
+        ]
+      },
+      "sky-hover": {
+        "role": "tertiary",
+        "displayName": "Sky Hover",
+        "canonical": "oklch(90.0% 0.037 247.0)",
+        "tonalRamp": [
+          "#020c17",
+          "#1a2834",
+          "#384754",
+          "#55687b",
+          "#778c9f",
+          "#9cb1c5",
+          "#bed4e9",
+          "#dbf2ff"
+        ]
+      },
+      "butter-hover": {
+        "role": "tertiary",
+        "displayName": "Butter Hover",
+        "canonical": "oklch(90.9% 0.082 86.5)",
+        "tonalRamp": [
+          "#170700",
+          "#342300",
+          "#544216",
+          "#7b6328",
+          "#9f864c",
+          "#c5ab70",
+          "#e9ce93",
+          "#ffecaf"
+        ]
+      },
+      "ok-ink": {
+        "role": "tertiary",
+        "displayName": "OK Ink",
+        "canonical": "oklch(47.1% 0.098 156.0)",
+        "tonalRamp": [
+          "#001300",
+          "#003115",
+          "#195133",
+          "#2d774e",
+          "#539b70",
+          "#78c194",
+          "#9be5b6",
+          "#b8ffd3"
+        ]
+      },
+      "bad-ink": {
+        "role": "tertiary",
+        "displayName": "Bad Ink",
+        "canonical": "oklch(51.1% 0.120 10.7)",
+        "tonalRamp": [
+          "#270003",
+          "#4a081b",
+          "#6f2b38",
+          "#9e4455",
+          "#c66877",
+          "#ef8d9b",
+          "#ffb0be",
+          "#ffcddb"
+        ]
+      },
+      "gold-ink": {
+        "role": "tertiary",
+        "displayName": "Gold Ink",
+        "canonical": "oklch(65.4% 0.120 81.4)",
+        "tonalRamp": [
+          "#1e0200",
+          "#3d1e00",
+          "#5f3e00",
+          "#885d00",
+          "#ae811f",
+          "#d4a64c",
+          "#f9c970",
+          "#ffe78e"
+        ]
+      },
+      "veil-soft": {
+        "role": "primary",
+        "displayName": "Veil Soft",
+        "canonical": "rgba(255, 255, 255, 0.55)",
+        "tonalRamp": [
+          "#0c0b09",
+          "#272623",
+          "#464542",
+          "#686662",
+          "#8b8984",
+          "#b0aea9",
+          "#d3d1cc",
+          "#f0eee9"
+        ]
+      },
+      "veil": {
+        "role": "primary",
+        "displayName": "Veil",
+        "canonical": "rgba(255, 255, 255, 0.72)",
+        "tonalRamp": [
+          "#0c0b09",
+          "#272623",
+          "#464542",
+          "#686662",
+          "#8b8984",
+          "#b0aea9",
+          "#d3d1cc",
+          "#f0eee9"
+        ]
+      },
+      "veil-strong": {
+        "role": "primary",
+        "displayName": "Veil Strong",
+        "canonical": "rgba(255, 255, 255, 0.86)",
+        "tonalRamp": [
+          "#0c0b09",
+          "#272623",
+          "#464542",
+          "#686662",
+          "#8b8984",
+          "#b0aea9",
+          "#d3d1cc",
+          "#f0eee9"
+        ]
+      }
+    },
+    "typographyMeta": {
+      "display": {
+        "displayName": "Display",
+        "purpose": "The handle in the profile panel (700) and page titles (600)."
+      },
+      "headline": {
+        "displayName": "Headline",
+        "purpose": "Page titles on phones and the 404 title."
+      },
+      "title": {
+        "displayName": "Title",
+        "purpose": "Section heads inside panels."
+      },
+      "control": {
+        "displayName": "Control",
+        "purpose": "Sticker buttons, nav tabs, ribbon, panel titles (13px)."
+      },
+      "body": {
+        "displayName": "Body",
+        "purpose": "Running text, 68-70ch cap on long copy, tabular numerals."
+      },
+      "body-sm": {
+        "displayName": "Body Small",
+        "purpose": "Chips, summaries, secondary copy."
+      },
+      "label": {
+        "displayName": "Label",
+        "purpose": "Uppercase form field labels, group headings, count pills."
+      },
+      "micro": {
+        "displayName": "Micro",
+        "purpose": "10px uppercase stat and figure labels only."
+      }
+    },
+    "shadows": [
+      {
+        "name": "lift",
+        "value": "0 3px 0 rgba(58,46,63,.16)",
+        "purpose": "Signature sticker lift on buttons, ribbon, active tab, player."
+      },
+      {
+        "name": "lift-sm",
+        "value": "0 2px 0 rgba(58,46,63,.10)",
+        "purpose": "Chips, panel titles, small tiles."
+      },
+      {
+        "name": "lift-lg",
+        "value": "0 4px 0 rgba(58,46,63,.14)",
+        "purpose": "Panels; tab bar stacks it with shadow-soft."
+      },
+      {
+        "name": "shadow-soft",
+        "value": "0 8px 22px rgba(58,46,63,.14)",
+        "purpose": "Floating tab bar only."
+      },
+      {
+        "name": "shadow-photo",
+        "value": "0 0 0 1.6px rgba(58,46,63,.45), 0 6px 14px rgba(58,46,63,.18)",
+        "purpose": "Portrait sticker and OG portrait."
+      },
+      {
+        "name": "sheet",
+        "value": "0 0 0 6px rgba(255,253,248,.7), 0 10px 30px rgba(58,46,63,.14), inset 0 0 0 1px rgba(255,255,255,.8)",
+        "purpose": "The paper sheet."
+      },
+      {
+        "name": "press-hover",
+        "value": "0 4px 0 rgba(58,46,63,.18)",
+        "purpose": "Button hover with translateY(-1px)."
+      },
+      {
+        "name": "press-active",
+        "value": "0 1px 0 rgba(58,46,63,.18)",
+        "purpose": "Button active with translateY(2px)."
+      },
+      {
+        "name": "lightbox-backdrop",
+        "value": "rgba(58,46,63,.72) + backdrop-filter: blur(3px)",
+        "purpose": "Dialog backdrop behind the screenshot lightbox."
+      }
+    ],
+    "motion": [
+      {
+        "name": "ease-settle",
+        "value": "cubic-bezier(0.22, 1, 0.36, 1)",
+        "purpose": "The one entrance: translateY(-10px) scale(.985) to rest."
+      },
+      {
+        "name": "ease-out",
+        "value": "cubic-bezier(0.16, 1, 0.3, 1)",
+        "purpose": "State transitions: press, tint, object lift."
+      },
+      {
+        "name": "dur-fast",
+        "value": "160ms",
+        "purpose": "Press and tint."
+      },
+      {
+        "name": "dur-base",
+        "value": "260ms",
+        "purpose": "Room object lift, notes fade."
+      },
+      {
+        "name": "dur-settle",
+        "value": "620ms",
+        "purpose": "Settle entrance; stagger calc(var(--i) * 70ms)."
+      },
+      {
+        "name": "vinyl-spin",
+        "value": "spin 2.4s linear infinite",
+        "purpose": "Record while music plays."
+      },
+      {
+        "name": "reduced-motion",
+        "value": "animation-duration: 0.001ms; transition-duration: 0.001ms",
+        "purpose": "All motion off under prefers-reduced-motion."
+      }
+    ],
+    "breakpoints": [
+      {
+        "name": "phone-labels",
+        "value": "420px"
+      },
+      {
+        "name": "phone",
+        "value": "640px"
+      },
+      {
+        "name": "frame",
+        "value": "720px"
+      },
+      {
+        "name": "entry",
+        "value": "760px"
+      },
+      {
+        "name": "one-column",
+        "value": "860px"
+      },
+      {
+        "name": "two-column",
+        "value": "1180px"
+      },
+      {
+        "name": "sheet-max",
+        "value": "1396px"
+      }
+    ]
+  },
+  "components": [
+    {
+      "name": "Sticker Button (white)",
+      "kind": "button",
+      "refersTo": "button-sticker",
+      "description": "The default control: white sticker with a plum line and a real press.",
+      "html": "<a class=\"ds-btn\" href=\"#\"><svg width=\"18\" height=\"18\" viewBox=\"0 0 16 16\" aria-hidden=\"true\" style=\"flex:none;color:var(--white,#fffdf8)\"><path d=\"M3 2.5h7v11H3z\" fill=\"#FFFDF8\" stroke=\"#3A2E3F\" stroke-width=\"1.4\" stroke-linejoin=\"round\"/><circle cx=\"8\" cy=\"8.5\" r=\"1\" fill=\"#3A2E3F\"/><path d=\"M10.5 8h3m-1.5-1.8 1.8 1.8-1.8 1.8\" fill=\"none\" stroke=\"#3A2E3F\" stroke-width=\"1.4\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/></svg><span>Visit my work</span><span class=\"ds-kick\">11 entries</span></a>",
+      "css": ".ds-btn{display:inline-flex;align-items:center;gap:9px;border:2px solid var(--line,rgba(58,46,63,.45));border-radius:999px;padding:9px 16px;font-family:var(--font-display-stack,Fredoka,'Trebuchet MS',sans-serif);font-weight:600;font-size:.9375rem;line-height:1.2;color:var(--ink,#3a2e3f);text-decoration:none;background:var(--white,#fffdf8);box-shadow:0 3px 0 rgba(58,46,63,.16);transition:transform 160ms cubic-bezier(.16,1,.3,1),box-shadow 160ms cubic-bezier(.16,1,.3,1),background 160ms cubic-bezier(.16,1,.3,1);white-space:nowrap;cursor:pointer}.ds-btn:hover{transform:translateY(-1px);box-shadow:0 4px 0 rgba(58,46,63,.18);}.ds-btn:active{transform:translateY(2px);box-shadow:0 1px 0 rgba(58,46,63,.18)}.ds-btn:focus-visible{outline:3px solid var(--ink,#3a2e3f);outline-offset:3px}.ds-btn .ds-kick{margin-left:auto;font-family:var(--font-body-stack,Nunito,sans-serif);font-size:.6875rem;font-weight:900;background:var(--veil,rgba(255,255,255,.72));border:1px solid var(--line,rgba(58,46,63,.45));border-radius:999px;padding:1px 7px}"
+    },
+    {
+      "name": "Sticker Button (mint)",
+      "kind": "button",
+      "refersTo": "button-sticker-mint",
+      "description": "The primary 'go' action tone.",
+      "html": "<a class=\"ds-btn-mint\" href=\"#\"><svg width=\"18\" height=\"18\" viewBox=\"0 0 16 16\" aria-hidden=\"true\" style=\"flex:none;color:var(--white,#fffdf8)\"><path d=\"M3 2.5h7v11H3z\" fill=\"#FFFDF8\" stroke=\"#3A2E3F\" stroke-width=\"1.4\" stroke-linejoin=\"round\"/><circle cx=\"8\" cy=\"8.5\" r=\"1\" fill=\"#3A2E3F\"/><path d=\"M10.5 8h3m-1.5-1.8 1.8 1.8-1.8 1.8\" fill=\"none\" stroke=\"#3A2E3F\" stroke-width=\"1.4\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/></svg><span>Visit my work</span></a>",
+      "css": ".ds-btn-mint{display:inline-flex;align-items:center;gap:9px;border:2px solid var(--line,rgba(58,46,63,.45));border-radius:999px;padding:9px 16px;font-family:var(--font-display-stack,Fredoka,'Trebuchet MS',sans-serif);font-weight:600;font-size:.9375rem;line-height:1.2;color:var(--ink,#3a2e3f);text-decoration:none;background:var(--mint,#cde8d8);box-shadow:0 3px 0 rgba(58,46,63,.16);transition:transform 160ms cubic-bezier(.16,1,.3,1),box-shadow 160ms cubic-bezier(.16,1,.3,1),background 160ms cubic-bezier(.16,1,.3,1);white-space:nowrap;cursor:pointer}.ds-btn-mint:hover{transform:translateY(-1px);box-shadow:0 4px 0 rgba(58,46,63,.18);background:var(--mint-hover,#d8efe2)}.ds-btn-mint:active{transform:translateY(2px);box-shadow:0 1px 0 rgba(58,46,63,.18)}.ds-btn-mint:focus-visible{outline:3px solid var(--ink,#3a2e3f);outline-offset:3px}.ds-btn-mint .ds-kick{margin-left:auto;font-family:var(--font-body-stack,Nunito,sans-serif);font-size:.6875rem;font-weight:900;background:var(--veil,rgba(255,255,255,.72));border:1px solid var(--line,rgba(58,46,63,.45));border-radius:999px;padding:1px 7px}"
+    },
+    {
+      "name": "Sticker Button (butter)",
+      "kind": "button",
+      "refersTo": "button-sticker-butter",
+      "description": "The 'take / send' tone: resume download, ledger send.",
+      "html": "<button class=\"ds-btn-butter\" type=\"button\"><svg width=\"18\" height=\"18\" viewBox=\"0 0 16 16\" aria-hidden=\"true\" style=\"flex:none;color:var(--white,#fffdf8)\"><path d=\"M10 2.5v8.2a2.3 2.3 0 1 1-1.5-2.1V2.5z\" fill=\"#3A2E3F\"/><path d=\"M10 2.5l4 1.5v3\" fill=\"none\" stroke=\"#3A2E3F\" stroke-width=\"1.5\" stroke-linecap=\"round\"/></svg><span>Sign the ledger</span></button>",
+      "css": ".ds-btn-butter{display:inline-flex;align-items:center;gap:9px;border:2px solid var(--line,rgba(58,46,63,.45));border-radius:999px;padding:9px 16px;font-family:var(--font-display-stack,Fredoka,'Trebuchet MS',sans-serif);font-weight:600;font-size:.9375rem;line-height:1.2;color:var(--ink,#3a2e3f);text-decoration:none;background:var(--butter,#f7d58b);box-shadow:0 3px 0 rgba(58,46,63,.16);transition:transform 160ms cubic-bezier(.16,1,.3,1),box-shadow 160ms cubic-bezier(.16,1,.3,1),background 160ms cubic-bezier(.16,1,.3,1);white-space:nowrap;cursor:pointer}.ds-btn-butter:hover{transform:translateY(-1px);box-shadow:0 4px 0 rgba(58,46,63,.18);background:var(--butter-hover,#f9dea2)}.ds-btn-butter:active{transform:translateY(2px);box-shadow:0 1px 0 rgba(58,46,63,.18)}.ds-btn-butter:focus-visible{outline:3px solid var(--ink,#3a2e3f);outline-offset:3px}.ds-btn-butter .ds-kick{margin-left:auto;font-family:var(--font-body-stack,Nunito,sans-serif);font-size:.6875rem;font-weight:900;background:var(--veil,rgba(255,255,255,.72));border:1px solid var(--line,rgba(58,46,63,.45));border-radius:999px;padding:1px 7px}"
+    },
+    {
+      "name": "Sticker Chip",
+      "kind": "chip",
+      "refersTo": "chip",
+      "description": "Status, tech, and counter label with optional status dot.",
+      "html": "<span class=\"ds-chip ds-chip-mint\"><i class=\"ds-dot\"></i>Open to remote</span> <span class=\"ds-chip ds-chip-sky\">General Santos City · PH</span> <span class=\"ds-chip\">TypeScript</span>",
+      "css": ".ds-chip{display:inline-flex;align-items:center;gap:6px;border:1.6px solid var(--line,rgba(58,46,63,.45));border-radius:999px;padding:4px 11px;font-family:var(--font-body-stack,Nunito,sans-serif);font-size:.8125rem;font-weight:800;line-height:1.25;color:var(--ink,#3a2e3f);background:var(--white,#fffdf8);box-shadow:0 2px 0 rgba(58,46,63,.1);white-space:nowrap}.ds-chip-mint{background:var(--mint,#cde8d8)}.ds-chip-sky{background:var(--sky,#bfd9f2)}.ds-dot{width:8px;height:8px;border-radius:50%;border:1px solid var(--line,rgba(58,46,63,.45));background:var(--success,#7fe0a0)}"
+    },
+    {
+      "name": "Panel",
+      "kind": "card",
+      "refersTo": "panel",
+      "description": "Paper panel with the world's 2px line and 4px lift; the title hangs over the top edge as a sticker.",
+      "html": "<section class=\"ds-panel\"><div class=\"ds-panel-title ds-tone-butter\"><svg width=\"14\" height=\"14\" viewBox=\"0 0 16 16\" aria-hidden=\"true\" style=\"flex:none;color:var(--white,#fffdf8)\"><path d=\"M2.5 3.5h5v10h-5zM8.5 3.5h5v10h-5z\" fill=\"currentColor\" stroke=\"#3A2E3F\" stroke-width=\"1.4\" stroke-linejoin=\"round\"/><path d=\"M4 6h2M4 8h2M10 6h2M10 8h2\" stroke=\"#3A2E3F\" stroke-width=\"1.1\" stroke-linecap=\"round\"/></svg><span>Diary</span><small>newest first</small></div><p>Meet Calvin in his room, read the diary of shipped products, then take the resume or leave a note in the ledger.</p></section>",
+      "css": ".ds-panel{position:relative;background:var(--veil,rgba(255,255,255,.72));border:2px solid var(--line,rgba(58,46,63,.45));border-radius:18px;box-shadow:0 4px 0 rgba(58,46,63,.14);padding:20px 16px 16px;margin-top:16px;font-family:var(--font-body-stack,Nunito,sans-serif);font-weight:700;font-size:.9375rem;line-height:1.5;color:var(--ink,#3a2e3f)}.ds-panel p{margin:0}.ds-panel-title{position:absolute;top:-15px;left:16px;display:inline-flex;align-items:center;gap:6px;border:1.6px solid var(--line,rgba(58,46,63,.45));border-radius:999px;padding:4px 12px;font-family:var(--font-display-stack,Fredoka,'Trebuchet MS',sans-serif);font-weight:600;font-size:.8125rem;line-height:1.3;box-shadow:0 2px 0 rgba(58,46,63,.1);white-space:nowrap;background:var(--sky,#bfd9f2)}.ds-tone-butter{background:var(--butter,#f7d58b)}.ds-panel-title small{font-family:var(--font-body-stack,Nunito,sans-serif);font-size:.6875rem;font-weight:900;color:rgba(58,46,63,.68);margin-left:2px}"
+    },
+    {
+      "name": "Ledger Input",
+      "kind": "input",
+      "refersTo": "input",
+      "description": "Pill text input with uppercase label and sky-deep focus ring.",
+      "html": "<div class=\"ds-row\"><label class=\"ds-lbl\" for=\"ds-name\">Your name</label><input class=\"ds-input\" id=\"ds-name\" type=\"text\" placeholder=\"Who's visiting?\"></div>",
+      "css": ".ds-row{display:flex;flex-direction:column;gap:6px;font-family:var(--font-body-stack,Nunito,sans-serif)}.ds-lbl{font-size:.6875rem;font-weight:900;letter-spacing:.4px;text-transform:uppercase;color:rgba(58,46,63,.68);padding-left:12px}.ds-input{background:var(--white,#fffdf8);border:1.6px solid var(--line,rgba(58,46,63,.45));border-radius:999px;padding:8px 14px;font:inherit;font-size:.8125rem;font-weight:700;color:var(--ink,#3a2e3f);box-shadow:inset 0 2px 0 rgba(58,46,63,.06);caret-color:var(--blossom-deep,#e67a8a)}.ds-input::placeholder{color:rgba(58,46,63,.68);font-weight:700}.ds-input:focus-visible{outline:3px solid var(--sky-deep,#9dc4ec);outline-offset:1px}"
+    },
+    {
+      "name": "Tab Bar",
+      "kind": "nav",
+      "refersTo": "nav-tab",
+      "description": "The floating sticker tab bar; active tab is mint with a lift and an ink underbar.",
+      "html": "<nav class=\"ds-nav\"><a class=\"ds-tab ds-on\" href=\"#\"><svg width=\"18\" height=\"18\" viewBox=\"0 0 16 16\" aria-hidden=\"true\" style=\"flex:none;color:var(--white,#fffdf8)\"><path d=\"M2.5 8 8 3l5.5 5v5.5h-11z\" fill=\"currentColor\" stroke=\"#3A2E3F\" stroke-width=\"1.4\" stroke-linejoin=\"round\"/><rect x=\"6.5\" y=\"9.5\" width=\"3\" height=\"4\" fill=\"#3A2E3F\"/></svg>Room</a><a class=\"ds-tab\" href=\"#\"><svg width=\"18\" height=\"18\" viewBox=\"0 0 16 16\" aria-hidden=\"true\" style=\"flex:none;color:var(--white,#fffdf8)\"><path d=\"M2.5 3.5h5v10h-5zM8.5 3.5h5v10h-5z\" fill=\"currentColor\" stroke=\"#3A2E3F\" stroke-width=\"1.4\" stroke-linejoin=\"round\"/><path d=\"M4 6h2M4 8h2M10 6h2M10 8h2\" stroke=\"#3A2E3F\" stroke-width=\"1.1\" stroke-linecap=\"round\"/></svg>Diary <span class=\"ds-n\">11</span></a><a class=\"ds-tab\" href=\"#\"><svg width=\"18\" height=\"18\" viewBox=\"0 0 16 16\" aria-hidden=\"true\" style=\"flex:none;color:var(--white,#fffdf8)\"><path d=\"M10 2.5v8.2a2.3 2.3 0 1 1-1.5-2.1V2.5z\" fill=\"#3A2E3F\"/><path d=\"M10 2.5l4 1.5v3\" fill=\"none\" stroke=\"#3A2E3F\" stroke-width=\"1.5\" stroke-linecap=\"round\"/></svg>Ledger</a></nav>",
+      "css": ".ds-nav{display:inline-flex;align-items:center;gap:6px;padding:6px 8px;background:var(--veil-strong,rgba(255,255,255,.86));border:2px solid var(--line,rgba(58,46,63,.45));border-radius:999px;box-shadow:0 4px 0 rgba(58,46,63,.14),0 8px 22px rgba(58,46,63,.14)}.ds-tab{position:relative;display:inline-flex;align-items:center;gap:7px;border:2px solid transparent;border-radius:999px;padding:7px 16px;font-family:var(--font-display-stack,Fredoka,'Trebuchet MS',sans-serif);font-weight:600;font-size:.9375rem;color:var(--ink,#3a2e3f);text-decoration:none;transition:background 160ms cubic-bezier(.16,1,.3,1)}.ds-tab:hover{background:var(--blush,#f7e6e8)}.ds-tab.ds-on{background:var(--mint,#cde8d8);border-color:var(--line,rgba(58,46,63,.45));box-shadow:0 3px 0 rgba(58,46,63,.16)}.ds-tab.ds-on::after{content:\"\";position:absolute;left:50%;bottom:-9px;width:16px;height:3px;background:var(--ink,#3a2e3f);border-radius:2px;transform:translateX(-50%);opacity:.7}.ds-tab:focus-visible{outline:3px solid var(--ink,#3a2e3f);outline-offset:3px}.ds-n{font-family:var(--font-body-stack,Nunito,sans-serif);font-size:.6875rem;font-weight:900;background:var(--white,#fffdf8);border:1.4px solid var(--line,rgba(58,46,63,.45));border-radius:999px;padding:0 6px}"
+    },
+    {
+      "name": "Record Player",
+      "kind": "custom",
+      "refersTo": "bgm-player",
+      "description": "The persistent BGM control: blush pill, play circle, level bars, volume dots.",
+      "html": "<div class=\"ds-bgm\"><button class=\"ds-pp\" type=\"button\" aria-label=\"Play\"><svg width=\"16\" height=\"16\" viewBox=\"0 0 16 16\" aria-hidden=\"true\" style=\"flex:none;color:var(--white,#fffdf8)\"><path d=\"M5 3.5v9l7.5-4.5z\" fill=\"#3A2E3F\" stroke=\"#3A2E3F\" stroke-width=\"1.2\" stroke-linejoin=\"round\"/></svg></button><span class=\"ds-bars\"><i></i><i></i><i></i><i></i><i></i></span><span class=\"ds-meta\"><span class=\"ds-t\">BGM · Hip Shop</span><span class=\"ds-s\">Rouxls Kaard</span></span><span class=\"ds-vol\"><i class=\"ds-on\"></i><i class=\"ds-on\"></i><i></i><i></i><i></i></span></div>",
+      "css": ".ds-bgm{display:inline-flex;align-items:center;gap:10px;background:var(--blush,#f7e6e8);border:2px solid var(--line,rgba(58,46,63,.45));border-radius:999px;padding:5px 12px 5px 6px;font-family:var(--font-body-stack,Nunito,sans-serif);font-size:.8125rem;font-weight:800;color:var(--ink,#3a2e3f);box-shadow:0 3px 0 rgba(58,46,63,.16);min-height:44px}.ds-pp{width:32px;height:32px;border-radius:50%;background:var(--white,#fffdf8);border:1.8px solid var(--line,rgba(58,46,63,.45));display:grid;place-items:center;padding:0;cursor:pointer;transition:transform 160ms cubic-bezier(.16,1,.3,1)}.ds-pp:active{transform:scale(.94)}.ds-bars{display:flex;align-items:flex-end;gap:2.5px;height:16px}.ds-bars i{width:4px;height:4px;background:var(--ink,#3a2e3f);border-radius:2px;opacity:.8}.ds-meta{display:flex;flex-direction:column;line-height:1.15}.ds-t{font-family:var(--font-display-stack,Fredoka,'Trebuchet MS',sans-serif);font-weight:500;font-size:.9375rem;white-space:nowrap}.ds-s{color:rgba(58,46,63,.68);font-size:.6875rem}.ds-vol{display:flex;gap:3px;margin-left:4px}.ds-vol i{width:12px;height:12px;border-radius:50%;border:1.4px solid var(--line,rgba(58,46,63,.45));background:var(--white,#fffdf8)}.ds-vol i.ds-on{background:var(--butter,#f7d58b)}"
+    },
+    {
+      "name": "Room Tag",
+      "kind": "custom",
+      "refersTo": "chip-xs",
+      "description": "The tag() sticker label used on every object in the isometric room (SVG).",
+      "html": "<svg width=\"140\" height=\"24\" viewBox=\"0 0 140 24\"><g><rect x=\"1\" y=\"2\" width=\"138\" height=\"20\" rx=\"10\" fill=\"#FFFFFF\" stroke=\"#3A2E3F\" stroke-opacity=\".7\" stroke-width=\"1.2\"/><text x=\"70\" y=\"15.6\" text-anchor=\"middle\" font-family=\"Nunito, sans-serif\" font-size=\"10\" font-weight=\"800\" fill=\"#3A2E3F\">Hip Shop · Rouxls Kaard</text></g></svg>",
+      "css": "svg{display:block;filter:drop-shadow(0 2px 1.2px rgba(58,46,63,.18))}"
+    },
+    {
+      "name": "Lightbox Button",
+      "kind": "button",
+      "refersTo": "lightbox-button",
+      "description": "40px sticker circles on the screenshot dialog: butter close, mint prev/next.",
+      "html": "<button class=\"ds-lb ds-lb-close\" type=\"button\" aria-label=\"Close\"><svg width=\"16\" height=\"16\" viewBox=\"0 0 16 16\" aria-hidden=\"true\"><path d=\"M3 3l10 10M13 3 3 13\" stroke=\"#3A2E3F\" stroke-width=\"1.8\" stroke-linecap=\"round\"/></svg></button> <button class=\"ds-lb\" type=\"button\" aria-label=\"Next\"><svg width=\"16\" height=\"16\" viewBox=\"0 0 16 16\" aria-hidden=\"true\"><path d=\"M3 8h9M9 4.5 12.5 8 9 11.5\" fill=\"none\" stroke=\"#3A2E3F\" stroke-width=\"1.6\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/></svg></button>",
+      "css": ".ds-lb{width:40px;height:40px;border-radius:50%;border:2px solid var(--line,rgba(58,46,63,.45));background:var(--mint,#cde8d8);box-shadow:0 3px 0 rgba(58,46,63,.16);display:inline-grid;place-items:center;padding:0;cursor:pointer}.ds-lb-close{background:var(--butter,#f7d58b)}.ds-lb:active{transform:translateY(2px);box-shadow:none}.ds-lb:focus-visible{outline:3px solid var(--ink,#3a2e3f);outline-offset:3px}"
+    }
+  ],
+  "narrative": {
+    "northStar": "The Minihompy Room",
+    "overview": "The site is a room you visit, not a hero you scroll past. Everything sits on one committed blush field printed with a tiny diamond motif; a cream paper sheet floats on it inside a plum line, and every panel, control, chip, and label on that sheet is a sticker: an outlined pastel shape with a hard 2-4px lift underneath. The centre of the home page is an isometric SVG room drawn in the same hand (plum outlines, pastel fills, soft drop shadows), and its furnishings are the site's links. Density is high and friendly: three columns of small type, many stickers, few empty areas. The look is a single light scheme; there is no dark mode and no dark hero.\n\nThe build refuses the dark hero, the skill cloud, and the card grid. Depth is physical rather than atmospheric: offset lifts, not diffuse glows; a real press on every control (up 1px on hover, down 2px on active). Motion is one authored moment, the \"settle\", in which the room and panels land from 10px above with a 70ms stagger, and after that the only things that move are the record when music plays and the object you are pointing at.",
+    "keyCharacteristics": [
+      "Blush ground, paper sheet, sticker whites: the palette is committed at page scale, not accents on grey.",
+      "Four pastels (sky, butter, mint, blossom) are role colours for stickers; plum ink is the only text colour.",
+      "Plum line on everything: 2px on panels and controls, 1.6px on chips and inner surfaces.",
+      "Hard offset lifts (0 3px 0) are the signature shadow; blur appears only on the sheet and the floating tab bar.",
+      "Fredoka display on Nunito body, both heavy; tabular numerals everywhere.",
+      "One settle entrance, one spinning record, reduced-motion turns all of it off."
+    ],
+    "rules": [
+      {
+        "name": "The One Ink Rule",
+        "body": "Text, strokes, focus rings, and icon outlines are always plum ink or a plum alpha. Pastels colour surfaces, never letters. The three sanctioned exceptions are stamps and replies: ok-ink, bad-ink, gold-ink.",
+        "section": "colors"
+      },
+      {
+        "name": "The Sticker Tone Rule",
+        "body": "A pastel appears as the whole fill of an outlined sticker (panel title, chip, button, tab), never as a wash, gradient, or tint behind text on paper. Tones carry meaning by habit: mint for \"here / go\", butter for \"take / send\", sky for \"write\", blossom for \"warn / ledger\".",
+        "section": "colors"
+      },
+      {
+        "name": "The Paper Under Everything Rule",
+        "body": "Content lives on the paper sheet; the blush field and its diamond motif are visible only as the margin around it and under the floating tab bar.",
+        "section": "colors"
+      },
+      {
+        "name": "The Heavy Pair Rule",
+        "body": "Fredoka for anything you press or a title; Nunito for anything you read. Neither ever drops below weight 600.",
+        "section": "typography"
+      },
+      {
+        "name": "The Tabular Rule",
+        "body": "Numbers are always tabular so counters, years, and route counts align; never override font-variant-numeric on a stat.",
+        "section": "typography"
+      },
+      {
+        "name": "The Room on Phones Rule",
+        "body": "At ≤640px the room does not shrink: it keeps a 620px minimum width and scrolls sideways inside its panel with a 6% edge mask and a \"swipe to look around\" hint, and every object in it is repeated as a tappable legend chip below. Nothing in the room becomes unreachable on a phone.",
+        "section": "layout"
+      },
+      {
+        "name": "The Hard Lift Rule",
+        "body": "A shadow on a control or panel is a solid offset with zero blur. Blur belongs only to the sheet, the tab bar, and photographs.",
+        "section": "elevation"
+      },
+      {
+        "name": "The Real Press Rule",
+        "body": "Every button rises 1px on hover and sinks 2px on active, with the lift shrinking to match. A control that does not move is not a sticker.",
+        "section": "elevation"
+      }
+    ],
+    "dos": [
+      "Do put content on the paper sheet and keep the blush field as the margin, with the diamond motif at 36px tiles.",
+      "Do give every raised surface a plum line and a hard lift: 2px line + 0 3px 0 on controls, 2px + 0 4px 0 on panels, 1.6px + 0 2px 0 on chips.",
+      "Do make every button press: up 1px on hover, down 2px on active.",
+      "Do use a pastel as the whole fill of an outlined sticker, and pick the tone by habit (mint go, butter take, sky write, blossom warn).",
+      "Do set titles and controls in Fredoka 600 and everything readable in Nunito 700-900 with tabular numerals.",
+      "Do enter with one settle (620ms, --ease-settle, 70ms stagger via --i) and honour reduced motion.",
+      "Do draw icons and room objects on the 16-grid in plum ink with currentColor fills.",
+      "Do keep the room reachable on phones: sideways scroll at ≥620px width plus the legend chips.",
+      "Do use the veils (55 / 72 / 86% white) for translucent paper and the hover tints for pastel hovers instead of new alpha or hex values."
+    ],
+    "donts": [
+      "Don't add a dark mode or a dark hero; the world is one light scheme (color-scheme: light).",
+      "Don't put pastel or coloured text on paper; text is plum ink or an ink alpha, with ok-ink, bad-ink, and gold-ink reserved for reply lines and stamps.",
+      "Don't use blurred or ambient shadows on controls or panels; blur belongs to the sheet, the tab bar, and photos only.",
+      "Don't replace the authored icon set with an icon font or a third-party glyph library.",
+      "Don't lay projects out as a card grid or skills as a cloud; the diary list and the shelf are the forms.",
+      "Don't add a second entrance animation or continuous motion beyond the record, the level bars, and the lamp.",
+      "Don't set any text lighter than weight 600, or use the 10px micro size for anything but uppercase labels."
+    ]
+  }
+}

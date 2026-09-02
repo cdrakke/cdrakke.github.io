@@ -1,0 +1,101 @@
+---
+/** A paper panel with the world's 2px line and 4px lift. Title floats on the top edge as a sticker. */
+import Icon from "./Icon.astro";
+import type { IconName } from "./Icon.astro";
+
+interface Props {
+  title?: string;
+  icon?: IconName;
+  tone?: "sky" | "butter" | "mint" | "blush" | "blossom";
+  as?: "section" | "aside" | "div" | "article" | "nav";
+  class?: string;
+  id?: string;
+  /** Right-aligned text beside the title, e.g. "newest first". */
+  aside?: string;
+  /** Stagger index for the settle entrance. */
+  i?: number;
+}
+
+const {
+  title,
+  icon,
+  tone = "sky",
+  as: Tag = "section",
+  class: className,
+  id,
+  aside,
+  i,
+} = Astro.props;
+---
+
+<Tag
+  class:list={["panel", className, i !== undefined && "settle"]}
+  id={id}
+  style={i !== undefined ? `--i:${i}` : undefined}
+  aria-labelledby={title && id ? `${id}-title` : undefined}
+>
+  {
+    title && (
+      <div class:list={["panel-title", `tone-${tone}`]}>
+        {icon && <Icon name={icon} size={14} />}
+        <span id={id ? `${id}-title` : undefined}>{title}</span>
+        {aside && <small>{aside}</small>}
+      </div>
+    )
+  }
+  <slot />
+</Tag>
+
+<style>
+  .panel {
+    position: relative;
+    background: var(--veil);
+    border: var(--border);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--lift-lg);
+    padding: var(--space-5) var(--space-4) var(--space-4);
+  }
+
+  .panel-title {
+    position: absolute;
+    top: -15px;
+    left: var(--space-4);
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    border: var(--border-thin);
+    border-radius: var(--radius-pill);
+    padding: 4px 12px;
+    font-family: var(--font-display-stack);
+    font-weight: 600;
+    font-size: var(--text-sm);
+    line-height: 1.3;
+    box-shadow: var(--lift-sm);
+    white-space: nowrap;
+    z-index: 1;
+  }
+
+  .panel-title small {
+    font-family: var(--font-body-stack);
+    font-size: var(--text-xs);
+    font-weight: 900;
+    color: var(--ink-soft);
+    margin-left: 2px;
+  }
+
+  .tone-sky {
+    background: var(--sky);
+  }
+  .tone-butter {
+    background: var(--butter);
+  }
+  .tone-mint {
+    background: var(--mint);
+  }
+  .tone-blush {
+    background: var(--blush);
+  }
+  .tone-blossom {
+    background: var(--blossom);
+  }
+</style>

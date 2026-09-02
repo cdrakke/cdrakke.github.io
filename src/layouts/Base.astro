@@ -1,0 +1,329 @@
+---
+import { ClientRouter } from "astro:transitions";
+import { Font } from "astro:assets";
+import "@/styles/global.css";
+import BottomNav from "@/components/BottomNav.astro";
+import Icon from "@/components/Icon.astro";
+import StickerChip from "@/components/StickerChip.astro";
+import { site } from "@/data/site";
+import { copy } from "@/data/copy";
+
+interface Props {
+  title?: string;
+  description?: string;
+  /** Path to an OG image; defaults to the site card. */
+  ogImage?: string;
+  noindex?: boolean;
+  /** Emit the Person JSON-LD (home page). */
+  person?: boolean;
+  counts?: Partial<Record<string, number>>;
+  /** Hide the frame chrome (topbar, nav) for print/OG surfaces. */
+  bare?: boolean;
+}
+
+const {
+  title,
+  description = copy.seoDescription,
+  ogImage = "/og.png",
+  noindex = false,
+  person = false,
+  counts,
+  bare = false,
+} = Astro.props;
+
+const fullTitle = title ? `${title} · ${site.handle}` : `${site.handle} · ${site.name}, Full Stack Developer`;
+const canonical = new URL(Astro.url.pathname, Astro.site).href;
+const ogUrl = new URL(ogImage, Astro.site).href;
+
+const personLd = {
+  "@context": "https://schema.org",
+  "@type": "Person",
+  name: site.name,
+  alternateName: site.handle,
+  jobTitle: site.role,
+  url: site.url,
+  email: `mailto:${site.email}`,
+  address: { "@type": "PostalAddress", addressLocality: "General Santos City", addressCountry: "PH" },
+  sameAs: [site.github, "https://x.com/CDrakke", "https://www.linkedin.com/in/calvin-drakke-r-94935b128/"],
+};
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{fullTitle}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonical} />
+    {noindex && <meta name="robots" content="noindex, nofollow" />}
+    <meta name="theme-color" content="#F3E6EE" />
+    <meta name="color-scheme" content="light" />
+
+    <meta property="og:type" content={person ? "profile" : "website"} />
+    <meta property="og:site_name" content={`${site.handle}'s minihompy`} />
+    <meta property="og:title" content={fullTitle} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:image" content={ogUrl} />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content={`${site.handle}'s room: ${site.name}, ${site.role}`} />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:site" content={site.twitterHandle} />
+    <meta name="twitter:creator" content={site.twitterHandle} />
+    <meta name="twitter:title" content={fullTitle} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={ogUrl} />
+
+    <link rel="icon" href="/favicon.ico" sizes="32x32" />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <link rel="manifest" href="/site.webmanifest" />
+
+    <Font cssVariable="--font-display" preload />
+    <Font cssVariable="--font-body" preload />
+
+    {person && <script is:inline type="application/ld+json" set:html={JSON.stringify(personLd)} />}
+    <ClientRouter />
+  </head>
+  <body class:list={[bare && "bare"]}>
+    <!--
+      THESIS: The profile is a room you visit, not a hero you scroll past. It refuses the dark hero, the skill cloud, and the card grid.
+      OWN-WORLD: Blush field with a diamond motif; paper panels with 2px plum lines and a 3px lift; pastel sticker chips in sky, butter, mint, blossom; Fredoka display over Nunito body; an isometric SVG room drawn in plum outline; every control a rounded sticker with a real press.
+      STORY: Meet Calvin in his room, read the diary of shipped products, then take the resume or leave a note in the ledger.
+      FIRST VIEWPORT: Three panels: profile (portrait sticker, name, role, note, counters, three actions) left; the isometric room centre; diary and guest ledger right. A floating sticker tab bar with the record player at the bottom. Primary action: Visit my work, top of the profile stack.
+      FORM: Minihompy room, catalog challenger cyworld-minihompy-room chosen over the assigned Guild Roster sheet; seed 801194f6.
+      FINISH: unreviewed and undocumented is unfinished; this build ends with the finish review, the verdict, and DESIGN.md.
+    -->
+    <a class="skip" href="#main">Skip to content</a>
+    <div class="frame">
+      {
+        !bare && (
+          <>
+            <div class="corner c1" aria-hidden="true"><i /><i /><i /><i /></div>
+            <div class="corner c2" aria-hidden="true"><i /><i /><i /><i /></div>
+            <div class="corner c3" aria-hidden="true"><i /><i /><i /><i /></div>
+            <div class="corner c4" aria-hidden="true"><i /><i /><i /><i /></div>
+          </>
+        )
+      }
+      <div class="paper">
+        {
+          !bare && (
+            <header class="topbar">
+              <a class="ribbon" href="/">
+                <Icon name="home" size={18} />
+                {site.handle}'s minihompy
+              </a>
+              <div class="chips">
+                <StickerChip tone="mint" dot="success">{site.availability}</StickerChip>
+                <StickerChip tone="sky" class="chip-loc">{site.locationShort} · PH</StickerChip>
+                <StickerChip tone="blush" icon="note" class="chip-bgm">
+                  <span data-bgm-label>BGM · {site.music.title}</span>
+                </StickerChip>
+              </div>
+            </header>
+          )
+        }
+        <main id="main" tabindex="-1">
+          <slot />
+        </main>
+      </div>
+      {!bare && <BottomNav counts={counts} />}
+    </div>
+
+    <script>
+      // The topbar chip mirrors the player, on every page, after every navigation.
+      const sync = (playing: boolean) => {
+        document.querySelectorAll<HTMLElement>("[data-bgm-label]").forEach((el) => {
+          const title = el.dataset.title ?? (el.dataset.title = el.textContent?.replace(/^(Now spinning|BGM) · /, "") ?? "");
+          el.textContent = `${playing ? "Now spinning" : "BGM"} · ${title}`;
+        });
+      };
+      document.addEventListener("bgm:state", (e) => sync((e as CustomEvent).detail.playing));
+      document.addEventListener("astro:page-load", () => document.dispatchEvent(new Event("bgm:query")));
+    </script>
+  </body>
+</html>
+
+<style>
+  .skip {
+    position: absolute;
+    left: 12px;
+    top: -60px;
+    z-index: 100;
+    background: var(--butter);
+    border: var(--border);
+    border-radius: var(--radius-pill);
+    padding: 8px 14px;
+    font-family: var(--font-display-stack);
+    text-decoration: none;
+  }
+  .skip:focus {
+    top: 12px;
+  }
+
+  .frame {
+    position: relative;
+    min-height: 100dvh;
+    padding: var(--frame-pad) var(--frame-pad) calc(var(--nav-height) + 2 * var(--frame-pad) + env(safe-area-inset-bottom, 0px));
+    background-color: var(--blush);
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='36' height='36' viewBox='0 0 36 36'%3E%3Cg fill='none' stroke='%233A2E3F' stroke-opacity='.28' stroke-width='1.2'%3E%3Cpath d='M18 8 l4 4 l-4 4 l-4 -4 z' fill='%23BFD9F2'/%3E%3Cpath d='M18 20 l4 4 l-4 4 l-4 -4 z' fill='%23F7D58B'/%3E%3C/g%3E%3Ccircle cx='4' cy='16' r='1.6' fill='%233A2E3F' fill-opacity='.35'/%3E%3Ccircle cx='32' cy='16' r='1.6' fill='%233A2E3F' fill-opacity='.35'/%3E%3Ccircle cx='18' cy='2' r='1.2' fill='%23E67A8A' fill-opacity='.6'/%3E%3Ccircle cx='18' cy='34' r='1.2' fill='%23E67A8A' fill-opacity='.6'/%3E%3C/svg%3E");
+    background-size: 36px 36px;
+  }
+
+  .bare .frame {
+    padding: 0;
+    min-height: 0;
+    background-image: none;
+  }
+
+  .corner {
+    position: fixed;
+    width: 38px;
+    height: 38px;
+    z-index: 2;
+    pointer-events: none;
+  }
+  .corner i {
+    position: absolute;
+    width: 12px;
+    height: 12px;
+    border: 1.4px solid rgba(58, 46, 63, 0.5);
+    transform: rotate(45deg);
+    border-radius: var(--radius-hairline);
+  }
+  .corner i:nth-child(1) {
+    left: 13px;
+    top: 0;
+    background: var(--sky);
+  }
+  .corner i:nth-child(2) {
+    left: 0;
+    top: 13px;
+    background: var(--butter);
+  }
+  .corner i:nth-child(3) {
+    left: 26px;
+    top: 13px;
+    background: var(--mint);
+  }
+  .corner i:nth-child(4) {
+    left: 13px;
+    top: 26px;
+    background: var(--blossom);
+  }
+  .c1 {
+    left: 6px;
+    top: 6px;
+  }
+  .c2 {
+    right: 6px;
+    top: 6px;
+  }
+  .c3 {
+    left: 6px;
+    bottom: 6px;
+  }
+  .c4 {
+    right: 6px;
+    bottom: 6px;
+  }
+
+  .paper {
+    position: relative;
+    max-width: 1396px;
+    margin: 0 auto;
+    /* the sheet always reaches the tab bar; short pages never leave the bar floating on bare field */
+    min-height: calc(100dvh - var(--nav-height) - 3 * var(--frame-pad));
+    background: var(--paper);
+    border: var(--border);
+    border-radius: var(--radius-xl);
+    box-shadow:
+      0 0 0 6px rgba(255, 253, 248, 0.7),
+      0 10px 30px rgba(58, 46, 63, 0.14),
+      inset 0 0 0 1px rgba(255, 255, 255, 0.8);
+    padding: var(--space-4) var(--space-5) var(--space-6);
+  }
+  .paper::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    background: repeating-linear-gradient(0deg, rgba(58, 46, 63, 0.028) 0 1px, transparent 1px 22px);
+    pointer-events: none;
+  }
+  .bare .paper {
+    border: 0;
+    box-shadow: none;
+    border-radius: 0;
+    max-width: none;
+    padding: 0;
+    background: transparent;
+  }
+  .bare .paper::before {
+    display: none;
+  }
+
+  main {
+    position: relative;
+  }
+  main:focus {
+    outline: none;
+  }
+
+  .topbar {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--space-3);
+    flex-wrap: wrap;
+    min-height: 40px;
+    margin-bottom: var(--space-5);
+  }
+
+  .ribbon {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: var(--butter);
+    border: var(--border);
+    border-radius: var(--radius-pill);
+    padding: 6px 16px 6px 12px;
+    font-family: var(--font-display-stack);
+    font-weight: 600;
+    font-size: var(--text-lg);
+    box-shadow: var(--lift);
+    text-decoration: none;
+  }
+
+  .chips {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+  }
+
+  @media (max-width: 720px) {
+    :root {
+      --frame-pad: 10px;
+    }
+    .paper {
+      padding: var(--space-3) var(--space-3) var(--space-5);
+    }
+    .corner {
+      display: none;
+    }
+  }
+
+  /* Phones: only the BGM chip stays in the topbar; location and availability already live in the profile line. */
+  @media (max-width: 640px) {
+    .chips > :global(.chip:not(.chip-bgm)) {
+      display: none;
+    }
+    .topbar {
+      margin-bottom: var(--space-4);
+    }
+  }
+</style>

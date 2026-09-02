@@ -1,0 +1,126 @@
+---
+/** One diary line: a dated sticker, the title with its status, and the real figures. Whole card is the link. */
+import StickerChip from "./StickerChip.astro";
+import { statusLabel, statusTone, kindLabel, yearTone, figureText, formerLabel, type Project } from "@/lib/projects";
+
+interface Props {
+  project: Project;
+  index: number;
+  /** Compact rows for the home panel; full rows on /diary. */
+  compact?: boolean;
+}
+
+const { project, index, compact = false } = Astro.props;
+const { data } = project;
+/** Compact rows keep to three figures so the home column stays one line per entry. */
+const figures = (compact ? data.figures.slice(0, 3) : data.figures).map(figureText);
+const line = figures.length ? figures.join(" · ") : data.summary;
+---
+
+<a class:list={["entry", compact && "compact"]} href={`/diary/${project.id}`}>
+  <span class:list={["yr", `tone-${yearTone(index)}`]}>{data.year}</span>
+  <span class="body">
+    <span class="head">
+      <span class="title">{data.title}</span>
+      <StickerChip tone={statusTone[data.status]} size="xs" dot={data.status === "live" || data.status === "in-service" ? "success" : undefined}>
+        {statusLabel[data.status]}
+      </StickerChip>
+      {!compact && <StickerChip size="xs">{kindLabel[data.kind]}</StickerChip>}
+      {data.former && !compact && <StickerChip size="xs" tone="blush">{formerLabel}</StickerChip>}
+    </span>
+    <span class="line">{line}</span>
+    {!compact && data.collaborator && <span class="with">with {data.collaborator.name}</span>}
+  </span>
+</a>
+
+<style>
+  .entry {
+    display: grid;
+    grid-template-columns: 50px 1fr;
+    gap: 10px;
+    align-items: start;
+    background: var(--white);
+    border: var(--border-thin);
+    border-radius: var(--radius-md);
+    padding: 9px 11px;
+    box-shadow: var(--lift-sm);
+    text-decoration: none;
+    color: var(--ink);
+    transition:
+      transform var(--dur-fast) var(--ease-out),
+      box-shadow var(--dur-fast) var(--ease-out);
+  }
+  .entry:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--lift);
+  }
+  .entry:active {
+    transform: translateY(1px);
+  }
+
+  .yr {
+    font-family: var(--font-display-stack);
+    font-weight: 600;
+    font-size: var(--text-sm);
+    border: 1.4px solid var(--line);
+    border-radius: var(--radius-pill);
+    text-align: center;
+    padding: 3px 0;
+    line-height: 1.2;
+    margin-top: 1px;
+  }
+  .tone-butter {
+    background: var(--butter);
+  }
+  .tone-sky {
+    background: var(--sky);
+  }
+  .tone-blush {
+    background: var(--blush);
+  }
+  .tone-mint {
+    background: var(--mint);
+  }
+  .tone-blossom {
+    background: var(--blossom);
+  }
+
+  .body {
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+  }
+  .head {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    flex-wrap: wrap;
+  }
+  .title {
+    font-size: var(--text-md);
+    font-weight: 900;
+    line-height: 1.25;
+  }
+  .compact .title {
+    font-size: var(--text-sm);
+  }
+  /* compact rows: one status chip, inline after the title, on every entry */
+  .compact .head {
+    gap: 6px;
+  }
+  .line {
+    font-size: var(--text-sm);
+    font-weight: 700;
+    color: var(--ink-soft);
+    line-height: 1.35;
+  }
+  .compact .line {
+    font-size: var(--text-xs);
+  }
+  .with {
+    font-size: var(--text-xs);
+    font-weight: 800;
+    color: var(--ink-soft);
+  }
+</style>

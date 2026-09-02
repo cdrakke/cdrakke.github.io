@@ -5,6 +5,10 @@ on:
     branches: [main]
   workflow_dispatch:
 
+env:
+  # Puppeteer is a dev dependency for local OG/resume renders only; CI never runs a browser.
+  PUPPETEER_SKIP_DOWNLOAD: "true"
+
 permissions:
   contents: read
   pages: write
@@ -18,19 +22,18 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - name: Checkout
+        uses: actions/checkout@v7
 
-      - uses: actions/setup-node@v4
+      # Installs, runs `astro build`, and uploads dist/ as the Pages artifact.
+      # The OG image and resume PDF are committed (public/og.png, public/resume/*.pdf),
+      # so CI does not need a browser.
+      - name: Install, build, and upload
+        uses: withastro/action@v6
         with:
-          node-version: 20
-          cache: npm
-
-      - run: npm ci
-      - run: npm run build
-
-      - uses: actions/upload-pages-artifact@v3
-        with:
-          path: dist
+          node-version: 22
+          package-manager: npm@latest
+          build-cmd: npx astro build
 
   deploy:
     needs: build
@@ -39,5 +42,6 @@ jobs:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
     steps:
-      - id: deployment
-        uses: actions/deploy-pages@v4
+      - name: Deploy
+        id: deployment
+        uses: actions/deploy-pages@v5

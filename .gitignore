@@ -28,3 +28,18 @@ references/
 *.njsproj
 *.sln
 *.sw?
+
+# Astro
+.astro/
+
+# Impeccable working files (review captures); mocks and config are committed
+.impeccable/review/
+
+# Secrets and local tool output
+.env
+.env.*
+!.env.example
+.playwright-mcp/
+.impeccable/unused/
+.impeccable/hook.cache.json
+.impeccable/questions/

@@ -1,0 +1,100 @@
+---
+/**
+ * One consistent icon system: 16-unit grid, 1.4 stroke, plum ink, drawn by hand for this world.
+ * `currentColor` fills follow the parent chip colour so an icon on a sky chip wears sky.
+ */
+export type IconName =
+  | "home"
+  | "book"
+  | "shelf"
+  | "ledger"
+  | "door"
+  | "mail"
+  | "pdf"
+  | "note"
+  | "spark"
+  | "github"
+  | "x"
+  | "linkedin"
+  | "discord"
+  | "phone"
+  | "pin"
+  | "link"
+  | "arrow"
+  | "back"
+  | "play"
+  | "pause"
+  | "volume"
+  | "mute"
+  | "check"
+  | "warn"
+  | "medal"
+  | "cert"
+  | "server"
+  | "record"
+  | "heart";
+
+interface Props {
+  name: IconName;
+  size?: number;
+  class?: string;
+  label?: string;
+}
+
+const { name, size = 16, class: className, label } = Astro.props;
+
+const ink = "#3A2E3F";
+const paper = "#FFFDF8";
+
+const paths: Record<IconName, string> = {
+  home: `<path d="M2.5 8 8 3l5.5 5v5.5h-11z" fill="currentColor" stroke="${ink}" stroke-width="1.4" stroke-linejoin="round"/><rect x="6.5" y="9.5" width="3" height="4" fill="${ink}"/>`,
+  book: `<path d="M2.5 3.5h5v10h-5zM8.5 3.5h5v10h-5z" fill="currentColor" stroke="${ink}" stroke-width="1.4" stroke-linejoin="round"/><path d="M4 6h2M4 8h2M10 6h2M10 8h2" stroke="${ink}" stroke-width="1.1" stroke-linecap="round"/>`,
+  shelf: `<path d="M2 5h12M2 11h12" stroke="${ink}" stroke-width="1.6" stroke-linecap="round"/><circle cx="5" cy="8" r="1.6" fill="currentColor" stroke="${ink}" stroke-width="1.2"/><circle cx="9" cy="8" r="1.6" fill="currentColor" stroke="${ink}" stroke-width="1.2"/>`,
+  ledger: `<rect x="3" y="2.5" width="10" height="11" rx="2" fill="currentColor" stroke="${ink}" stroke-width="1.4"/><path d="M6 6h4M6 8.5h4M6 11h2.5" stroke="${ink}" stroke-width="1.2" stroke-linecap="round"/>`,
+  door: `<path d="M3 2.5h7v11H3z" fill="${paper}" stroke="${ink}" stroke-width="1.4" stroke-linejoin="round"/><circle cx="8" cy="8.5" r="1" fill="${ink}"/><path d="M10.5 8h3m-1.5-1.8 1.8 1.8-1.8 1.8" fill="none" stroke="${ink}" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/>`,
+  mail: `<rect x="2" y="3.5" width="12" height="9" rx="2" fill="${paper}" stroke="${ink}" stroke-width="1.4"/><path d="M2.5 5 8 9l5.5-4" fill="none" stroke="${ink}" stroke-width="1.4" stroke-linejoin="round"/>`,
+  pdf: `<path d="M4 2h5.5L13 5.5V14H4z" fill="${paper}" stroke="${ink}" stroke-width="1.4" stroke-linejoin="round"/><path d="M9.5 2v3.5H13" fill="none" stroke="${ink}" stroke-width="1.4" stroke-linejoin="round"/><path d="M6 8.5h5M6 11h4" stroke="${ink}" stroke-width="1.3" stroke-linecap="round"/>`,
+  note: `<path d="M10 2.5v8.2a2.3 2.3 0 1 1-1.5-2.1V2.5z" fill="${ink}"/><path d="M10 2.5l4 1.5v3" fill="none" stroke="${ink}" stroke-width="1.5" stroke-linecap="round"/>`,
+  spark: `<path d="M8 1.5l1.6 4.4L14 7.5l-4.4 1.6L8 13.5 6.4 9.1 2 7.5l4.4-1.6z" fill="currentColor" stroke="${ink}" stroke-width="1.3" stroke-linejoin="round"/>`,
+  github: `<circle cx="8" cy="8" r="6" fill="${ink}"/><path d="M5.5 9.5c1 1.6 4 1.6 5 0" stroke="${paper}" stroke-width="1.2" stroke-linecap="round" fill="none"/><circle cx="6" cy="6.8" r="1" fill="${paper}"/><circle cx="10" cy="6.8" r="1" fill="${paper}"/>`,
+  x: `<path d="M3 3l10 10M13 3 3 13" stroke="${ink}" stroke-width="1.8" stroke-linecap="round"/>`,
+  linkedin: `<rect x="2.5" y="2.5" width="11" height="11" rx="2" fill="currentColor" stroke="${ink}" stroke-width="1.4"/><path d="M5.5 7v4M5.5 5.2v.1M8 11V8.8c0-1 .7-1.8 1.7-1.8s1.8.8 1.8 1.8V11" fill="none" stroke="${ink}" stroke-width="1.4" stroke-linecap="round"/>`,
+  discord: `<path d="M4 4.5c2.6-1.2 5.4-1.2 8 0l1.5 6.5c-1.4 1.1-2.8 1.6-4 1.7l-.5-1.2H7l-.5 1.2c-1.2-.1-2.6-.6-4-1.7z" fill="currentColor" stroke="${ink}" stroke-width="1.4" stroke-linejoin="round"/><circle cx="6.3" cy="8.3" r="1" fill="${ink}"/><circle cx="9.7" cy="8.3" r="1" fill="${ink}"/>`,
+  phone: `<path d="M4.5 2.5h3l1 3-1.5 1a7 7 0 0 0 2.5 2.5l1-1.5 3 1v3a1 1 0 0 1-1 1A10 10 0 0 1 3.5 3.5a1 1 0 0 1 1-1z" fill="currentColor" stroke="${ink}" stroke-width="1.4" stroke-linejoin="round"/>`,
+  pin: `<path d="M8 14s4.5-4.2 4.5-7.5a4.5 4.5 0 1 0-9 0C3.5 9.8 8 14 8 14z" fill="currentColor" stroke="${ink}" stroke-width="1.4" stroke-linejoin="round"/><circle cx="8" cy="6.5" r="1.6" fill="${ink}"/>`,
+  link: `<path d="M6.5 9.5l3-3M5 7.5 3.8 8.7a2.3 2.3 0 0 0 3.2 3.2L8.2 10.7M8 5.3l1.2-1.2a2.3 2.3 0 0 1 3.2 3.2L11.2 8.5" fill="none" stroke="${ink}" stroke-width="1.5" stroke-linecap="round"/>`,
+  arrow: `<path d="M3 8h9M9 4.5 12.5 8 9 11.5" fill="none" stroke="${ink}" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>`,
+  back: `<path d="M13 8H4M7 4.5 3.5 8 7 11.5" fill="none" stroke="${ink}" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>`,
+  play: `<path d="M5 3.5v9l7.5-4.5z" fill="${ink}" stroke="${ink}" stroke-width="1.2" stroke-linejoin="round"/>`,
+  pause: `<rect x="4" y="3.5" width="3" height="9" rx="1" fill="${ink}"/><rect x="9" y="3.5" width="3" height="9" rx="1" fill="${ink}"/>`,
+  volume: `<path d="M3 6.5h2.5L9 3.5v9L5.5 9.5H3z" fill="currentColor" stroke="${ink}" stroke-width="1.3" stroke-linejoin="round"/><path d="M11 6a3 3 0 0 1 0 4M12.5 4.2a5.5 5.5 0 0 1 0 7.6" fill="none" stroke="${ink}" stroke-width="1.3" stroke-linecap="round"/>`,
+  mute: `<path d="M3 6.5h2.5L9 3.5v9L5.5 9.5H3z" fill="currentColor" stroke="${ink}" stroke-width="1.3" stroke-linejoin="round"/><path d="M11 6l3 4M14 6l-3 4" fill="none" stroke="${ink}" stroke-width="1.4" stroke-linecap="round"/>`,
+  check: `<circle cx="8" cy="8" r="6" fill="currentColor" stroke="${ink}" stroke-width="1.4"/><path d="M5.2 8.2 7.2 10l3.6-4" fill="none" stroke="${ink}" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>`,
+  warn: `<path d="M8 2.5 14 13H2z" fill="currentColor" stroke="${ink}" stroke-width="1.4" stroke-linejoin="round"/><path d="M8 6.5v3M8 11.2v.1" stroke="${ink}" stroke-width="1.6" stroke-linecap="round"/>`,
+  medal: `<path d="M5 2h6l-2 4H7z" fill="${paper}" stroke="${ink}" stroke-width="1.2" stroke-linejoin="round"/><circle cx="8" cy="10" r="3.8" fill="currentColor" stroke="${ink}" stroke-width="1.4"/><path d="M8 8.2l.6 1.3 1.4.2-1 1 .2 1.4L8 11.4l-1.2.7.2-1.4-1-1 1.4-.2z" fill="${ink}"/>`,
+  cert: `<rect x="2.5" y="3" width="11" height="9" rx="1.5" fill="currentColor" stroke="${ink}" stroke-width="1.4"/><path d="M5 6h6M5 8h4" stroke="${ink}" stroke-width="1.2" stroke-linecap="round"/><circle cx="11" cy="10" r="1.6" fill="${paper}" stroke="${ink}" stroke-width="1.1"/>`,
+  server: `<rect x="3" y="2.5" width="10" height="4.5" rx="1.2" fill="currentColor" stroke="${ink}" stroke-width="1.4"/><rect x="3" y="9" width="10" height="4.5" rx="1.2" fill="currentColor" stroke="${ink}" stroke-width="1.4"/><circle cx="10.8" cy="4.8" r="1" fill="${ink}"/><circle cx="10.8" cy="11.3" r="1" fill="${ink}"/>`,
+  record: `<circle cx="8" cy="8" r="6" fill="${ink}"/><circle cx="8" cy="8" r="3.6" fill="none" stroke="${paper}" stroke-opacity=".35" stroke-width="1"/><circle cx="8" cy="8" r="1.9" fill="currentColor" stroke="${paper}" stroke-width=".8"/>`,
+  heart: `<path d="M8 13.5S2.5 10 2.5 6.2A2.8 2.8 0 0 1 8 5a2.8 2.8 0 0 1 5.5 1.2C13.5 10 8 13.5 8 13.5z" fill="currentColor" stroke="${ink}" stroke-width="1.4" stroke-linejoin="round"/>`,
+};
+---
+
+<svg
+  class:list={["icon", className]}
+  width={size}
+  height={size}
+  viewBox="0 0 16 16"
+  aria-hidden={label ? undefined : "true"}
+  role={label ? "img" : undefined}
+  focusable="false"
+  set:html={(label ? `<title>${label}</title>` : "") + paths[name]}
+/>
+
+<style>
+  .icon {
+    display: inline-block;
+    flex: none;
+    vertical-align: -0.15em;
+    color: var(--white);
+  }
+</style>

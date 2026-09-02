@@ -1,3 +1,5 @@
 User-agent: *
 Allow: /
-Sitemap: https://cdrakke.github.io/sitemap.xml
+Disallow: /og/
+
+Sitemap: https://cdrakke.github.io/sitemap-index.xml

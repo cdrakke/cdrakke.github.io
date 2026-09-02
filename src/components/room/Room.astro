@@ -1,0 +1,248 @@
+---
+/**
+ * Drekyz's room. Server-rendered SVG; the visitable furnishings are real links (or a button for the record).
+ * Labels are part of the drawing so a first-time visitor can read the room without hovering.
+ */
+import { roomObjects } from "@/data/room";
+import { site } from "@/data/site";
+import * as draw from "./draw";
+import { getImage } from "astro:assets";
+import windowSunset from "@/assets/images/room/window-sunset.webp";
+
+/** The view through the window: a painted GenSan sunset, clipped to the pane by draw.windowScene. */
+const windowImg = await getImage({ src: windowSunset, width: 552, format: "webp" });
+
+interface Props {
+  class?: string;
+}
+const { class: className } = Astro.props;
+
+const drawn: Record<string, draw.Drawn> = {
+  "monitor-raidium": draw.monitorRaidium(),
+  "monitor-terminal": draw.monitorTerminal(),
+  "server-rack": draw.serverRack(),
+  "record-player": draw.recordPlayer(),
+  "shelf-medals": draw.shelfMedals(),
+  certificate: draw.certificate(),
+  barong: draw.barong(),
+  "bot-plush": draw.botPlush(),
+  window: draw.windowScene(windowImg.src),
+  guestbook: draw.guestbook(),
+};
+
+/** Paint order: back wall items first, then floor objects front to back. */
+const order = [
+  "window",
+  "shelf-medals",
+  "certificate",
+  "barong",
+  "server-rack",
+  "monitor-raidium",
+  "monitor-terminal",
+  "record-player",
+  "guestbook",
+  "bot-plush",
+];
+
+const byId = Object.fromEntries(roomObjects.map((o) => [o.id, o]));
+---
+
+<svg
+  class:list={["room", className]}
+  viewBox={draw.VIEWBOX}
+  xmlns="http://www.w3.org/2000/svg"
+  role="group"
+  aria-label={`${site.handle}'s room. Furnishings are links to the rest of the site.`}
+>
+  <Fragment set:html={draw.defs()} />
+  <g class="stage settle" style="--i:0">
+    <Fragment set:html={draw.stage()} />
+  </g>
+  <g class="static settle" style="--i:2">
+    <Fragment set:html={draw.desk()} />
+    <Fragment set:html={draw.plant()} />
+  </g>
+  {
+    order.map((id, i) => {
+      const o = byId[id];
+      const d = drawn[id];
+      if (!o || !d) return null;
+      const isButton = "event" in o.action;
+      const href = "href" in o.action ? o.action.href : undefined;
+      return (
+        <g class="obj settle" style={`--i:${i + 3}`} data-id={id}>
+          {isButton ? (
+            <g
+              class="hit"
+              role="button"
+              tabindex="0"
+              aria-label={o.aria}
+              data-event={"event" in o.action ? o.action.event : undefined}
+              set:html={d.svg + d.label}
+            />
+          ) : (
+            <a class="hit" href={href} aria-label={o.aria} set:html={d.svg + d.label} />
+          )}
+        </g>
+      );
+    })
+  }
+  <g class="sticker" filter="url(#soft)">
+    <rect x="16" y="12" width="126" height="28" rx="14" fill="#F7D58B" stroke="#3A2E3F" stroke-opacity=".7" stroke-width="1.3" />
+    <path d="M30 30 v-7 l6 -5 l6 5 v7 z" fill="#FFFDF8" stroke="#3A2E3F" stroke-opacity=".8" stroke-width="1.2" stroke-linejoin="round" />
+    <rect x="34" y="24" width="4" height="6" fill="#3A2E3F" fill-opacity=".7" />
+    <text x="52" y="30.5" font-size="12.5" font-weight="600" fill="#3A2E3F" class="display">{site.handle}'s room</text>
+  </g>
+  <g class="sticker hint" filter="url(#soft)">
+    <rect x="540" y="12" width="144" height="28" rx="14" fill="#FFFFFF" stroke="#3A2E3F" stroke-opacity=".7" stroke-width="1.3" />
+    <circle cx="557" cy="26" r="5" fill="#CDE8D8" stroke="#3A2E3F" stroke-opacity=".7" stroke-width="1.1" />
+    <circle cx="557" cy="26" r="1.8" fill="#3A2E3F" />
+    <text x="569" y="30.5" font-size="11" font-weight="800" fill="#3A2E3F">click a thing to visit</text>
+  </g>
+</svg>
+
+<script>
+  // The record player in the room follows the real player, and can drive it.
+  const wire = () => {
+    document.querySelectorAll<SVGElement>(".room").forEach((room) => {
+      if (room.dataset.wired) return;
+      room.dataset.wired = "1";
+      room.querySelectorAll<SVGGElement>("[data-event]").forEach((el) => {
+        const fire = () => document.dispatchEvent(new Event(el.dataset.event!));
+        el.addEventListener("click", fire);
+        el.addEventListener("keydown", (e) => {
+          if (e.key === "Enter" || e.key === " ") {
+            e.preventDefault();
+            fire();
+          }
+        });
+      });
+    });
+  };
+  const reflect = (playing: boolean) => {
+    document.querySelectorAll<SVGElement>(".room").forEach((room) => room.classList.toggle("playing", playing));
+  };
+  document.addEventListener("bgm:state", (e) => reflect((e as CustomEvent).detail.playing));
+  document.addEventListener("astro:page-load", () => {
+    wire();
+    document.dispatchEvent(new Event("bgm:query"));
+  });
+  wire();
+</script>
+
+<style>
+  .room {
+    width: 100%;
+    height: auto;
+    display: block;
+    font-family: var(--font-body-stack);
+    overflow: visible;
+  }
+
+  .room :global(text.display) {
+    font-family: var(--font-display-stack);
+  }
+
+  .hit {
+    cursor: pointer;
+    outline: none;
+  }
+
+  .obj {
+    transform-box: fill-box;
+    transform-origin: 50% 100%;
+    transition: transform var(--dur-base) var(--ease-out);
+  }
+
+  .obj:hover,
+  .obj:focus-within {
+    transform: translateY(-3px);
+  }
+
+  .obj :global(.rtag) {
+    transition: transform var(--dur-fast) var(--ease-out);
+    transform-box: fill-box;
+    transform-origin: center;
+  }
+
+  .obj:hover :global(.rtag rect),
+  .obj:focus-within :global(.rtag rect) {
+    stroke-opacity: 1;
+    stroke-width: 1.6;
+  }
+
+  .hit:focus-visible :global(.rtag rect) {
+    stroke: #3a2e3f;
+    stroke-width: 2.4;
+    stroke-opacity: 1;
+  }
+
+  /* settle: the room lands piece by piece, from the stage up */
+  .settle {
+    transform-box: fill-box;
+    transform-origin: 50% 100%;
+  }
+
+  /* record player state */
+  .room :global(.vinyl) {
+    transform-box: fill-box;
+    transform-origin: center;
+  }
+  .room.playing :global(.vinyl) {
+    animation: spin 2.4s linear infinite;
+  }
+  .room :global(.notes) {
+    opacity: 0;
+    transition: opacity var(--dur-base) var(--ease-out);
+  }
+  .room.playing :global(.notes) {
+    opacity: 1;
+    animation: float 2.2s ease-in-out infinite alternate;
+  }
+  .room :global(.ico-pause) {
+    display: none;
+  }
+  .room.playing :global(.ico-pause) {
+    display: inline;
+  }
+  .room.playing :global(.ico-play) {
+    display: none;
+  }
+  .room :global(.lamp) {
+    animation: pulse 2.8s ease-in-out infinite alternate;
+  }
+
+  @keyframes spin {
+    to {
+      transform: rotate(360deg);
+    }
+  }
+  @keyframes float {
+    from {
+      transform: translateY(0);
+    }
+    to {
+      transform: translateY(-4px);
+    }
+  }
+  @keyframes pulse {
+    from {
+      opacity: 0.55;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .room.playing :global(.vinyl),
+    .room.playing :global(.notes),
+    .room :global(.lamp) {
+      animation: none;
+    }
+    .obj:hover,
+    .obj:focus-within {
+      transform: none;
+    }
+  }
+</style>

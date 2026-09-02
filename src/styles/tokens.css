@@ -1,0 +1,89 @@
+/* Minihompy world tokens. Palette is committed at page scale: the blush field owns the ground,
+   sticker whites float on it, and the four pastels are role colours, not accents on grey. */
+:root {
+  /* palette */
+  --blush: #f7e6e8;
+  --sky: #bfd9f2;
+  --sky-deep: #9dc4ec;
+  --butter: #f7d58b;
+  --butter-deep: #e9c15f;
+  --mint: #cde8d8;
+  --blossom: #f3b8ac;
+  --blossom-deep: #e67a8a;
+  --wood: #c9a27e;
+  --paper: #fff8f1;
+  --white: #fffdf8;
+  --ink: #3a2e3f;
+  --ink-2: #5a4a60;
+  --ink-soft: rgba(58, 46, 63, 0.68);
+  --line: rgba(58, 46, 63, 0.45);
+  --success: #7fe0a0;
+
+  /* hover tints: each sticker tone one step lighter under the pointer */
+  --mint-hover: #d8efe2;
+  --sky-hover: #cbe1f6;
+  --butter-hover: #f9dea2;
+
+  /* translucent paper laid over the blush field (panels, tab bar, count pills) */
+  --veil-soft: rgba(255, 255, 255, 0.55);
+  --veil: rgba(255, 255, 255, 0.72);
+  --veil-strong: rgba(255, 255, 255, 0.86);
+
+  /* status ink on pastel ground (ledger replies, stamps) */
+  --ok-ink: #1f6b43;
+  --bad-ink: #a83a52;
+  --gold-ink: #b7871d;
+
+  /* type */
+  --font-display-stack: var(--font-display), "Trebuchet MS", Verdana, sans-serif;
+  --font-body-stack: var(--font-body), "Segoe UI", "Helvetica Neue", Arial, sans-serif;
+  --text-2xs: 0.625rem; /* 10: uppercase micro labels only */
+  --text-xs: 0.6875rem; /* 11 */
+  --text-sm: 0.8125rem; /* 13 */
+  --text-md: 0.9375rem; /* 15 */
+  --text-lg: 1.0625rem; /* 17 */
+  --text-xl: 1.375rem; /* 22 */
+  --text-2xl: 1.75rem; /* 28 */
+  --text-3xl: 2.5rem; /* 40 */
+  --leading-tight: 1.1;
+  --leading-body: 1.5;
+
+  /* shape */
+  --radius-hairline: 2px; /* tape, underline marks, corner ornaments */
+  --radius-tight: 6px; /* picture frames, certificate mats */
+  --radius-sm: 10px;
+  --radius-md: 14px;
+  --radius-lg: 18px;
+  --radius-xl: 22px;
+  --radius-pill: 999px;
+  --border: 2px solid var(--line);
+  --border-thin: 1.6px solid var(--line);
+
+  /* depth: every shadow carries an offset and a blur; the sticker lift is the one signature */
+  --lift: 0 3px 0 rgba(58, 46, 63, 0.16);
+  --lift-sm: 0 2px 0 rgba(58, 46, 63, 0.1);
+  --lift-lg: 0 4px 0 rgba(58, 46, 63, 0.14);
+  --shadow-soft: 0 8px 22px rgba(58, 46, 63, 0.14);
+  --shadow-photo: 0 0 0 1.6px var(--line), 0 6px 14px rgba(58, 46, 63, 0.18);
+
+  /* rhythm */
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-5: 20px;
+  --space-6: 28px;
+  --space-7: 40px;
+
+  /* motion: one ease for everything that settles */
+  --ease-settle: cubic-bezier(0.22, 1, 0.36, 1);
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+  --dur-fast: 160ms;
+  --dur-base: 260ms;
+  --dur-settle: 620ms;
+
+  --nav-height: 62px;
+  --frame-pad: 22px;
+
+  color-scheme: light;
+}

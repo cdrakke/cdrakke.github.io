@@ -1,0 +1,626 @@
+---
+import { getCollection } from "astro:content";
+import { Image } from "astro:assets";
+import Base from "@/layouts/Base.astro";
+import Panel from "@/components/Panel.astro";
+import StickerChip from "@/components/StickerChip.astro";
+import StickerButton from "@/components/StickerButton.astro";
+import Icon from "@/components/Icon.astro";
+import { site } from "@/data/site";
+import { copy } from "@/data/copy";
+import { figureLabel } from "@/lib/projects";
+
+const projects = await getCollection("projects");
+const server = projects.find((p) => p.id === "server");
+const experience = (await getCollection("experience")).sort((a, b) => b.data.start.localeCompare(a.data.start));
+const education = await getCollection("education");
+const certificates = await getCollection("certificates");
+const skills = await getCollection("skills");
+
+const sti = education.find((e) => e.id === "sti-college");
+const gscnhs = education.find((e) => e.id === "gscnhs");
+const civil = certificates.find((c) => c.id === "civil-service");
+const capstoneAward = certificates.find((c) => c.id === "outstanding-capstone");
+
+const groups: Array<{ key: (typeof skills)[number]["data"]["category"]; label: string; tone: "mint" | "sky" | "blush" | "butter" | "white" }> = [
+  { key: "language", label: "Languages", tone: "butter" },
+  { key: "framework", label: "Frameworks", tone: "sky" },
+  { key: "database", label: "Databases", tone: "mint" },
+  { key: "tool", label: "Tools", tone: "blush" },
+  { key: "other", label: "Practices", tone: "white" },
+];
+
+const medals = [
+  { title: "Cum Laude", sub: "BS Information Technology, 2025", tone: "#F7D58B", ring: "#D9AF4C" },
+  { title: "Best Capstone Project", sub: "GYOCC.online, STI College GenSan", tone: "#E8E8F0", ring: "#B8B8C8" },
+  { title: "Programmer of the Year", sub: "STI College GenSan", tone: "#F0C79C", ring: "#C98F5C" },
+];
+
+const counts = { Diary: projects.length, Shelf: 4 };
+---
+
+<Base title="Shelf" description={`About Calvin Drakke I. Rulete (Drekyz): awards, education, experience, and how he runs his own infrastructure.`} counts={counts}>
+  <div class="wrap">
+    <header class="head settle" style="--i:0">
+      <h1>Shelf</h1>
+      <p class="lede">The things on the walls: who I am, what I've earned, where I've worked, and how I keep the lights on.</p>
+      <nav class="jump" aria-label="On this shelf">
+        <a href="#about">About</a><a href="#awards">Awards</a><a href="#certificates">Certificates</a><a href="#education">Education</a><a href="#experience">Experience</a><a href="#devops">DevOps</a><a href="#skills">Stack</a>
+      </nav>
+    </header>
+
+    <Panel title="About" icon="home" tone="sky" id="about" i={1}>
+      <p class="intro">{copy.intro}</p>
+      <div class="practices">
+        {copy.whatIDo.map((w, i) => <StickerChip tone={(["butter", "sky", "mint", "blossom"] as const)[i % 4]}>{w.title}</StickerChip>)}
+      </div>
+      <dl class="whatido">
+        {
+          copy.whatIDo.map((w) => (
+            <div class="w">
+              <dt>{w.title}</dt>
+              <dd>
+                {w.body}
+                {"link" in w && w.link && (
+                  <a class="wlink" href={w.link.href}>
+                    {w.link.label} <Icon name="arrow" size={13} />
+                  </a>
+                )}
+              </dd>
+            </div>
+          ))
+        }
+      </dl>
+      <p class="mindset"><Icon name="spark" size={16} class="spark" />{copy.mindset}</p>
+    </Panel>
+
+    <Panel title="Awards" icon="medal" tone="butter" id="awards" i={2}>
+      <div class="medalrow">
+        {
+          medals.map((m) => (
+            <div class="medal">
+              <svg viewBox="0 0 64 80" aria-hidden="true">
+                <path d="M23 4 L32 30 L41 4" fill="none" stroke="#3A2E3F" stroke-opacity=".6" stroke-width="12" stroke-linejoin="round" stroke-linecap="round" />
+                <path d="M23 4 L32 30 L41 4" fill="none" stroke="#E67A8A" stroke-width="8" stroke-linejoin="round" stroke-linecap="round" />
+                <circle cx="32" cy="50" r="22" fill={m.tone} stroke="#3A2E3F" stroke-opacity=".7" stroke-width="2" />
+                <circle cx="32" cy="50" r="15" fill="none" stroke={m.ring} stroke-width="2.4" />
+                <path d="M32 39 l3.2 6.8 7.5 .9 -5.5 5.1 1.4 7.4 -6.6 -3.7 -6.6 3.7 1.4 -7.4 -5.5 -5.1 7.5 -.9z" fill={m.ring} />
+              </svg>
+              <h3>{m.title}</h3>
+              <p>{m.sub}</p>
+            </div>
+          ))
+        }
+      </div>
+      {
+        sti?.data.images[0] && (
+          <figure class="proof">
+            <Image src={sti.data.images[0]} alt="The graduation medals" width={1280} widths={[480, 960, 1280]} sizes="(max-width: 720px) 100vw, 640px" loading="eager" />
+            <figcaption>The medals, on graduation day.</figcaption>
+          </figure>
+        )
+      }
+    </Panel>
+
+    <Panel title="Certificates" icon="cert" tone="mint" id="certificates" i={3}>
+      <div class="certs">
+        {
+          civil && (
+            <div class="cert">
+              <div class="frame">
+                <span class="ctitle">{civil.data.title}</span>
+                <span class="cissuer">{civil.data.issuer}</span>
+                <span class="stamp">{civil.data.display}</span>
+                <span class="cdate">{civil.data.date}</span>
+              </div>
+              <p class="story">{copy.civilServiceStory}</p>
+            </div>
+          )
+        }
+        {
+          capstoneAward && (
+            <div class="cert">
+              <div class="frame frame-alt">
+                <span class="ctitle">{capstoneAward.data.title}</span>
+                <span class="cissuer">{capstoneAward.data.issuer}</span>
+                <span class="stamp stamp-gold">{capstoneAward.data.display}</span>
+                <span class="cdate">{capstoneAward.data.date}</span>
+              </div>
+              {capstoneAward.data.image && (
+                <figure class="proof small">
+                  <Image src={capstoneAward.data.image} alt="Outstanding Capstone Project award" widths={[480, 960]} sizes="(max-width: 720px) 100vw, 420px" loading="lazy" />
+                </figure>
+              )}
+            </div>
+          )
+        }
+      </div>
+    </Panel>
+
+    <Panel title="Education" icon="book" tone="blush" id="education" i={4}>
+      <ol class="timeline">
+        {
+          [sti, gscnhs].filter(Boolean).map((e) => (
+            <li class="tl">
+              {e!.data.logo && <Image src={e!.data.logo} alt="" width={96} height={96} class="logo" loading="lazy" />}
+              <div>
+                <h3>{e!.data.institution}</h3>
+                <p class="sub">{e!.data.level} · {e!.data.years}</p>
+                <p class="desc">{e!.data.description}</p>
+                {e!.data.achievements.length > 0 && (
+                  <div class="chips">
+                    {e!.data.achievements.map((a) => (
+                      <StickerChip size="xs" tone="butter" icon="medal">{a}</StickerChip>
+                    ))}
+                  </div>
+                )}
+              </div>
+            </li>
+          ))
+        }
+      </ol>
+    </Panel>
+
+    <Panel title="Experience" icon="door" tone="sky" id="experience" i={5}>
+      <ol class="timeline">
+        {
+          experience.map((x) => (
+            <li class="tl">
+              {x.data.logo && <Image src={x.data.logo} alt="" width={96} height={96} class="logo" loading="lazy" />}
+              <div>
+                <h3>{x.data.role}</h3>
+                <p class="sub">
+                  {x.data.organization} · {x.data.period}
+                  {x.data.end === null && <StickerChip size="xs" tone="mint" dot="success">current</StickerChip>}
+                </p>
+                <p class="desc">{x.data.description}</p>
+                <ul class="resp">
+                  {x.data.responsibilities.map((r) => (
+                    <li>{r}</li>
+                  ))}
+                </ul>
+                {x.data.tech.length > 0 && (
+                  <div class="chips">
+                    {x.data.tech.map((t) => (
+                      <StickerChip size="xs">{t}</StickerChip>
+                    ))}
+                  </div>
+                )}
+              </div>
+            </li>
+          ))
+        }
+      </ol>
+    </Panel>
+
+    <Panel title="How I run things" icon="server" tone="mint" id="devops" i={6}>
+      <div class="devops">
+        <svg class="rack" viewBox="0 0 80 110" aria-hidden="true">
+          <rect x="8" y="6" width="64" height="98" rx="6" fill="#3A2E3F" stroke="#241B29" stroke-width="2" />
+          {[16, 34, 52, 70].map((y) => (
+            <g>
+              <rect x="14" y={y} width="52" height="12" rx="3" fill="#5A4A60" stroke="#241B29" stroke-width="1.2" />
+              <rect x="19" y={y + 4.5} width="22" height="3" rx="1.5" fill="#241B29" />
+              <circle cx="58" cy={y + 6} r="2.6" fill={y === 52 ? "#F7D58B" : "#7FE0A0"} />
+            </g>
+          ))}
+          <rect x="14" y="88" width="52" height="10" rx="3" fill="#2E2432" />
+          <text x="40" y="96" text-anchor="middle" font-size="6.5" font-weight="800" fill="#FFF8F1" font-family="Nunito, sans-serif">BARE METAL</text>
+        </svg>
+        <div>
+          <p class="desc">{copy.devops}</p>
+          {
+            server && server.data.figures.length > 0 && (
+              <ul class="figures" role="list" aria-label="Server figures">
+                {server.data.figures.map((f, i) => (
+                  <li>
+                    <StickerChip tone={(["mint", "sky", "butter", "blush"] as const)[i % 4]}>
+                      <b>{f.value}</b>&nbsp;{figureLabel(f)}
+                    </StickerChip>
+                  </li>
+                ))}
+              </ul>
+            )
+          }
+          {
+            server && (
+              <div class="more">
+                <StickerButton href={`/diary/${server.id}`} size="sm" tone="mint" icon="server" full={false}>
+                  Read the server entry
+                </StickerButton>
+              </div>
+            )
+          }
+        </div>
+      </div>
+    </Panel>
+
+    <Panel title="Stack" icon="shelf" tone="butter" id="skills" i={7}>
+      <div class="skillgroups">
+        {
+          groups.map((g) => (
+            <div class="sg">
+              <h3>{g.label}</h3>
+              <div class="chips">
+                {skills
+                  .filter((s) => s.data.category === g.key)
+                  .map((s) => (
+                    <StickerChip size="xs" tone={g.tone}>{s.data.name}</StickerChip>
+                  ))}
+              </div>
+            </div>
+          ))
+        }
+      </div>
+      <p class="note"><Icon name="spark" size={14} class="spark" />{copy.aiDisclaimer}</p>
+    </Panel>
+
+    <div class="cta settle" style="--i:8">
+      <StickerButton href={site.resumePath} tone="butter" icon="pdf" download="Calvin_Drakke_Rulete_Resume.pdf" full={false}>Take my resume (PDF)</StickerButton>
+      <StickerButton href="/ledger" tone="sky" icon="ledger" full={false}>Leave a note</StickerButton>
+    </div>
+  </div>
+</Base>
+
+<style>
+  .wrap {
+    max-width: 900px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-6);
+    scroll-margin-top: 20px;
+  }
+  .wrap :global(.panel) {
+    scroll-margin-top: 24px;
+  }
+  .head {
+    padding: var(--space-2) var(--space-2) 0;
+  }
+  h1 {
+    font-size: var(--text-3xl);
+  }
+  .lede {
+    margin-top: var(--space-3);
+    max-width: 62ch;
+    font-size: var(--text-md);
+    color: var(--ink-2);
+  }
+  .jump {
+    display: flex;
+    gap: 6px;
+    flex-wrap: wrap;
+    margin-top: var(--space-4);
+  }
+  .jump a {
+    background: var(--white);
+    border: var(--border-thin);
+    border-radius: var(--radius-pill);
+    padding: 4px 12px;
+    font-family: var(--font-display-stack);
+    font-weight: 600;
+    font-size: var(--text-sm);
+    text-decoration: none;
+    box-shadow: var(--lift-sm);
+  }
+  .jump a:hover {
+    background: var(--mint);
+  }
+
+  h3 {
+    font-size: var(--text-lg);
+  }
+  .intro {
+    font-size: var(--text-md);
+    line-height: 1.55;
+    max-width: 70ch;
+    color: var(--ink-2);
+    margin-top: 4px;
+  }
+  .practices {
+    display: flex;
+    gap: 6px;
+    flex-wrap: wrap;
+    margin-top: var(--space-4);
+  }
+  .whatido {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--space-4) var(--space-6);
+    margin: var(--space-5) 0 0;
+  }
+  .w dt {
+    font-family: var(--font-display-stack);
+    font-weight: 600;
+    font-size: var(--text-lg);
+    padding-bottom: 4px;
+    border-bottom: 1.5px dotted var(--line);
+  }
+  .w dd {
+    margin: 8px 0 0;
+    font-size: var(--text-sm);
+    line-height: 1.5;
+    color: var(--ink-2);
+    max-width: 48ch;
+  }
+  .wlink {
+    display: flex;
+    width: fit-content;
+    align-items: center;
+    gap: 4px;
+    margin-top: 6px;
+    font-weight: 800;
+    color: var(--ink);
+  }
+  .mindset {
+    margin-top: var(--space-4);
+    background: var(--blush);
+    border: var(--border-thin);
+    border-radius: var(--radius-md);
+    padding: 12px 14px;
+    font-size: var(--text-sm);
+    line-height: 1.45;
+    display: flex;
+    gap: 8px;
+    align-items: flex-start;
+  }
+  :global(.spark) {
+    color: var(--butter);
+    flex: none;
+    margin-top: 2px;
+  }
+
+  .medalrow {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
+    margin-top: 4px;
+  }
+  .medal {
+    text-align: center;
+    padding: 8px 12px 4px;
+  }
+  .medal svg {
+    width: 64px;
+    height: 80px;
+    margin: 0 auto 6px;
+  }
+  .medal p {
+    font-size: var(--text-xs);
+    color: var(--ink-soft);
+    margin-top: 2px;
+  }
+  .proof {
+    margin: var(--space-4) 0 0;
+    border: var(--border-thin);
+    border-radius: var(--radius-md);
+    overflow: hidden;
+    background: var(--white);
+    box-shadow: var(--lift-sm);
+    transform: rotate(-0.5deg);
+  }
+  .proof :global(img) {
+    width: 100%;
+    height: auto;
+  }
+  .proof figcaption {
+    padding: 6px 12px;
+    font-size: var(--text-xs);
+    color: var(--ink-soft);
+  }
+  .proof.small {
+    max-width: 420px;
+    margin-top: var(--space-3);
+  }
+
+  .certs {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--space-4);
+    margin-top: 4px;
+  }
+  .frame {
+    position: relative;
+    background: var(--wood);
+    border: var(--border-thin);
+    border-radius: var(--radius-tight);
+    padding: 10px;
+    box-shadow: var(--lift);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 4px;
+  }
+  .frame::before {
+    content: "";
+    position: absolute;
+    inset: 10px;
+    background: var(--white);
+    border: 1px solid rgba(58, 46, 63, 0.3);
+    border-radius: var(--radius-hairline);
+  }
+  .frame > * {
+    position: relative;
+  }
+  .ctitle {
+    margin-top: 12px;
+    font-size: var(--text-xs);
+    font-weight: 900;
+    letter-spacing: 0.6px;
+    text-transform: uppercase;
+  }
+  .cissuer {
+    font-size: var(--text-xs);
+    color: var(--ink-soft);
+  }
+  .stamp {
+    margin: 8px 0 4px;
+    font-family: var(--font-display-stack);
+    font-weight: 700;
+    font-size: var(--text-xl);
+    letter-spacing: 2px;
+    color: var(--blossom-deep);
+    border: 2.5px solid var(--blossom-deep);
+    border-radius: var(--radius-tight);
+    padding: 2px 12px;
+    transform: rotate(-6deg);
+  }
+  .stamp-gold {
+    color: var(--gold-ink);
+    border-color: var(--gold-ink);
+  }
+  .cdate {
+    margin-bottom: 12px;
+    font-size: var(--text-xs);
+    font-weight: 800;
+  }
+  .story {
+    margin-top: var(--space-3);
+    font-size: var(--text-sm);
+    line-height: 1.45;
+    color: var(--ink-2);
+  }
+
+  .timeline {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-4);
+    margin-top: 4px;
+  }
+  .tl {
+    display: grid;
+    grid-template-columns: 56px 1fr;
+    gap: var(--space-3);
+    align-items: start;
+  }
+  .tl :global(.logo) {
+    width: 56px;
+    height: 56px;
+    object-fit: contain;
+    border-radius: var(--radius-sm);
+    border: var(--border-thin);
+    background: var(--white);
+    padding: 4px;
+  }
+  .sub {
+    font-size: var(--text-sm);
+    color: var(--ink-soft);
+    margin-top: 2px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex-wrap: wrap;
+  }
+  .desc {
+    margin-top: 6px;
+    font-size: var(--text-sm);
+    line-height: 1.45;
+    color: var(--ink-2);
+    max-width: 68ch;
+  }
+  .resp {
+    margin-top: 6px;
+    padding-left: 16px;
+    list-style: disc;
+    font-size: var(--text-sm);
+    line-height: 1.45;
+    color: var(--ink-2);
+    max-width: 68ch;
+  }
+  .resp li::marker {
+    color: var(--blossom-deep);
+  }
+  .chips {
+    display: flex;
+    gap: 5px;
+    flex-wrap: wrap;
+    margin-top: 8px;
+  }
+
+  .devops {
+    display: grid;
+    grid-template-columns: 80px 1fr;
+    gap: var(--space-4);
+    align-items: start;
+    margin-top: 4px;
+  }
+  .rack {
+    width: 80px;
+    height: 110px;
+  }
+  .devops .figures {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin: 10px 0 0;
+    padding: 0;
+    list-style: none;
+  }
+  .devops .figures b {
+    font-family: var(--font-display-stack);
+    font-weight: 600;
+    font-size: var(--text-md);
+  }
+  .devops .more {
+    display: flex;
+    margin-top: 10px;
+  }
+
+  .skillgroups {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--space-3) var(--space-4);
+    margin-top: 4px;
+  }
+  .sg h3 {
+    font-size: var(--text-sm);
+    font-family: var(--font-body-stack);
+    font-weight: 900;
+    letter-spacing: 0.4px;
+    text-transform: uppercase;
+    color: var(--ink-soft);
+  }
+  .sg .chips {
+    margin-top: 6px;
+  }
+  .note {
+    margin-top: var(--space-4);
+    font-size: var(--text-sm);
+    color: var(--ink-2);
+    display: flex;
+    gap: 8px;
+    align-items: flex-start;
+  }
+  .cta {
+    display: flex;
+    gap: 8px;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+
+  @media (max-width: 720px) {
+    .whatido,
+    .certs,
+    .skillgroups {
+      grid-template-columns: 1fr;
+    }
+    .medalrow {
+      grid-template-columns: 1fr;
+    }
+    .tl {
+      grid-template-columns: 44px 1fr;
+    }
+    .tl :global(.logo) {
+      width: 44px;
+      height: 44px;
+    }
+    /* phones: the rack is already in the room; give the prose the full width */
+    .devops {
+      grid-template-columns: 1fr;
+    }
+    .rack {
+      display: none;
+    }
+  }
+</style>

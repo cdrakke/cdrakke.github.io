@@ -1,0 +1,612 @@
+---
+import { Image, getImage } from "astro:assets";
+import Base from "@/layouts/Base.astro";
+import Panel from "@/components/Panel.astro";
+import StickerChip from "@/components/StickerChip.astro";
+import { site } from "@/data/site";
+import StickerButton from "@/components/StickerButton.astro";
+import Icon from "@/components/Icon.astro";
+import { allProjects, statusLabel, statusTone, kindLabel, yearTone, figureLabel } from "@/lib/projects";
+
+export async function getStaticPaths() {
+  const projects = await allProjects();
+  return projects.map((project, i) => ({
+    params: { slug: project.id },
+    props: { project, index: i, prev: projects[i - 1] ?? null, next: projects[i + 1] ?? null },
+  }));
+}
+
+const { project, index, prev, next } = Astro.props;
+const { data } = project;
+const gallery = [data.cover, ...data.screenshots].filter((g): g is NonNullable<typeof g> => Boolean(g));
+// Full-size renditions for the lightbox (capped at 1600px, webp).
+const fullSize = await Promise.all(
+  gallery.map((img) => getImage({ src: img, format: "webp", width: Math.min(1600, img.width) })),
+);
+const counts = { Diary: (await allProjects()).length, Shelf: 4 };
+---
+
+<Base title={data.title} description={data.summary} counts={counts}>
+  <article class="wrap">
+    <a class="back settle" style="--i:0" href="/diary"><Icon name="back" size={14} />Back to the diary</a>
+
+    <header class="head settle" style="--i:1">
+      <span class:list={["yr", `tone-${yearTone(index)}`]}>{data.year}</span>
+      <div class="titles">
+        <h1>{data.title}</h1>
+        <div class="meta">
+          <StickerChip tone={statusTone[data.status]} dot={data.status === "live" || data.status === "in-service" ? "success" : undefined}>{statusLabel[data.status]}</StickerChip>
+          <StickerChip>{kindLabel[data.kind]}</StickerChip>
+          <StickerChip tone="blush">{data.period}</StickerChip>
+          <StickerChip tone="sky">{data.role}</StickerChip>
+          {data.former && <StickerChip tone="blush" icon="warn">I'm no longer active on this project</StickerChip>}
+        </div>
+      </div>
+    </header>
+
+    <p class="summary settle" style="--i:2">{data.summary}</p>
+    {
+      data.figures.length > 0 && (
+        <ul class="figures settle" style="--i:2" role="list" aria-label="Figures">
+          {data.figures.map((f, i) => (
+            <li>
+              <StickerChip tone={(["mint", "sky", "butter", "blush"] as const)[i % 4]}>
+                <b>{f.value}</b>&nbsp;{figureLabel(f)}
+              </StickerChip>
+            </li>
+          ))}
+        </ul>
+      )
+    }
+
+    {
+      gallery.length > 0 && (
+        <Panel title="Screenshots" icon="spark" tone="sky" id="shots" i={3} class="shots" aside="click to view">
+          <div class:list={["gallery", `count-${Math.min(gallery.length, 5)}`]} data-gallery>
+            {gallery.map((img, i) => (
+              <a
+                class:list={["shot", i === 0 && "hero"]}
+                href={fullSize[i].src}
+                data-lightbox
+                data-index={i}
+                data-alt={`${data.title} screenshot ${i + 1} of ${gallery.length}`}
+                aria-label={`View ${data.title} screenshot ${i + 1} of ${gallery.length} at full size`}
+                hidden={i >= 5}
+              >
+                <Image src={img} alt={`${data.title} screenshot ${i + 1}`} widths={[480, 960, 1440]} sizes={i === 0 ? "(max-width: 760px) 100vw, 600px" : "(max-width: 760px) 50vw, 200px"} loading={i === 0 ? "eager" : "lazy"} />
+                {i === 4 && gallery.length > 5 && <span class="more">+{gallery.length - 5} photo{gallery.length - 5 === 1 ? "" : "s"}</span>}
+              </a>
+            ))}
+          </div>
+          <dialog class="lightbox" data-lightbox-dialog aria-label={`${data.title} screenshots`}>
+            <div class="lb-frame">
+              <img alt="" data-lb-img />
+              <p class="lb-caption"><span data-lb-caption /></p>
+              <button class="lb-btn lb-close" type="button" data-lb-close aria-label="Close"><Icon name="x" size={16} /></button>
+              <button class="lb-btn lb-prev" type="button" data-lb-prev aria-label="Previous screenshot"><Icon name="back" size={16} /></button>
+              <button class="lb-btn lb-next" type="button" data-lb-next aria-label="Next screenshot"><Icon name="arrow" size={16} /></button>
+            </div>
+          </dialog>
+        </Panel>
+      )
+    }
+
+    {
+      data.generic && (
+        <p class="generic settle" style="--i:3">
+          <StickerChip tone="butter" icon="warn">
+            Client work under an internal platform. Described without its name, address, or screens on purpose.
+          </StickerChip>
+        </p>
+      )
+    }
+
+    <div class="cols">
+      <Panel title="What it is" icon="book" tone="butter" id="about" i={4}>
+        <p class="body">{data.description}</p>
+        {
+          data.features.length > 0 && (
+            <ul class="features">
+              {data.features.map((f) => (
+                <li>
+                  <Icon name="check" size={15} class="tick" />
+                  <span>{f}</span>
+                </li>
+              ))}
+            </ul>
+          )
+        }
+      </Panel>
+
+      <div class="side">
+        <div class="links">
+          {data.liveUrl && (
+            <StickerButton href={data.liveUrl} external tone="mint" icon="link">
+              Visit {data.liveUrl.replace(/^https?:\/\//, "").replace(/\/$/, "")}
+            </StickerButton>
+          )}
+          {data.repoUrl && (
+            <StickerButton href={data.repoUrl} external tone="sky" icon="github">
+              Source on GitHub
+            </StickerButton>
+          )}
+          {data.documentUrl && (
+            <StickerButton href={data.documentUrl} external tone="butter" icon="pdf">
+              Read the paper (PDF)
+            </StickerButton>
+          )}
+          {
+            /* Entries with nothing to visit still lead somewhere: the two actions the site exists for. */
+            !data.liveUrl && !data.repoUrl && !data.documentUrl && (
+              <>
+                <StickerButton href={site.resumePath} tone="butter" icon="pdf" download="Calvin_Drakke_Rulete_Resume.pdf">
+                  Take my resume (PDF)
+                </StickerButton>
+                <StickerButton href={`mailto:${site.email}`} tone="sky" icon="mail">
+                  Leave a note (email)
+                </StickerButton>
+              </>
+            )
+          }
+        </div>
+
+        <Panel title="Built with" icon="server" tone="blush" id="tech" i={6}>
+          <ul class="tech" role="list">
+            {data.tech.map((t, i) => (
+              <li>
+                <StickerChip size="xs" tone={(["mint", "sky", "blush", "butter"] as const)[i % 4]}>{t}</StickerChip>
+              </li>
+            ))}
+          </ul>
+          {
+            data.collaborator && (
+              <p class="with">
+                <Icon name="heart" size={14} class="heart" />
+                Built with{" "}
+                {data.collaborator.url ? (
+                  <a href={data.collaborator.url} target="_blank" rel="noopener noreferrer">
+                    {data.collaborator.name}
+                  </a>
+                ) : (
+                  data.collaborator.name
+                )}
+              </p>
+            )
+          }
+        </Panel>
+      </div>
+    </div>
+
+    <nav class="pager settle" style="--i:7" aria-label="Other entries">
+      {prev ? <a class="pg" href={`/diary/${prev.id}`}><Icon name="back" size={14} /><span><small>Newer</small>{prev.data.title}</span></a> : <span />}
+      {next ? <a class="pg right" href={`/diary/${next.id}`}><span><small>Older</small>{next.data.title}</span><Icon name="arrow" size={14} /></a> : <span />}
+    </nav>
+  </article>
+</Base>
+
+<script>
+  // Click-to-view lightbox over the screenshot row. Keyboard: Escape closes, arrows move.
+  const wire = () => {
+    document.querySelectorAll<HTMLElement>("[data-gallery]").forEach((gallery) => {
+      if (gallery.dataset.wired) return;
+      gallery.dataset.wired = "1";
+      const dialog = gallery.parentElement?.querySelector<HTMLDialogElement>("[data-lightbox-dialog]");
+      if (!dialog) return;
+      const img = dialog.querySelector<HTMLImageElement>("[data-lb-img]")!;
+      const caption = dialog.querySelector<HTMLElement>("[data-lb-caption]")!;
+      const shots = [...gallery.querySelectorAll<HTMLAnchorElement>("[data-lightbox]")];
+      if (shots.length < 2) dialog.setAttribute("data-single", "");
+      let current = 0;
+
+      const show = (i: number) => {
+        current = (i + shots.length) % shots.length;
+        const shot = shots[current];
+        img.src = shot.href;
+        img.alt = shot.dataset.alt ?? "";
+        caption.textContent = shot.dataset.alt ?? "";
+      };
+
+      shots.forEach((shot, i) =>
+        shot.addEventListener("click", (e) => {
+          e.preventDefault();
+          show(i);
+          dialog.showModal();
+        }),
+      );
+      dialog.querySelector("[data-lb-close]")?.addEventListener("click", () => dialog.close());
+      dialog.querySelector("[data-lb-prev]")?.addEventListener("click", () => show(current - 1));
+      dialog.querySelector("[data-lb-next]")?.addEventListener("click", () => show(current + 1));
+      dialog.addEventListener("click", (e) => {
+        if (e.target === dialog) dialog.close(); // backdrop
+      });
+      dialog.addEventListener("keydown", (e) => {
+        if (e.key === "ArrowLeft") show(current - 1);
+        if (e.key === "ArrowRight") show(current + 1);
+      });
+      dialog.addEventListener("close", () => {
+        img.removeAttribute("src");
+      });
+    });
+  };
+  document.addEventListener("astro:page-load", wire);
+  wire();
+</script>
+
+<style>
+  .wrap {
+    max-width: 980px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-5);
+  }
+  .back {
+    align-self: flex-start;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-size: var(--text-sm);
+    font-weight: 900;
+    text-decoration: none;
+    background: var(--white);
+    border: var(--border-thin);
+    border-radius: var(--radius-pill);
+    padding: 5px 12px 5px 9px;
+    box-shadow: var(--lift-sm);
+  }
+  .head {
+    display: grid;
+    grid-template-columns: 64px 1fr;
+    gap: var(--space-4);
+    align-items: start;
+  }
+  .yr {
+    font-family: var(--font-display-stack);
+    font-weight: 600;
+    font-size: var(--text-lg);
+    border: var(--border-thin);
+    border-radius: var(--radius-pill);
+    text-align: center;
+    padding: 6px 0;
+    margin-top: 6px;
+  }
+  .tone-butter {
+    background: var(--butter);
+  }
+  .tone-sky {
+    background: var(--sky);
+  }
+  .tone-blush {
+    background: var(--blush);
+  }
+  .tone-mint {
+    background: var(--mint);
+  }
+  .tone-blossom {
+    background: var(--blossom);
+  }
+  h1 {
+    font-size: var(--text-3xl);
+  }
+  .meta {
+    display: flex;
+    gap: 6px;
+    flex-wrap: wrap;
+    margin-top: var(--space-3);
+  }
+  .summary {
+    font-size: var(--text-lg);
+    color: var(--ink-2);
+    max-width: 70ch;
+    padding-left: 80px;
+  }
+
+  .shots {
+    padding-bottom: var(--space-3);
+  }
+  /* listing mosaic: one hero, a tight grid of thumbnails, every cell filled edge to edge */
+  .gallery {
+    display: grid;
+    gap: 8px;
+    margin-top: 6px;
+    aspect-ratio: 2.6 / 1;
+    grid-template-columns: 1.55fr 1fr 1fr;
+    grid-template-rows: 1fr 1fr;
+  }
+  .count-1 {
+    grid-template-columns: 1fr;
+    grid-template-rows: 1fr;
+    aspect-ratio: 16 / 9;
+  }
+  .count-2 {
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr;
+    aspect-ratio: 2.4 / 1;
+  }
+  .count-3 {
+    grid-template-columns: 1.55fr 1fr;
+  }
+  .count-4 .shot:nth-child(4) {
+    grid-column: 2 / 4;
+  }
+  .shot {
+    position: relative;
+    display: block;
+    min-height: 0;
+    min-width: 0;
+    border: var(--border-thin);
+    border-radius: var(--radius-md);
+    overflow: hidden;
+    background: var(--white);
+    cursor: zoom-in;
+    transition: box-shadow var(--dur-fast) var(--ease-out);
+  }
+  .shot.hero {
+    grid-row: 1 / 3;
+  }
+  .count-1 .shot.hero,
+  .count-2 .shot.hero {
+    grid-row: auto;
+  }
+  .shot:hover,
+  .shot:focus-visible {
+    box-shadow: var(--lift);
+  }
+  .shot :global(img) {
+    width: 100%;
+    height: 100%;
+    display: block;
+    object-fit: cover;
+    object-position: top center;
+    transition: transform var(--dur-base) var(--ease-out);
+  }
+  .shot:hover :global(img) {
+    transform: scale(1.03);
+  }
+  .more {
+    position: absolute;
+    right: 8px;
+    bottom: 8px;
+    background: var(--butter);
+    border: var(--border-thin);
+    border-radius: var(--radius-pill);
+    padding: 4px 11px;
+    font-family: var(--font-display-stack);
+    font-weight: 600;
+    font-size: var(--text-sm);
+    box-shadow: var(--lift-sm);
+  }
+
+  /* lightbox: a sticker frame over a dimmed room */
+  .lightbox {
+    border: 0;
+    padding: 0;
+    background: transparent;
+    max-width: min(96vw, 1400px);
+    max-height: 96dvh;
+    overflow: visible;
+  }
+  .lightbox::backdrop {
+    background: rgba(58, 46, 63, 0.72);
+    backdrop-filter: blur(3px);
+  }
+  .lb-frame {
+    position: relative;
+    background: var(--white);
+    border: var(--border);
+    border-radius: var(--radius-lg);
+    padding: 10px 10px 8px;
+    box-shadow: var(--shadow-soft);
+  }
+  .lb-frame img {
+    display: block;
+    max-width: calc(96vw - 24px);
+    max-height: calc(96dvh - 70px);
+    width: auto;
+    height: auto;
+    border-radius: var(--radius-sm);
+  }
+  .lb-caption {
+    margin: 8px 4px 0;
+    font-size: var(--text-sm);
+    font-weight: 800;
+    color: var(--ink-2);
+  }
+  .lb-btn {
+    position: absolute;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    border: var(--border);
+    background: var(--butter);
+    box-shadow: var(--lift);
+    display: grid;
+    place-items: center;
+    padding: 0;
+  }
+  .lb-btn:active {
+    transform: translateY(2px);
+    box-shadow: none;
+  }
+  .lb-close {
+    top: -16px;
+    right: -16px;
+  }
+  .lb-prev,
+  .lb-next {
+    top: 50%;
+    transform: translateY(-50%);
+    background: var(--mint);
+  }
+  .lb-prev {
+    left: -18px;
+  }
+  .lb-next {
+    right: -18px;
+  }
+  .lightbox[data-single] .lb-prev,
+  .lightbox[data-single] .lb-next {
+    display: none;
+  }
+
+  .generic :global(.chip) {
+    white-space: normal;
+    line-height: 1.35;
+  }
+
+  .cols {
+    display: grid;
+    grid-template-columns: minmax(0, 1.4fr) minmax(280px, 1fr);
+    gap: var(--space-4);
+    align-items: start;
+  }
+  .side {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-5);
+  }
+  .body {
+    font-size: var(--text-md);
+    line-height: 1.55;
+    color: var(--ink-2);
+    max-width: 68ch;
+    margin-top: 4px;
+  }
+  .features {
+    margin-top: var(--space-4);
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+  .features li {
+    display: flex;
+    gap: 8px;
+    align-items: flex-start;
+    font-size: var(--text-sm);
+    line-height: 1.4;
+  }
+  .features :global(.tick) {
+    color: var(--mint);
+    margin-top: 2px;
+  }
+  .figures {
+    display: flex;
+    gap: 6px;
+    flex-wrap: wrap;
+    padding: 0 0 0 80px;
+    margin: -6px 0 0;
+    list-style: none;
+  }
+  .figures b {
+    font-family: var(--font-display-stack);
+    font-weight: 600;
+    font-size: var(--text-md);
+  }
+  .tech {
+    display: flex;
+    gap: 5px;
+    flex-wrap: wrap;
+    margin: 4px 0 0;
+    padding: 0;
+    list-style: none;
+  }
+  .with {
+    margin-top: var(--space-3);
+    font-size: var(--text-sm);
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    flex-wrap: wrap;
+  }
+  .with :global(.heart) {
+    color: var(--blossom);
+  }
+  .links {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .pager {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--space-3);
+    margin-top: var(--space-3);
+  }
+  .pg {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: var(--white);
+    border: var(--border-thin);
+    border-radius: var(--radius-md);
+    padding: 10px 14px;
+    text-decoration: none;
+    box-shadow: var(--lift-sm);
+    font-weight: 900;
+    font-size: var(--text-sm);
+  }
+  .pg.right {
+    justify-self: end;
+    text-align: right;
+  }
+  .pg small {
+    display: block;
+    font-size: var(--text-xs);
+    font-weight: 900;
+    letter-spacing: 0.4px;
+    text-transform: uppercase;
+    color: var(--ink-soft);
+  }
+
+  @media (max-width: 760px) {
+    /* phones: hero on top, thumbnails two per row beneath */
+    .gallery,
+    .count-3,
+    .count-2 {
+      grid-template-columns: 1fr 1fr;
+      grid-template-rows: auto;
+      aspect-ratio: auto;
+    }
+    .shot {
+      aspect-ratio: 4 / 3;
+    }
+    .shot.hero,
+    .count-1 .shot.hero,
+    .count-2 .shot.hero {
+      grid-column: 1 / 3;
+      grid-row: auto;
+      aspect-ratio: 16 / 10;
+    }
+    .count-4 .shot:nth-child(4) {
+      grid-column: auto;
+    }
+    .lb-prev {
+      left: 6px;
+    }
+    .lb-next {
+      right: 6px;
+    }
+    .lb-close {
+      top: 6px;
+      right: 6px;
+    }
+    .head {
+      grid-template-columns: 54px 1fr;
+    }
+    .summary,
+    .figures {
+      padding-left: 0;
+    }
+    .cols {
+      grid-template-columns: 1fr;
+    }
+    /* phones: the action buttons and the short tech list come before the long body */
+    .side {
+      order: -1;
+    }
+    h1 {
+      font-size: var(--text-2xl);
+    }
+  }
+</style>

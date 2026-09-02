@@ -1,0 +1,264 @@
+---
+/**
+ * The resume, from the same data as the site. Printed to PDF by scripts/build-resume.mjs.
+ * A4, one page if it can, plain and quick to scan; the room stays on the website.
+ */
+import { getCollection } from "astro:content";
+import Base from "@/layouts/Base.astro";
+import { site } from "@/data/site";
+import { copy } from "@/data/copy";
+import { allProjects, figureText } from "@/lib/projects";
+
+const experience = (await getCollection("experience")).sort((a, b) => b.data.start.localeCompare(a.data.start));
+const education = (await getCollection("education")).sort((a, b) => b.data.years.localeCompare(a.data.years));
+const certificates = await getCollection("certificates");
+const skills = await getCollection("skills");
+const projects = await allProjects();
+const selected = ["raidium", "ops-platform", "ifs-dss", "gyocc-online"].map((id) => projects.find((p) => p.id === id)!).filter(Boolean);
+
+const groups = [
+  ["Languages", "language"],
+  ["Frameworks", "framework"],
+  ["Databases", "database"],
+  ["Tools", "tool"],
+  ["Practices", "other"],
+] as const;
+
+const sti = education.find((e) => e.id === "sti-college");
+---
+
+<Base title="Resume" description={copy.resumeSummary} noindex bare>
+  <div class="sheet">
+    <header class="top">
+      <div>
+        <h1>{site.name}</h1>
+        <p class="role">{site.role} · {site.handle}</p>
+      </div>
+      <address>
+        <a href={`mailto:${site.email}`}>{site.email}</a>
+        <span>{site.phone}</span>
+        <a href={site.github}>github.com/cdrakke</a>
+        <a href={site.url}>{site.url.replace("https://", "")}</a>
+        <span>{site.location} · Open to remote</span>
+      </address>
+    </header>
+
+    <p class="summary">{copy.resumeSummary}</p>
+
+    <section>
+      <h2>Experience</h2>
+      {
+        experience.map((x) => (
+          <div class="item">
+            <div class="row">
+              <strong>{x.data.role}</strong>
+              <span class="when">{x.data.period}</span>
+            </div>
+            <div class="org">{x.data.organization} · {x.data.location}</div>
+            <ul>
+              {x.data.responsibilities.map((r) => (
+                <li>{r}</li>
+              ))}
+            </ul>
+            {x.data.tech.length > 0 && <div class="tech">{x.data.tech.join(" · ")}</div>}
+          </div>
+        ))
+      }
+    </section>
+
+    <section>
+      <h2>Selected projects</h2>
+      {
+        selected.map((p) => (
+          <div class="item">
+            <div class="row">
+              <strong>
+                {p.data.title}
+                {p.data.liveUrl && <span class="url"> · {p.data.liveUrl.replace(/^https?:\/\//, "").replace(/\/$/, "")}</span>}
+              </strong>
+              <span class="when">{p.data.period}</span>
+            </div>
+            <div class="org">
+              {p.data.role}
+              {p.data.figures.length > 0 && <> · {p.data.figures.map(figureText).join(" · ")}</>}
+            </div>
+            <p class="desc">{p.data.summary}</p>
+            <div class="tech">{p.data.tech.join(" · ")}</div>
+          </div>
+        ))
+      }
+    </section>
+
+    <div class="two">
+      <section>
+        <h2>Education</h2>
+        {
+          education.map((e) => (
+            <div class="item">
+              <div class="row">
+                <strong>{e.data.institution}</strong>
+                <span class="when">{e.data.years}</span>
+              </div>
+              <div class="org">{e.data.level}</div>
+              {e.data.achievements.length > 0 && <div class="tech">{e.data.achievements.join(" · ")}</div>}
+            </div>
+          ))
+        }
+        <h2>Certifications</h2>
+        {
+          certificates.map((c) => (
+            <div class="item">
+              <div class="row">
+                <strong>{c.data.title}</strong>
+                <span class="when">{c.data.date}</span>
+              </div>
+              <div class="org">{c.data.issuer} · {c.data.display.toLowerCase()}</div>
+            </div>
+          ))
+        }
+      </section>
+
+      <section>
+        <h2>Skills</h2>
+        {
+          groups.map(([label, key]) => (
+            <div class="skill">
+              <strong>{label}</strong>
+              <span>{skills.filter((s) => s.data.category === key).map((s) => s.data.name).join(", ")}</span>
+            </div>
+          ))
+        }
+      </section>
+    </div>
+
+    {sti && <p class="foot">References and project details available on request. Generated from {site.url}.</p>}
+  </div>
+</Base>
+
+<style is:global>
+  @page {
+    size: A4;
+    margin: 12mm 14mm;
+  }
+</style>
+
+<style>
+  .sheet {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 24px 0;
+    font-family: var(--font-body-stack);
+    font-weight: 600;
+    font-size: 10.2pt;
+    line-height: 1.38;
+    color: #111;
+  }
+  .top {
+    display: flex;
+    justify-content: space-between;
+    gap: 16px;
+    align-items: flex-start;
+    border-bottom: 2px solid #3a2e3f;
+    padding-bottom: 8px;
+  }
+  h1 {
+    font-family: var(--font-display-stack);
+    font-size: 22pt;
+    font-weight: 700;
+    letter-spacing: 0.2px;
+  }
+  .role {
+    font-size: 11pt;
+    font-weight: 800;
+    color: #3a2e3f;
+    margin-top: 2px;
+  }
+  address {
+    font-style: normal;
+    text-align: right;
+    font-size: 9pt;
+    display: flex;
+    flex-direction: column;
+    gap: 1px;
+  }
+  address a {
+    text-decoration: none;
+    color: #1f4dbf;
+  }
+  .summary {
+    margin: 10px 0 6px;
+    font-size: 10pt;
+  }
+  h2 {
+    font-family: var(--font-display-stack);
+    font-size: 11.5pt;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin: 12px 0 4px;
+    padding-bottom: 2px;
+    border-bottom: 1px solid #b8a8bf;
+  }
+  .item {
+    margin: 6px 0;
+    break-inside: avoid;
+  }
+  .row {
+    display: flex;
+    justify-content: space-between;
+    gap: 12px;
+  }
+  .when {
+    font-size: 9pt;
+    color: #555;
+    white-space: nowrap;
+  }
+  .org {
+    font-size: 9.4pt;
+    color: #3a2e3f;
+  }
+  .url {
+    font-weight: 700;
+    color: #1f4dbf;
+  }
+  ul {
+    margin: 2px 0 0;
+    padding-left: 14px;
+    list-style: disc;
+  }
+  li {
+    margin: 1px 0;
+  }
+  .desc {
+    margin-top: 2px;
+  }
+  .tech {
+    font-size: 8.8pt;
+    color: #555;
+    margin-top: 2px;
+  }
+  .two {
+    display: grid;
+    grid-template-columns: 1.2fr 1fr;
+    gap: 18px;
+  }
+  .skill {
+    margin: 4px 0;
+    font-size: 9.4pt;
+  }
+  .skill strong {
+    display: block;
+    color: #3a2e3f;
+  }
+  .foot {
+    margin-top: 14px;
+    font-size: 8.5pt;
+    color: #777;
+  }
+  @media print {
+    .sheet {
+      padding: 0;
+      max-width: none;
+    }
+  }
+</style>

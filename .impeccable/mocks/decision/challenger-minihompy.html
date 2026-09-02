@@ -1,0 +1,402 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><title>Drekyz's minihompy</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&family=Nunito:wght@600;700;800;900&display=swap" rel="stylesheet">
+<style>
+:root{--blush:#F3E6EE;--sky:#BFD9F2;--butter:#F7D58B;--ink:#3A2E3F;--mint:#CDE8D8;--wood:#C9A27E;--paper:#FFF8F1;--line:rgba(58,46,63,.45);--muted:rgba(58,46,63,.68)}
+html,body{width:1440px;height:900px;overflow:hidden;margin:0}
+body{font-family:Nunito,system-ui,sans-serif;color:var(--ink);background:var(--blush);-webkit-font-smoothing:antialiased}
+*{box-sizing:border-box}
+.frame{position:relative;width:1440px;height:900px;background-color:var(--blush);background-image:url("data:image/svg+xml,%3Csvg%20xmlns%3D'http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg'%20width%3D'36'%20height%3D'36'%20viewBox%3D'0%200%2036%2036'%3E%3Cg%20fill%3D'none'%20stroke%3D'%233A2E3F'%20stroke-opacity%3D'.28'%20stroke-width%3D'1.2'%3E%3Cpath%20d%3D'M18%208%20l4%204%20l-4%204%20l-4%20-4%20z'%20fill%3D'%23BFD9F2'%2F%3E%3Cpath%20d%3D'M18%2020%20l4%204%20l-4%204%20l-4%20-4%20z'%20fill%3D'%23F7D58B'%2F%3E%3C%2Fg%3E%3Ccircle%20cx%3D'4'%20cy%3D'16'%20r%3D'1.6'%20fill%3D'%233A2E3F'%20fill-opacity%3D'.35'%2F%3E%3Ccircle%20cx%3D'32'%20cy%3D'16'%20r%3D'1.6'%20fill%3D'%233A2E3F'%20fill-opacity%3D'.35'%2F%3E%3Ccircle%20cx%3D'18'%20cy%3D'2'%20r%3D'1.2'%20fill%3D'%23E67A8A'%20fill-opacity%3D'.6'%2F%3E%3Ccircle%20cx%3D'18'%20cy%3D'34'%20r%3D'1.2'%20fill%3D'%23E67A8A'%20fill-opacity%3D'.6'%2F%3E%3C%2Fsvg%3E");background-size:36px 36px}
+.frame::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(255,248,241,.25),rgba(255,248,241,0) 30%,rgba(255,248,241,0) 70%,rgba(255,248,241,.25));pointer-events:none}
+.paper{position:absolute;inset:22px;background:var(--paper);border:2px solid var(--line);border-radius:22px;box-shadow:0 0 0 6px rgba(255,253,248,.7),0 10px 30px rgba(58,46,63,.14),inset 0 0 0 1px rgba(255,255,255,.8);padding:16px 18px;z-index:1}
+.paper::before{content:"";position:absolute;inset:0;border-radius:20px;background:repeating-linear-gradient(0deg,rgba(58,46,63,.028) 0 1px,transparent 1px 22px);pointer-events:none}
+.corner{position:absolute;width:38px;height:38px;z-index:2}
+.corner i{position:absolute;width:12px;height:12px;border:1.4px solid rgba(58,46,63,.5);transform:rotate(45deg);border-radius:2px}
+.corner i:nth-child(1){left:13px;top:0;background:var(--sky)}.corner i:nth-child(2){left:0;top:13px;background:var(--butter)}.corner i:nth-child(3){left:26px;top:13px;background:var(--mint)}.corner i:nth-child(4){left:13px;top:26px;background:#F3B8AC}
+.c1{left:14px;top:14px}.c2{right:14px;top:14px}.c3{left:14px;bottom:14px}.c4{right:14px;bottom:14px}
+
+.top{height:40px;display:flex;align-items:center;justify-content:space-between;position:relative}
+.ribbon{display:inline-flex;align-items:center;gap:8px;background:var(--butter);border:2px solid var(--line);border-radius:999px;padding:6px 16px 6px 12px;font-family:Fredoka,sans-serif;font-weight:600;font-size:17px;box-shadow:0 3px 0 rgba(58,46,63,.14)}
+.ribbon svg{width:18px;height:18px;color:#FFFDF8}
+.chips{display:flex;gap:8px}
+.chip{display:inline-flex;align-items:center;gap:6px;background:#fff;border:1.6px solid var(--line);border-radius:999px;padding:5px 12px;font-size:12px;font-weight:800;box-shadow:0 2px 0 rgba(58,46,63,.1)}
+.chip svg{width:14px;height:14px}
+.chip.sky{background:var(--sky)}.chip.mint{background:var(--mint)}.chip.blush{background:var(--blush)}
+
+.main{margin-top:12px;display:grid;grid-template-columns:290px 1fr 322px;gap:14px;height:700px}
+.panel{position:relative;background:rgba(255,255,255,.72);border:2px solid var(--line);border-radius:18px;box-shadow:0 4px 0 rgba(58,46,63,.12);padding:16px}
+.ptitle{position:absolute;top:-14px;left:16px;display:inline-flex;align-items:center;gap:6px;background:var(--sky);border:1.6px solid var(--line);border-radius:999px;padding:4px 12px;font-family:Fredoka,sans-serif;font-weight:600;font-size:13px;box-shadow:0 2px 0 rgba(58,46,63,.1)}
+.ptitle.butter{background:var(--butter)}.ptitle.mint{background:var(--mint)}.ptitle.blush{background:var(--blush)}
+.ptitle svg{width:14px;height:14px;color:#FFFDF8}
+
+/* left */
+.profile{display:flex;flex-direction:column;align-items:center;text-align:center}
+.portrait{position:relative;width:140px;height:140px;margin-top:12px;transform:rotate(-3deg)}
+.portrait img{width:140px;height:140px;object-fit:cover;object-position:50% 20%;border-radius:22px;border:6px solid #fff;box-shadow:0 0 0 1.6px var(--line),0 6px 14px rgba(58,46,63,.18);display:block}
+.tape{position:absolute;left:36px;top:-11px;width:62px;height:18px;background:rgba(247,213,139,.85);border:1px solid rgba(58,46,63,.25);transform:rotate(4deg);border-radius:2px;box-shadow:0 1px 2px rgba(58,46,63,.1)}
+.tape::after{content:"";position:absolute;inset:3px;border-top:1px dashed rgba(58,46,63,.25);border-bottom:1px dashed rgba(58,46,63,.25)}
+.name{font-family:Fredoka,sans-serif;font-weight:700;font-size:40px;line-height:1;margin-top:14px;letter-spacing:.5px}
+.name small{display:block;font-family:Nunito,sans-serif;font-weight:800;font-size:12.5px;line-height:1.3;letter-spacing:0;margin-top:6px;color:var(--ink)}
+.loc{font-size:11.5px;font-weight:700;color:var(--muted);margin-top:4px;display:inline-flex;align-items:center;gap:5px}
+.loc i{width:7px;height:7px;border-radius:50%;background:#7FE0A0;border:1px solid var(--line);display:inline-block}
+.note{position:relative;margin-top:16px;background:var(--blush);border:1.6px solid var(--line);border-radius:14px;padding:16px 12px 11px;font-size:12.3px;line-height:1.42;font-weight:700;text-align:left;width:100%}
+.note b{position:absolute;top:-10px;left:10px;background:#fff;border:1.4px solid var(--line);border-radius:999px;padding:2px 9px;font-size:10px;font-weight:900;letter-spacing:.4px;text-transform:uppercase}
+.counters{display:grid;grid-template-columns:1fr 1fr;gap:8px;width:100%;margin-top:12px}
+.ct{background:#fff;border:1.6px solid var(--line);border-radius:12px;padding:6px 8px 6px;text-align:left;box-shadow:0 2px 0 rgba(58,46,63,.08)}
+.ct span{display:block;font-size:9.4px;font-weight:900;letter-spacing:.4px;text-transform:uppercase;color:var(--muted)}
+.ct em{display:flex;align-items:center;gap:6px;font-style:normal;font-family:Fredoka,sans-serif;font-weight:600;font-size:19px;line-height:1.15;margin-top:1px}
+.ct em svg{width:16px;height:16px}
+.ct.mood{background:var(--mint)}
+.btns{display:flex;flex-direction:column;gap:8px;width:100%;margin-top:12px}
+.btn{display:flex;align-items:center;gap:9px;border:2px solid var(--line);border-radius:999px;padding:9px 14px;font-family:Fredoka,sans-serif;font-weight:600;font-size:15px;box-shadow:0 3px 0 rgba(58,46,63,.18);text-decoration:none;color:var(--ink)}
+.btn svg{width:18px;height:18px;flex:none}
+.btn.mint{background:var(--mint)}.btn.sky{background:var(--sky)}.btn.butter{background:var(--butter)}
+.btn .k{margin-left:auto;font-family:Nunito,sans-serif;font-size:10px;font-weight:900;background:rgba(255,255,255,.7);border:1px solid var(--line);border-radius:999px;padding:1px 7px}
+
+/* centre */
+.roompanel{padding:14px 10px 6px;background:rgba(255,255,255,.55);display:flex;flex-direction:column;justify-content:center}
+.room{width:100%;height:auto;display:block;margin-top:4px}
+
+/* right */
+.diary{display:flex;flex-direction:column;gap:7px;margin-top:6px}
+.entry{display:grid;grid-template-columns:46px 1fr;gap:8px;align-items:start;background:#fff;border:1.6px solid var(--line);border-radius:13px;padding:7px 9px;box-shadow:0 2px 0 rgba(58,46,63,.08)}
+.entry .yr{font-family:Fredoka,sans-serif;font-weight:600;font-size:13px;background:var(--butter);border:1.4px solid var(--line);border-radius:999px;text-align:center;padding:2px 0;line-height:1.2;margin-top:1px}
+.entry:nth-child(2) .yr{background:var(--sky)}.entry:nth-child(3) .yr{background:var(--blush)}.entry:nth-child(4) .yr{background:var(--mint)}.entry:nth-child(5) .yr{background:#F3B8AC}
+.entry h4{margin:0;font-size:12.6px;font-weight:900;line-height:1.25}
+.entry p{margin:2px 0 0;font-size:10.8px;font-weight:700;color:var(--muted);line-height:1.3}
+.entry .live{display:inline-block;margin-left:5px;font-size:9px;font-weight:900;letter-spacing:.3px;background:var(--mint);border:1px solid var(--line);border-radius:999px;padding:0 6px;vertical-align:1px}
+.ledger{margin-top:14px;background:var(--blush);border:1.6px solid var(--line);border-radius:14px;padding:12px 11px 11px;position:relative}
+.ledger .lh{display:flex;align-items:center;justify-content:space-between}
+.ledger h4{margin:0;font-family:Fredoka,sans-serif;font-weight:600;font-size:15px;display:flex;align-items:center;gap:6px}
+.ledger h4 svg{width:15px;height:15px;color:#fff}
+.ledger .sub{font-size:10.5px;font-weight:700;color:var(--muted)}
+.field{display:flex;align-items:center;gap:8px;margin-top:9px}
+.input{flex:1;background:#fff;border:1.6px solid var(--line);border-radius:999px;padding:7px 12px;font-size:12px;font-weight:700;color:var(--muted);display:flex;align-items:center;gap:8px;box-shadow:inset 0 2px 0 rgba(58,46,63,.06)}
+.input i{width:2px;height:14px;background:var(--ink);display:inline-block;border-radius:1px}
+.send{background:var(--butter);border:2px solid var(--line);border-radius:999px;padding:5px 14px;font-family:Fredoka,sans-serif;font-weight:600;font-size:13.5px;box-shadow:0 3px 0 rgba(58,46,63,.18)}
+.ledger .mail{margin-top:8px;font-size:10.5px;font-weight:800;display:flex;align-items:center;gap:6px}
+.ledger .mail svg{width:13px;height:13px}
+.friends{margin-top:12px}
+.friends .lbl,.shelfrow .lbl{font-size:10px;font-weight:900;letter-spacing:.5px;text-transform:uppercase;color:var(--muted);display:flex;align-items:center;gap:6px}
+.friends .lbl::after,.shelfrow .lbl::after{content:"";flex:1;border-top:1.5px dotted var(--line)}
+.frow{display:flex;gap:7px;margin-top:7px;flex-wrap:wrap}
+.fchip{display:inline-flex;align-items:center;gap:7px;background:#fff;border:1.6px solid var(--line);border-radius:999px;padding:4px 11px 4px 5px;font-size:11.5px;font-weight:800;box-shadow:0 2px 0 rgba(58,46,63,.08)}
+.fchip .av{width:20px;height:20px;border-radius:50%;background:var(--sky);border:1.4px solid var(--line);display:grid;place-items:center;font-family:Fredoka,sans-serif;font-size:11px;font-weight:600}
+.fchip .av.gh{background:var(--butter)}.fchip .av svg{width:14px;height:14px}
+.shelfrow{margin-top:12px}
+.srow{display:flex;gap:5px;margin-top:7px;flex-wrap:wrap}
+.srow span{background:#fff;border:1.4px solid var(--line);border-radius:999px;padding:2px 8px;font-size:10.3px;font-weight:800}
+.srow span:nth-child(3n+1){background:var(--mint)}.srow span:nth-child(3n+2){background:var(--sky)}.srow span:nth-child(3n){background:var(--blush)}
+
+/* nav */
+.nav{margin-top:12px;height:58px;background:rgba(255,255,255,.75);border:2px solid var(--line);border-radius:999px;box-shadow:0 4px 0 rgba(58,46,63,.12);display:flex;align-items:center;padding:6px 8px;gap:6px}
+.tab{display:inline-flex;align-items:center;gap:7px;border:2px solid transparent;border-radius:999px;padding:7px 16px;font-family:Fredoka,sans-serif;font-weight:600;font-size:15px;color:var(--ink);position:relative}
+.tab svg{width:18px;height:18px;color:#FFFDF8}
+.tab.on{background:var(--mint);border-color:var(--line);box-shadow:0 3px 0 rgba(58,46,63,.16)}
+.tab.on::after{content:"";position:absolute;left:50%;bottom:-9px;width:16px;height:3px;background:var(--ink);border-radius:2px;transform:translateX(-50%);opacity:.7}
+.tab .n{font-family:Nunito,sans-serif;font-size:10px;font-weight:900;background:#fff;border:1.4px solid var(--line);border-radius:999px;padding:0 6px}
+.bgm{margin-left:auto;display:inline-flex;align-items:center;gap:10px;background:var(--blush);border:2px solid var(--line);border-radius:999px;padding:5px 14px 5px 6px;font-size:12.5px;font-weight:800;box-shadow:0 3px 0 rgba(58,46,63,.14)}
+.bgm .pp{width:30px;height:30px;border-radius:50%;background:#fff;border:1.8px solid var(--line);display:grid;place-items:center}
+.bgm .pp{display:flex;align-items:center;justify-content:center;gap:3px}.bgm .pp b{width:4.5px;height:12px;background:var(--ink);border-radius:1.5px;display:block}
+.bgm .bars{display:flex;align-items:flex-end;gap:2.5px;height:16px}
+.bgm .bars i{width:4px;background:var(--ink);border-radius:2px;display:block;opacity:.8}
+.bgm .t{font-family:Fredoka,sans-serif;font-weight:500;font-size:14px}
+.bgm .s{color:var(--muted);font-size:11px}
+.bgm .vol{display:flex;gap:3px}.bgm .vol i{width:8px;height:8px;border-radius:50%;border:1.4px solid var(--line);background:var(--butter);display:block}.bgm .vol i.off{background:#fff}
+</style></head><body>
+<div class="frame">
+  <div class="corner c1"><i></i><i></i><i></i><i></i></div><div class="corner c2"><i></i><i></i><i></i><i></i></div>
+  <div class="corner c3"><i></i><i></i><i></i><i></i></div><div class="corner c4"><i></i><i></i><i></i><i></i></div>
+  <div class="paper">
+    <div class="top">
+      <div class="ribbon"><svg viewBox="0 0 16 16"><path d="M2.5 8 8 3l5.5 5v5.5h-11z" fill="currentColor" stroke="#3A2E3F" stroke-width="1.4" stroke-linejoin="round"/><rect x="6.5" y="9.5" width="3" height="4" fill="#3A2E3F"/></svg>Drekyz's minihompy</div>
+      <div class="chips">
+        <span class="chip mint"><span style="width:8px;height:8px;border-radius:50%;background:#7FE0A0;border:1px solid var(--line)"></span>open to remote</span>
+        <span class="chip sky">GenSan, PH · 2026.09.02</span>
+        <span class="chip blush"><svg viewBox="0 0 16 16"><path d="M10 2.5v8.2a2.3 2.3 0 1 1-1.5-2.1V2.5z" fill="#3A2E3F"/><path d="M10 2.5l4 1.5v3" fill="none" stroke="#3A2E3F" stroke-width="1.5" stroke-linecap="round"/></svg>Now spinning · Hip Shop</span>
+      </div>
+    </div>
+
+    <div class="main">
+      <!-- LEFT: profile -->
+      <section class="panel profile">
+        <div class="ptitle"><svg viewBox="0 0 16 16"><path d="M2.5 8 8 3l5.5 5v5.5h-11z" fill="currentColor" stroke="#3A2E3F" stroke-width="1.4" stroke-linejoin="round"/><rect x="6.5" y="9.5" width="3" height="4" fill="#3A2E3F"/></svg>Profile</div>
+        <div class="portrait"><img src="file:///home/drekyz/Documents/Programming/Personal/cdrakke.github.io/public/images/avatar.png" alt="Calvin Drakke I. Rulete"><div class="tape"></div></div>
+        <div class="name">Drekyz<small>Calvin Drakke I. Rulete<br>Full Stack Developer</small></div>
+        <div class="loc"><i></i>General Santos City · Remote</div>
+        <div class="note"><b>today's note</b>I ship and run whole products: schema, API, billing, infrastructure, deploy, and the frontend when it needs me.</div>
+        <div class="counters">
+          <div class="ct"><span>Projects</span><em>11</em></div>
+          <div class="ct"><span>Commits on flagships</span><em>1,600+</em></div>
+          <div class="ct"><span>Guilds served</span><em>6+</em></div>
+          <div class="ct mood"><span>Mood</span><em><svg viewBox="0 0 16 16"><path d="M8 1.5l1.6 4.4L14 7.5l-4.4 1.6L8 13.5 6.4 9.1 2 7.5l4.4-1.6z" fill="#F7D58B" stroke="#3A2E3F" stroke-width="1.3" stroke-linejoin="round"/></svg>shipping</em></div>
+        </div>
+        <div class="btns">
+          <a class="btn mint" href="#work"><svg viewBox="0 0 16 16"><path d="M3 2.5h7v11H3z" fill="#FFFDF8" stroke="#3A2E3F" stroke-width="1.4" stroke-linejoin="round"/><circle cx="8" cy="8.5" r="1" fill="#3A2E3F"/><path d="M10.5 8h3m-1.5-1.8 1.8 1.8-1.8 1.8" fill="none" stroke="#3A2E3F" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>Visit my work<span class="k">11 rooms</span></a>
+          <a class="btn sky" href="mailto:drekyz.business@gmail.com"><svg viewBox="0 0 16 16"><rect x="2" y="3.5" width="12" height="9" rx="2" fill="#FFFDF8" stroke="#3A2E3F" stroke-width="1.4"/><path d="M2.5 5 8 9l5.5-4" fill="none" stroke="#3A2E3F" stroke-width="1.4" stroke-linejoin="round"/></svg>Leave a note (email)</a>
+          <a class="btn butter" href="#resume"><svg viewBox="0 0 16 16"><path d="M4 2h5.5L13 5.5V14H4z" fill="#FFFDF8" stroke="#3A2E3F" stroke-width="1.4" stroke-linejoin="round"/><path d="M9.5 2v3.5H13" fill="none" stroke="#3A2E3F" stroke-width="1.4" stroke-linejoin="round"/><path d="M6 8.5h5M6 11h4" stroke="#3A2E3F" stroke-width="1.3" stroke-linecap="round"/></svg>Take my resume (PDF)</a>
+        </div>
+      </section>
+
+      <!-- CENTRE: room -->
+      <section class="panel roompanel">
+        <div class="ptitle mint"><svg viewBox="0 0 16 16"><path d="M2.5 8 8 3l5.5 5v5.5h-11z" fill="currentColor" stroke="#3A2E3F" stroke-width="1.4" stroke-linejoin="round"/><rect x="6.5" y="9.5" width="3" height="4" fill="#3A2E3F"/></svg>Room</div>
+        <svg class="room" viewBox="0 0 700 630" xmlns="http://www.w3.org/2000/svg" aria-label="Drekyz's minihompy room"><defs>
+  <pattern id="floorChk" patternUnits="userSpaceOnUse" width="2" height="2">
+    <rect width="2" height="2" fill="#FFF8F1"/>
+    <rect width="1" height="1" fill="#F3E6EE"/><rect x="1" y="1" width="1" height="1" fill="#F3E6EE"/>
+    <rect width="1" height="1" fill="none" stroke="#3A2E3F" stroke-opacity=".12" stroke-width="1" vector-effect="non-scaling-stroke"/>
+    <rect x="1" y="1" width="1" height="1" fill="none" stroke="#3A2E3F" stroke-opacity=".12" stroke-width="1" vector-effect="non-scaling-stroke"/>
+  </pattern>
+  <pattern id="wallStripeR" patternUnits="userSpaceOnUse" width="0.5" height="255">
+    <rect width="0.5" height="255" fill="#BFD9F2"/><rect width="0.22" height="255" fill="#CFE3F6"/>
+  </pattern>
+  <pattern id="wallStripeL" patternUnits="userSpaceOnUse" width="0.5" height="255">
+    <rect width="0.5" height="255" fill="#B5D2EE"/><rect width="0.22" height="255" fill="#C6DDF3"/>
+  </pattern>
+  <linearGradient id="sunset" x1="0" y1="0" x2="0" y2="1">
+    <stop offset="0" stop-color="#BFD9F2"/><stop offset=".45" stop-color="#F7D58B"/><stop offset=".72" stop-color="#F2B08C"/><stop offset=".73" stop-color="#8FB8D9"/><stop offset="1" stop-color="#6E9FC9"/>
+  </linearGradient>
+  <radialGradient id="lampGlow"><stop offset="0" stop-color="#7FE0A0" stop-opacity=".9"/><stop offset="1" stop-color="#7FE0A0" stop-opacity="0"/></radialGradient>
+  <filter id="soft" x="-20%" y="-20%" width="140%" height="140%"><feDropShadow dx="0" dy="2" stdDeviation="1.2" flood-color="#3A2E3F" flood-opacity=".18"/></filter>
+</defs><ellipse cx="350" cy="585" rx="290" ry="26" fill="#3A2E3F" fill-opacity=".08"/><polygon points="46,443 350,595 654,443 654,427 350,579 46,427" fill="#B88E6B" stroke="#3A2E3F" stroke-opacity=".55" stroke-width="1.3" stroke-linejoin="round"/><line x1="350" y1="579" x2="350" y2="595" stroke="#3A2E3F" stroke-opacity=".35" stroke-width="1.2"/><g transform="matrix(-38 19 0 -1 350 275)"><rect x="0" y="0" width="8" height="255" fill="url(#wallStripeL)"/>
+  <rect x="0" y="0" width="8" height="12" fill="#FFFDF8"/><rect x="0" y="241" width="8" height="14" fill="#FFFDF8"/>
+  <rect x="0" y="239" width="8" height="2" fill="#E9C3D3"/></g><g transform="matrix(38 19 0 -1 350 275)"><rect x="0" y="0" width="8" height="255" fill="url(#wallStripeR)"/>
+  <rect x="0" y="0" width="8" height="12" fill="#FFFDF8"/><rect x="0" y="241" width="8" height="14" fill="#FFFDF8"/>
+  <rect x="0" y="239" width="8" height="2" fill="#E9C3D3"/></g><polyline points="46,172 46,427 350,275 654,427 654,172 350,20 46,172" fill="none" stroke="#3A2E3F" stroke-opacity=".6" stroke-width="1.6" stroke-linejoin="round"/><line x1="350" y1="275" x2="350" y2="20" stroke="#3A2E3F" stroke-opacity=".45" stroke-width="1.4"/><g transform="matrix(38 19 -38 19 350 275)"><rect x="0" y="0" width="8" height="8" fill="url(#floorChk)"/></g><polygon points="350,275 654,427 350,579 46,427" fill="none" stroke="#3A2E3F" stroke-opacity=".6" stroke-width="1.6" stroke-linejoin="round"/><g transform="matrix(0.894 0.447 -0.894 0.447 331.00 451.70)">
+  <ellipse cx="0" cy="0" rx="92" ry="70" fill="#F3E6EE" stroke="#3A2E3F" stroke-opacity=".5" stroke-width="1.3"/>
+  <ellipse cx="0" cy="0" rx="70" ry="50" fill="none" stroke="#F7D58B" stroke-width="7"/>
+  <ellipse cx="0" cy="0" rx="34" ry="22" fill="#CDE8D8" stroke="#3A2E3F" stroke-opacity=".35" stroke-width="1"/>
+</g><g >
+  <polygon points="386.48,176.16 485.28,225.56 485.28,218.56 386.48,169.16" fill="#C9A27E" stroke="#3A2E3F" stroke-opacity=".55" stroke-width="1.3" stroke-linejoin="round"/>
+  <polygon points="498.2,219.1 485.28,225.56 485.28,218.56 498.2,212.1" fill="#B88E6B" stroke="#3A2E3F" stroke-opacity=".55" stroke-width="1.3" stroke-linejoin="round"/>
+  <polygon points="399.4,162.7 498.2,212.1 485.28,218.56 386.48,169.16" fill="#E2C4A2" stroke="#3A2E3F" stroke-opacity=".55" stroke-width="1.3" stroke-linejoin="round"/>
+</g><g >
+  <polygon points="392.18,209.01 397.88,211.86 397.88,181.86 392.18,179.01" fill="#C9A27E" stroke="#3A2E3F" stroke-opacity=".55" stroke-width="1.3" stroke-linejoin="round"/>
+  <polygon points="410.8,205.4 397.88,211.86 397.88,181.86 410.8,175.4" fill="#B88E6B" stroke="#3A2E3F" stroke-opacity=".55" stroke-width="1.3" stroke-linejoin="round"/>
+  <polygon points="405.1,172.55 410.8,175.4 397.88,181.86 392.18,179.01" fill="#E2C4A2" stroke="#3A2E3F" stroke-opacity=".55" stroke-width="1.3" stroke-linejoin="round"/>
+</g><g >
+  <polygon points="473.88,249.86 479.58,252.71 479.58,222.71 473.88,219.86" fill="#C9A27E" stroke="#3A2E3F" stroke-opacity=".55" stroke-width="1.3" stroke-linejoin="round"/>
+  <polygon points="492.5,246.25 479.58,252.71 479.58,222.71 492.5,216.25" fill="#B88E6B" stroke="#3A2E3F" stroke-opacity=".55" stroke-width="1.3" stroke-linejoin="round"/>
+  <polygon points="486.8,213.4 492.5,216.25 479.58,222.71 473.88,219.86" fill="#E2C4A2" stroke="#3A2E3F" stroke-opacity=".55" stroke-width="1.3" stroke-linejoin="round"/>
+</g><g filter="url(#soft)">
+    <path d="M404.84000000000003 126.38 L413.84000000000003 146.38 L422.84000000000003 126.38" fill="none" stroke="#3A2E3F" stroke-opacity=".6" stroke-width="7.5" stroke-linejoin="round" stroke-linecap="round"/>
+    <path d="M404.84000000000003 126.38 L413.84000000000003 146.38 L422.84000000000003 126.38" fill="none" stroke="#E67A8A" stroke-width="5" stroke-linejoin="round" stroke-linecap="round"/>
+    <path d="M404.84000000000003 126.38 L413.84000000000003 146.38 L422.84000000000003 126.38" fill="none" stroke="#FFF8F1" stroke-width="1.2" stroke-linejoin="round" stroke-dasharray="1.5 2"/>
+    <circle cx="413.84000000000003" cy="158.38" r="12" fill="#F7D58B" stroke="#3A2E3F" stroke-opacity=".7" stroke-width="1.3"/>
+    <circle cx="413.84000000000003" cy="158.38" r="8" fill="none" stroke="#D9AF4C" stroke-width="1.6"/>
+    <path d="M413.84000000000003 152.38 l1.8 3.8 4.2 .5 -3.1 2.9 .8 4.1 -3.7 -2.1 -3.7 2.1 .8 -4.1 -3.1 -2.9 4.2 -.5 z" fill="#D9AF4C"/>
+  </g><g filter="url(#soft)">
+    <path d="M433.34000000000003 140.63 L442.34000000000003 160.63 L451.34000000000003 140.63" fill="none" stroke="#3A2E3F" stroke-opacity=".6" stroke-width="7.5" stroke-linejoin="round" stroke-linecap="round"/>
+    <path d="M433.34000000000003 140.63 L442.34000000000003 160.63 L451.34000000000003 140.63" fill="none" stroke="#E67A8A" stroke-width="5" stroke-linejoin="round" stroke-linecap="round"/>
+    <path d="M433.34000000000003 140.63 L442.34000000000003 160.63 L451.34000000000003 140.63" fill="none" stroke="#FFF8F1" stroke-width="1.2" stroke-linejoin="round" stroke-dasharray="1.5 2"/>
+    <circle cx="442.34000000000003" cy="172.63" r="12" fill="#E8E8F0" stroke="#3A2E3F" stroke-opacity=".7" stroke-width="1.3"/>
+    <circle cx="442.34000000000003" cy="172.63" r="8" fill="none" stroke="#B8B8C8" stroke-width="1.6"/>
+    <path d="M442.34000000000003 166.63 l1.8 3.8 4.2 .5 -3.1 2.9 .8 4.1 -3.7 -2.1 -3.7 2.1 .8 -4.1 -3.1 -2.9 4.2 -.5 z" fill="#B8B8C8"/>
+  </g><g filter="url(#soft)">
+    <path d="M461.84000000000003 154.88 L470.84000000000003 174.88 L479.84000000000003 154.88" fill="none" stroke="#3A2E3F" stroke-opacity=".6" stroke-width="7.5" stroke-linejoin="round" stroke-linecap="round"/>
+    <path d="M461.84000000000003 154.88 L470.84000000000003 174.88 L479.84000000000003 154.88" fill="none" stroke="#E67A8A" stroke-width="5" stroke-linejoin="round" stroke-linecap="round"/>
+    <path d="M461.84000000000003 154.88 L470.84000000000003 174.88 L479.84000000000003 154.88" fill="none" stroke="#FFF8F1" stroke-width="1.2" stroke-linejoin="round" stroke-dasharray="1.5 2"/>
+    <circle cx="470.84000000000003" cy="186.88" r="12" fill="#F0C79C" stroke="#3A2E3F" stroke-opacity=".7" stroke-width="1.3"/>
+    <circle cx="470.84000000000003" cy="186.88" r="8" fill="none" stroke="#C98F5C" stroke-width="1.6"/>
+    <path d="M470.84000000000003 180.88 l1.8 3.8 4.2 .5 -3.1 2.9 .8 4.1 -3.7 -2.1 -3.7 2.1 .8 -4.1 -3.1 -2.9 4.2 -.5 z" fill="#C98F5C"/>
+  </g><g class="rtag">
+  <rect x="401.3" y="215.89999999999998" width="64" height="19.5" rx="9.75" fill="#F7D58B" stroke="#3A2E3F" stroke-opacity=".7" stroke-width="1.2"/>
+  <text x="433.3" y="229.06999999999996" text-anchor="middle" font-size="9.5" font-weight="800" fill="#3A2E3F" font-family="Nunito, sans-serif">Cum Laude</text>
+</g><g class="rtag">
+  <rect x="401.3" y="238.89999999999998" width="85" height="19.5" rx="9.75" fill="#FFFFFF" stroke="#3A2E3F" stroke-opacity=".7" stroke-width="1.2"/>
+  <text x="443.8" y="252.06999999999996" text-anchor="middle" font-size="9.5" font-weight="800" fill="#3A2E3F" font-family="Nunito, sans-serif">Best Capstone</text>
+</g><g class="rtag">
+  <rect x="401.3" y="261.9" width="133" height="19.5" rx="9.75" fill="#F3E6EE" stroke="#3A2E3F" stroke-opacity=".7" stroke-width="1.2"/>
+  <text x="467.8" y="275.07" text-anchor="middle" font-size="9.5" font-weight="800" fill="#3A2E3F" font-family="Nunito, sans-serif">Programmer of the Year</text>
+</g><g transform="matrix(0.894 0.447 0 1 515.30 139.65)" filter="url(#soft)">
+  <rect x="0" y="0" width="82" height="60" rx="3" fill="#C9A27E" stroke="#3A2E3F" stroke-opacity=".7" stroke-width="1.3"/>
+  <rect x="5" y="5" width="72" height="50" rx="2" fill="#FFFDF8" stroke="#3A2E3F" stroke-opacity=".3" stroke-width=".8"/>
+  <text x="41" y="18" text-anchor="middle" font-size="7" font-weight="800" letter-spacing=".6" fill="#3A2E3F" font-family="Nunito, sans-serif">CIVIL SERVICE</text>
+  <text x="41" y="27" text-anchor="middle" font-size="6.5" font-weight="700" fill="#3A2E3F" fill-opacity=".7" font-family="Nunito, sans-serif">Professional</text>
+  <text x="41" y="46" text-anchor="middle" font-size="15" font-weight="600" fill="#3A2E3F" font-family="Fredoka, sans-serif">PASSED</text>
+  <circle cx="67" cy="45" r="4.5" fill="#E67A8A" stroke="#3A2E3F" stroke-opacity=".5" stroke-width=".8"/>
+</g><g class="rtag">
+  <rect x="492.5" y="138.75" width="133" height="19.5" rx="9.75" fill="#FFFFFF" stroke="#3A2E3F" stroke-opacity=".7" stroke-width="1.2"/>
+  <text x="559" y="151.92" text-anchor="middle" font-size="9.5" font-weight="800" fill="#3A2E3F" font-family="Nunito, sans-serif">Civil Service Pro PASSED</text>
+</g><g filter="url(#soft)">
+    <circle cx="629.3" cy="194.64999999999998" r="3" fill="#B88E6B" stroke="#3A2E3F" stroke-opacity=".6" stroke-width="1"/>
+    <path d="M629.3 197.64999999999998 q-2 4 -2 8 l-17 14 h38 l-17 -14 q0 -4 -2 -8" fill="none" stroke="#8C6A48" stroke-width="2" stroke-linejoin="round"/>
+    <path d="M611.3 219.64999999999998 l-10 13 l6 4 l3 -4 l1 48 h36 l1 -48 l3 4 l6 -4 l-10 -13 l-9 -2 q-9 7 -18 0 z" fill="#FFF8E8" stroke="#3A2E3F" stroke-opacity=".7" stroke-width="1.3" stroke-linejoin="round"/>
+    <path d="M629.3 224.64999999999998 v58" stroke="#E9D9B8" stroke-width="1"/>
+    <path d="M620.3 224.64999999999998 v56 M638.3 224.64999999999998 v56" stroke="#EADFC7" stroke-width="1" stroke-dasharray="1 2"/>
+    <path d="M624.3 234.64999999999998 q5 -4 10 0 M624.3 246.64999999999998 q5 -4 10 0 M624.3 258.65 q5 -4 10 0 M624.3 270.65 q5 -4 10 0" fill="none" stroke="#C9A27E" stroke-width="1"/>
+    <circle cx="629.3" cy="240.64999999999998" r="1.3" fill="#C9A27E"/><circle cx="629.3" cy="252.64999999999998" r="1.3" fill="#C9A27E"/><circle cx="629.3" cy="264.65" r="1.3" fill="#C9A27E"/>
+  </g><g class="rtag">
+  <rect x="601.3" y="284.9" width="48" height="19.5" rx="9.75" fill="#FFF8E8" stroke="#3A2E3F" stroke-opacity=".7" stroke-width="1.2"/>
+  <text x="625.3" y="298.07" text-anchor="middle" font-size="9.5" font-weight="800" fill="#3A2E3F" font-family="Nunito, sans-serif">Barong</text>
+</g><g transform="matrix(0.894 -0.447 0 1 70.70 214.65)" filter="url(#soft)">
+  <rect x="0" y="0" width="104" height="84" rx="6" fill="#FFFDF8" stroke="#3A2E3F" stroke-opacity=".7" stroke-width="1.3"/>
+  <rect x="6" y="6" width="92" height="72" rx="3" fill="url(#sunset)"/>
+  <circle cx="60" cy="58" r="14" fill="#F7D58B" stroke="#F2B08C" stroke-width="1.5"/>
+  <rect x="6" y="59" width="92" height="19" fill="#6E9FC9" fill-opacity=".75"/>
+  <path d="M6 64 q10 -3 20 0 t20 0 t20 0 t20 0 t12 0" fill="none" stroke="#FFF8F1" stroke-opacity=".7" stroke-width="1"/>
+  <path d="M6 71 q10 -3 20 0 t20 0 t20 0 t20 0 t12 0" fill="none" stroke="#FFF8F1" stroke-opacity=".5" stroke-width="1"/>
+  <!-- tuna-shaped cloud -->
+  <path d="M18 28 c6 -8 18 -10 30 -6 c5 -6 10 -5 12 -1 l8 -7 l-2 9 l2 9 l-8 -6 c-3 5 -9 6 -13 2 c-10 6 -22 6 -29 -2 c-5 3 -9 -1 -6 -5 c-3 -3 2 -6 6 -3 z" fill="#FFFFFF" stroke="#DCE8F3" stroke-width="1"/>
+  <path d="M40 28 l3 -4" stroke="#E4EEF7" stroke-width="1.2" stroke-linecap="round"/><circle cx="26" cy="26" r="1.2" fill="#BFD9F2"/>
+  <rect x="50" y="6" width="3" height="72" fill="#FFFDF8" stroke="#3A2E3F" stroke-opacity=".35" stroke-width=".6"/>
+  <rect x="6" y="40" width="92" height="3" fill="#FFFDF8" stroke="#3A2E3F" stroke-opacity=".35" stroke-width=".6"/>
+  <rect x="-2" y="82" width="108" height="6" rx="2" fill="#E2C4A2" stroke="#3A2E3F" stroke-opacity=".6" stroke-width="1.1"/>
+</g><g class="rtag">
+  <rect x="81.4" y="308.3" width="85" height="19.5" rx="9.75" fill="#F7D58B" stroke="#3A2E3F" stroke-opacity=".7" stroke-width="1.2"/>
+  <text x="123.9" y="321.47" text-anchor="middle" font-size="9.5" font-weight="800" fill="#3A2E3F" font-family="Nunito, sans-serif">GenSan sunset</text>
+</g><g >
+  <polygon points="358.74,318.13 365.2,321.36 365.2,265.36 358.74,262.13" fill="#C9A27E" stroke="#3A2E3F" stroke-opacity=".55" stroke-width="1.3" stroke-linejoin="round"/>
+  <polygon points="371.66,318.13 365.2,321.36 365.2,265.36 371.66,262.13" fill="#B88E6B" stroke="#3A2E3F" stroke-opacity=".55" stroke-width="1.3" stroke-linejoin="round"/>
+  <polygon points="365.2,258.9 371.66,262.13 365.2,265.36 358.74,262.13" fill="#E2C4A2" stroke="#3A2E3F" stroke-opacity=".55" stroke-width="1.3" stroke-linejoin="round"/>
+</g><g >
+  <polygon points="237.14,378.93 243.6,382.16 243.6,326.16 237.14,322.93" fill="#C9A27E" stroke="#3A2E3F" stroke-opacity=".55" stroke-width="1.3" stroke-linejoin="round"/>
+  <polygon points="250.06,378.93 243.6,382.16 243.6,326.16 250.06,322.93" fill="#B88E6B" stroke="#3A2E3F" stroke-opacity=".55" stroke-width="1.3" stroke-linejoin="round"/>
+  <polygon points="243.6,319.7 250.06,322.93 243.6,326.16 237.14,322.93" fill="#E2C4A2" stroke="#3A2E3F" stroke-opacity=".55" stroke-width="1.3" stroke-linejoin="round"/>
+</g><g >
+  <polygon points="201.04,360.88 207.5,364.11 207.5,308.11 201.04,304.88" fill="#C9A27E" stroke="#3A2E3F" stroke-opacity=".55" stroke-width="1.3" stroke-linejoin="round"/>
+  <polygon points="213.96,360.88 207.5,364.11 207.5,308.11 213.96,304.88" fill="#B88E6B" stroke="#3A2E3F" stroke-opacity=".55" stroke-width="1.3" stroke-linejoin="round"/>
+  <polygon points="207.5,301.65 213.96,304.88 207.5,308.11 201.04,304.88" fill="#E2C4A2" stroke="#3A2E3F" stroke-opacity=".55" stroke-width="1.3" stroke-linejoin="round"/>
+</g><g >
+  <polygon points="194.2,305.26 242.84,329.58 242.84,321.58 194.2,297.26" fill="#C9A27E" stroke="#3A2E3F" stroke-opacity=".55" stroke-width="1.3" stroke-linejoin="round"/>
+  <polygon points="380.4,260.8 242.84,329.58 242.84,321.58 380.4,252.8" fill="#B88E6B" stroke="#3A2E3F" stroke-opacity=".55" stroke-width="1.3" stroke-linejoin="round"/>
+  <polygon points="331.76,228.48 380.4,252.8 242.84,321.58 194.2,297.26" fill="#E2C4A2" stroke="#3A2E3F" stroke-opacity=".55" stroke-width="1.3" stroke-linejoin="round"/>
+</g><g >
+  <polygon points="300.6,254.7 310.1,259.45 310.1,251.45 300.6,246.7" fill="#3A2E3F" stroke="#3A2E3F" stroke-opacity=".55" stroke-width="1.3" stroke-linejoin="round"/>
+  <polygon points="319.6,254.7 310.1,259.45 310.1,251.45 319.6,246.7" fill="#2E2432" stroke="#3A2E3F" stroke-opacity=".55" stroke-width="1.3" stroke-linejoin="round"/>
+  <polygon points="310.1,241.95 319.6,246.7 310.1,251.45 300.6,246.7" fill="#5A4A60" stroke="#3A2E3F" stroke-opacity=".55" stroke-width="1.3" stroke-linejoin="round"/>
+</g><g >
+  <polygon points="257.66,265.13 266.78,269.69 266.78,209.69 257.66,205.13" fill="#3A2E3F" stroke="#3A2E3F" stroke-opacity=".55" stroke-width="1.3" stroke-linejoin="round"/>
+  <polygon points="340.88,232.64 266.78,269.69 266.78,209.69 340.88,172.64" fill="#2E2432" stroke="#3A2E3F" stroke-opacity=".55" stroke-width="1.3" stroke-linejoin="round"/>
+  <polygon points="331.76,168.08 340.88,172.64 266.78,209.69 257.66,205.13" fill="#5A4A60" stroke="#3A2E3F" stroke-opacity=".55" stroke-width="1.3" stroke-linejoin="round"/>
+</g><g transform="matrix(0.894 -0.447 0 1 266.78 209.69)">
+  <rect x="3" y="3" width="68" height="52" rx="2" fill="#241B29"/>
+  <rect x="3" y="3" width="68" height="9" fill="#3A2E3F"/>
+  <circle cx="8" cy="7.5" r="1.6" fill="#E67A8A"/><circle cx="13" cy="7.5" r="1.6" fill="#F7D58B"/><circle cx="18" cy="7.5" r="1.6" fill="#7FE0A0"/>
+  <text x="37" y="10" text-anchor="middle" font-size="5.6" font-weight="800" fill="#FFF8F1" font-family="Nunito, sans-serif">raidium.quest</text>
+  <text x="8" y="22" font-size="5" font-weight="700" fill="#BFD9F2" font-family="Nunito, sans-serif">WORLD BOSS</text>
+  <text x="8" y="34" font-size="10" font-weight="600" fill="#F7D58B" font-family="Fredoka, sans-serif">00:41:12</text>
+  <rect x="8" y="39" width="58" height="4" rx="2" fill="#3A2E3F"/><rect x="8" y="39" width="40" height="4" rx="2" fill="#7FE0A0"/>
+  <text x="8" y="51" font-size="4.6" font-weight="700" fill="#CDE8D8" font-family="Nunito, sans-serif">6+ guilds · attendance OCR on</text>
+</g><g >
+  <polygon points="226.5,291.75 236,296.5 236,288.5 226.5,283.75" fill="#3A2E3F" stroke="#3A2E3F" stroke-opacity=".55" stroke-width="1.3" stroke-linejoin="round"/>
+  <polygon points="245.5,291.75 236,296.5 236,288.5 245.5,283.75" fill="#2E2432" stroke="#3A2E3F" stroke-opacity=".55" stroke-width="1.3" stroke-linejoin="round"/>
+  <polygon points="236,279 245.5,283.75 236,288.5 226.5,283.75" fill="#5A4A60" stroke="#3A2E3F" stroke-opacity=".55" stroke-width="1.3" stroke-linejoin="round"/>
+</g><g >
+  <polygon points="206.36,290.78 215.48,295.34 215.48,245.34 206.36,240.78" fill="#3A2E3F" stroke="#3A2E3F" stroke-opacity=".55" stroke-width="1.3" stroke-linejoin="round"/>
+  <polygon points="259.18,273.49 215.48,295.34 215.48,245.34 259.18,223.49" fill="#2E2432" stroke="#3A2E3F" stroke-opacity=".55" stroke-width="1.3" stroke-linejoin="round"/>
+  <polygon points="250.06,218.93 259.18,223.49 215.48,245.34 206.36,240.78" fill="#5A4A60" stroke="#3A2E3F" stroke-opacity=".55" stroke-width="1.3" stroke-linejoin="round"/>
+</g><g transform="matrix(0.894 -0.447 0 1 215.48 245.34)">
+  <rect x="3" y="3" width="38" height="42" rx="2" fill="#241B29"/>
+  <text x="6" y="12" font-size="4.6" font-weight="700" fill="#7FE0A0" font-family="Nunito, sans-serif">$ docker ps</text>
+  <text x="6" y="20" font-size="4.4" font-weight="700" fill="#FFF8F1" font-family="Nunito, sans-serif">api   up</text>
+  <text x="6" y="27" font-size="4.4" font-weight="700" fill="#FFF8F1" font-family="Nunito, sans-serif">web   up</text>
+  <text x="6" y="34" font-size="4.4" font-weight="700" fill="#FFF8F1" font-family="Nunito, sans-serif">bot   up</text>
+  <text x="6" y="42" font-size="4.6" font-weight="700" fill="#7FE0A0" font-family="Nunito, sans-serif">$ _</text>
+</g><g >
+  <polygon points="272.1,289.85 283.5,295.55 283.5,292.55 272.1,286.85" fill="#F3E6EE" stroke="#3A2E3F" stroke-opacity=".55" stroke-width="1.3" stroke-linejoin="round"/>
+  <polygon points="344.3,265.15 283.5,295.55 283.5,292.55 344.3,262.15" fill="#E6D3DF" stroke="#3A2E3F" stroke-opacity=".55" stroke-width="1.3" stroke-linejoin="round"/>
+  <polygon points="332.9,256.45 344.3,262.15 283.5,292.55 272.1,286.85" fill="#FFFDF8" stroke="#3A2E3F" stroke-opacity=".55" stroke-width="1.3" stroke-linejoin="round"/>
+</g><g >
+  <polygon points="243.6,302.2 253.1,306.95 253.1,294.95 243.6,290.2" fill="#E67A8A" stroke="#3A2E3F" stroke-opacity=".55" stroke-width="1.3" stroke-linejoin="round"/>
+  <polygon points="262.6,302.2 253.1,306.95 253.1,294.95 262.6,290.2" fill="#D3687A" stroke="#3A2E3F" stroke-opacity=".55" stroke-width="1.3" stroke-linejoin="round"/>
+  <polygon points="253.1,285.45 262.6,290.2 253.1,294.95 243.6,290.2" fill="#F3E6EE" stroke="#3A2E3F" stroke-opacity=".55" stroke-width="1.3" stroke-linejoin="round"/>
+</g><g class="rtag">
+  <rect x="327.4" y="341.25" width="106" height="19.5" rx="9.75" fill="#FFFFFF" stroke="#3A2E3F" stroke-opacity=".7" stroke-width="1.2"/>
+  <text x="380.4" y="354.42" text-anchor="middle" font-size="9.5" font-weight="800" fill="#3A2E3F" font-family="Nunito, sans-serif">Desk · 2 monitors</text>
+</g><g >
+  <polygon points="150.5,388.05 182.8,404.2 182.8,344.2 150.5,328.05" fill="#3A2E3F" stroke="#3A2E3F" stroke-opacity=".55" stroke-width="1.3" stroke-linejoin="round"/>
+  <polygon points="217,387.1 182.8,404.2 182.8,344.2 217,327.1" fill="#2E2432" stroke="#3A2E3F" stroke-opacity=".55" stroke-width="1.3" stroke-linejoin="round"/>
+  <polygon points="184.7,310.95 217,327.1 182.8,344.2 150.5,328.05" fill="#5A4A60" stroke="#3A2E3F" stroke-opacity=".55" stroke-width="1.3" stroke-linejoin="round"/>
+</g><g transform="matrix(0.894 0.447 0 1 150.50 328.05)">
+  <rect x="4" y="8" width="24" height="7" rx="2" fill="#5A4A60" stroke="#241B29" stroke-width=".8"/><rect x="7" y="10.5" width="12" height="2" fill="#241B29"/><rect x="4" y="20" width="24" height="7" rx="2" fill="#5A4A60" stroke="#241B29" stroke-width=".8"/><rect x="7" y="22.5" width="12" height="2" fill="#241B29"/><rect x="4" y="32" width="24" height="7" rx="2" fill="#5A4A60" stroke="#241B29" stroke-width=".8"/><rect x="7" y="34.5" width="12" height="2" fill="#241B29"/><rect x="4" y="44" width="24" height="7" rx="2" fill="#5A4A60" stroke="#241B29" stroke-width=".8"/><rect x="7" y="46.5" width="12" height="2" fill="#241B29"/>
+  <circle cx="26" cy="11.5" r="1.6" fill="#7FE0A0"/><circle cx="26" cy="23.5" r="1.6" fill="#7FE0A0"/><circle cx="26" cy="35.5" r="1.6" fill="#F7D58B"/><circle cx="26" cy="47.5" r="1.6" fill="#7FE0A0"/>
+</g><circle cx="176.8" cy="336.2" r="10" fill="url(#lampGlow)"/><circle cx="176.8" cy="336.2" r="3" fill="#7FE0A0" stroke="#3A2E3F" stroke-opacity=".6" stroke-width="1"/><line x1="176.8" y1="339.2" x2="176.8" y2="343.2" stroke="#3A2E3F" stroke-opacity=".5" stroke-width="1.2"/><g class="rtag">
+  <rect x="201.79999999999998" y="386.35" width="133" height="19.5" rx="9.75" fill="#CDE8D8" stroke="#3A2E3F" stroke-opacity=".7" stroke-width="1.2"/>
+  <text x="268.29999999999995" y="399.52000000000004" text-anchor="middle" font-size="9.5" font-weight="800" fill="#3A2E3F" font-family="Nunito, sans-serif">VPS · Docker + Coolify</text>
+</g><g >
+  <polygon points="464,394.7 509.6,417.5 509.6,373.5 464,350.7" fill="#C9A27E" stroke="#3A2E3F" stroke-opacity=".55" stroke-width="1.3" stroke-linejoin="round"/>
+  <polygon points="555.2,394.7 509.6,417.5 509.6,373.5 555.2,350.7" fill="#B88E6B" stroke="#3A2E3F" stroke-opacity=".55" stroke-width="1.3" stroke-linejoin="round"/>
+  <polygon points="509.6,327.9 555.2,350.7 509.6,373.5 464,350.7" fill="#E2C4A2" stroke="#3A2E3F" stroke-opacity=".55" stroke-width="1.3" stroke-linejoin="round"/>
+</g><g >
+  <polygon points="470.46,350.13 510.74,370.27 510.74,360.27 470.46,340.13" fill="#E6D3DF" stroke="#3A2E3F" stroke-opacity=".55" stroke-width="1.3" stroke-linejoin="round"/>
+  <polygon points="548.74,351.27 510.74,370.27 510.74,360.27 548.74,341.27" fill="#D9C3CF" stroke="#3A2E3F" stroke-opacity=".55" stroke-width="1.3" stroke-linejoin="round"/>
+  <polygon points="508.46,321.13 548.74,341.27 510.74,360.27 470.46,340.13" fill="#F3E6EE" stroke="#3A2E3F" stroke-opacity=".55" stroke-width="1.3" stroke-linejoin="round"/>
+</g><g transform="matrix(0.894 0.447 -0.894 0.447 507.70 339.75)">
+  <circle cx="0" cy="0" r="19" fill="#241B29" stroke="#3A2E3F" stroke-width="1.2"/>
+  <circle cx="0" cy="0" r="14" fill="none" stroke="#4A3D50" stroke-width="1"/><circle cx="0" cy="0" r="10" fill="none" stroke="#4A3D50" stroke-width="1"/>
+  <circle cx="0" cy="0" r="6.5" fill="#F7D58B" stroke="#3A2E3F" stroke-opacity=".5" stroke-width=".8"/><circle cx="0" cy="0" r="1.2" fill="#241B29"/>
+</g><circle cx="545.7" cy="337.65" r="3.5" fill="#E6D3DF" stroke="#3A2E3F" stroke-opacity=".6" stroke-width="1"/><path d="M545.7 337.65 l-14 8 l-3 5" fill="none" stroke="#3A2E3F" stroke-opacity=".7" stroke-width="1.6" stroke-linecap="round"/><g fill="#3A2E3F" fill-opacity=".8"><path d="M535.7 299.75 v-12 l7 -2 v10 a3 3 0 1 1 -2 -2.8 v-4.5 l-3 .9 v8 a3 3 0 1 1 -2 -2.8z"/><path d="M547.7 277.75 v-9 l2 -.6 v7 a2.4 2.4 0 1 1 -2 -2.3z"/></g><g filter="url(#soft)"><path d="M457.70000000000005 301.75 a16 16 0 1 1 32 0 a16 16 0 0 1 -12 15.5 l-4 8 l-4 -8 a16 16 0 0 1 -12 -15.5 z" fill="#FFFFFF" stroke="#3A2E3F" stroke-opacity=".7" stroke-width="1.3"/>
+  <rect x="467.70000000000005" y="295.75" width="4" height="12" rx="1.2" fill="#3A2E3F"/><rect x="475.70000000000005" y="295.75" width="4" height="12" rx="1.2" fill="#3A2E3F"/></g><g class="rtag">
+  <rect x="440.6" y="424.95" width="138" height="19.5" rx="9.75" fill="#F3E6EE" stroke="#3A2E3F" stroke-opacity=".7" stroke-width="1.2"/>
+  <text x="509.6" y="438.12" text-anchor="middle" font-size="9.5" font-weight="800" fill="#3A2E3F" font-family="Nunito, sans-serif">Hip Shop · Rouxls Kaard</text>
+</g><g filter="url(#soft)">
+    <ellipse cx="97.29999999999998" cy="431.85" rx="15" ry="6" fill="#3A2E3F" fill-opacity=".12"/>
+    <path d="M84.29999999999998 407.85 h26 l-4 24 h-18 z" fill="#E6A79A" stroke="#3A2E3F" stroke-opacity=".65" stroke-width="1.3" stroke-linejoin="round"/>
+    <rect x="82.29999999999998" y="403.85" width="30" height="7" rx="3" fill="#F3B8AC" stroke="#3A2E3F" stroke-opacity=".65" stroke-width="1.3"/>
+    <g fill="#8FC7A6" stroke="#3A2E3F" stroke-opacity=".6" stroke-width="1.2" stroke-linejoin="round">
+      <path d="M97.29999999999998 403.85 c-20 -6 -26 -24 -14 -40 c10 8 16 24 14 40z"/>
+      <path d="M97.29999999999998 403.85 c20 -6 26 -24 14 -40 c-10 8 -16 24 -14 40z"/>
+      <path d="M97.29999999999998 403.85 c-6 -18 -2 -38 0 -50 c2 12 6 32 0 50z" fill="#CDE8D8"/>
+      <path d="M97.29999999999998 399.85 c-24 2 -32 -14 -30 -22 c12 2 26 8 30 22z"/>
+      <path d="M97.29999999999998 399.85 c24 2 32 -14 30 -22 c-12 2 -26 8 -30 22z"/>
+    </g>
+  </g><g filter="url(#soft)">
+    <ellipse cx="351.9" cy="517.3499999999999" rx="20" ry="7" fill="#3A2E3F" fill-opacity=".12"/>
+    <ellipse cx="342.9" cy="513.3499999999999" rx="7" ry="4" fill="#9DC4EC" stroke="#3A2E3F" stroke-opacity=".65" stroke-width="1.2"/>
+    <ellipse cx="360.9" cy="513.3499999999999" rx="7" ry="4" fill="#9DC4EC" stroke="#3A2E3F" stroke-opacity=".65" stroke-width="1.2"/>
+    <line x1="351.9" y1="471.3499999999999" x2="351.9" y2="463.3499999999999" stroke="#3A2E3F" stroke-opacity=".65" stroke-width="1.4"/>
+    <circle cx="351.9" cy="461.3499999999999" r="3.5" fill="#E67A8A" stroke="#3A2E3F" stroke-opacity=".65" stroke-width="1.2"/>
+    <circle cx="351.9" cy="493.3499999999999" r="22" fill="#BFD9F2" stroke="#3A2E3F" stroke-opacity=".7" stroke-width="1.4"/>
+    <ellipse cx="326.9" cy="497.3499999999999" rx="5" ry="7" fill="#BFD9F2" stroke="#3A2E3F" stroke-opacity=".65" stroke-width="1.2"/>
+    <ellipse cx="376.9" cy="497.3499999999999" rx="5" ry="7" fill="#BFD9F2" stroke="#3A2E3F" stroke-opacity=".65" stroke-width="1.2"/>
+    <rect x="336.9" y="484.3499999999999" width="30" height="16" rx="8" fill="#3A2E3F"/>
+    <circle cx="345.9" cy="492.3499999999999" r="2.6" fill="#F7D58B"/><circle cx="357.9" cy="492.3499999999999" r="2.6" fill="#F7D58B"/>
+    <path d="M348.9 496.8499999999999 q3 2.5 6 0" fill="none" stroke="#F7D58B" stroke-width="1.2" stroke-linecap="round"/>
+    <circle cx="336.9" cy="502.3499999999999" r="2.5" fill="#F3B8AC"/><circle cx="366.9" cy="502.3499999999999" r="2.5" fill="#F3B8AC"/>
+  </g><g class="rtag">
+  <rect x="297.9" y="527.5999999999999" width="112" height="19.5" rx="9.75" fill="#BFD9F2" stroke="#3A2E3F" stroke-opacity=".7" stroke-width="1.2"/>
+  <text x="353.9" y="540.7699999999999" text-anchor="middle" font-size="9.5" font-weight="800" fill="#3A2E3F" font-family="Nunito, sans-serif">GLiberator · 5 yrs</text>
+</g><g filter="url(#soft)"><rect x="16" y="12" width="126" height="28" rx="14" fill="#F7D58B" stroke="#3A2E3F" stroke-opacity=".7" stroke-width="1.3"/>
+<path d="M30 30 v-7 l6 -5 l6 5 v7 z" fill="#FFFDF8" stroke="#3A2E3F" stroke-opacity=".8" stroke-width="1.2" stroke-linejoin="round"/><rect x="34" y="24" width="4" height="6" fill="#3A2E3F" fill-opacity=".7"/>
+<text x="52" y="30.5" font-size="12.5" font-weight="600" fill="#3A2E3F" font-family="Fredoka, sans-serif">Drekyz's room</text></g><g filter="url(#soft)"><rect x="540" y="12" width="144" height="28" rx="14" fill="#FFFFFF" stroke="#3A2E3F" stroke-opacity=".7" stroke-width="1.3"/>
+<circle cx="557" cy="26" r="5" fill="#CDE8D8" stroke="#3A2E3F" stroke-opacity=".7" stroke-width="1.1"/><circle cx="557" cy="26" r="1.8" fill="#3A2E3F"/>
+<text x="569" y="30.5" font-size="11" font-weight="800" fill="#3A2E3F" font-family="Nunito, sans-serif">click a thing to visit</text></g></svg>
+      </section>
+
+      <!-- RIGHT: diary -->
+      <section class="panel">
+        <div class="ptitle butter"><svg viewBox="0 0 16 16"><path d="M2.5 3.5h5v10h-5zM8.5 3.5h5v10h-5z" fill="currentColor" stroke="#3A2E3F" stroke-width="1.4" stroke-linejoin="round"/><path d="M4 6h2M4 8h2M10 6h2M10 8h2" stroke="#3A2E3F" stroke-width="1.1" stroke-linecap="round"/></svg>Diary <span style="font-family:Nunito;font-size:10px;font-weight:900;opacity:.7">· newest first</span></div>
+        <div class="diary">
+          <div class="entry"><div class="yr">2026</div><div><h4>Ops platform for a real estate franchise<span class="live">in service</span></h4><p>56% of 2,004 commits · 730 PRs · 9-role RBAC in RLS</p></div></div>
+          <div class="entry"><div class="yr">2025</div><div><h4>Raidium · raidium.quest<span class="live">live</span></h4><p>505 commits · 225 routes · 33 models · 6+ guilds · on-chain billing · Android app</p></div></div>
+          <div class="entry"><div class="yr">2025</div><div><h4>Alertison</h4><p>family safety app · mobile · with Michael Panizales</p></div></div>
+          <div class="entry"><div class="yr">2025</div><div><h4>Pickleball GenSan</h4><p>PWA matchmaking · web</p></div></div>
+          <div class="entry"><div class="yr">2024</div><div><h4>GYOCC.online</h4><p>capstone · tracking workload cut 80%</p></div></div>
+        </div>
+        <div class="ledger">
+          <div class="lh"><h4><svg viewBox="0 0 16 16"><rect x="3" y="2.5" width="10" height="11" rx="2" fill="currentColor" stroke="#3A2E3F" stroke-width="1.4"/><path d="M6 6h4M6 8.5h4M6 11h2.5" stroke="#3A2E3F" stroke-width="1.2" stroke-linecap="round"/></svg>Guest ledger</h4><span class="sub">this is the contact form</span></div>
+          <div class="field"><div class="input">Leave a note...<i></i></div><div class="send">Send</div></div>
+          <div class="mail"><svg viewBox="0 0 16 16"><rect x="2" y="3.5" width="12" height="9" rx="2" fill="#FFFDF8" stroke="#3A2E3F" stroke-width="1.4"/><path d="M2.5 5 8 9l5.5-4" fill="none" stroke="#3A2E3F" stroke-width="1.4" stroke-linejoin="round"/></svg>or write to drekyz.business@gmail.com</div>
+        </div>
+        <div class="friends"><div class="lbl">Friends</div>
+          <div class="frow"><span class="fchip"><span class="av">M</span>Michael Panizales</span><span class="fchip"><span class="av gh"><svg viewBox="0 0 16 16"><circle cx="8" cy="8" r="6" fill="#3A2E3F"/><path d="M5.5 9.5c1 1.6 4 1.6 5 0" stroke="#FFFDF8" stroke-width="1.2" stroke-linecap="round" fill="none"/><circle cx="6" cy="6.8" r="1" fill="#FFFDF8"/><circle cx="10" cy="6.8" r="1" fill="#FFFDF8"/></svg></span>GitHub · cdrakke</span></div>
+        </div>
+        <div class="shelfrow"><div class="lbl">Shelf · stack</div>
+          <div class="srow"><span>TypeScript</span><span>Python</span><span>C#</span><span>NestJS</span><span>Next.js</span><span>Django</span><span>React Native</span><span>PostgreSQL</span><span>Redis</span><span>Docker</span><span>Coolify</span><span>NGINX</span></div>
+        </div>
+      </section>
+    </div>
+
+    <nav class="nav">
+      <div class="tab on"><svg viewBox="0 0 16 16"><path d="M2.5 8 8 3l5.5 5v5.5h-11z" fill="currentColor" stroke="#3A2E3F" stroke-width="1.4" stroke-linejoin="round"/><rect x="6.5" y="9.5" width="3" height="4" fill="#3A2E3F"/></svg>Room</div>
+      <div class="tab"><svg viewBox="0 0 16 16"><path d="M2.5 3.5h5v10h-5zM8.5 3.5h5v10h-5z" fill="currentColor" stroke="#3A2E3F" stroke-width="1.4" stroke-linejoin="round"/><path d="M4 6h2M4 8h2M10 6h2M10 8h2" stroke="#3A2E3F" stroke-width="1.1" stroke-linecap="round"/></svg>Diary<span class="n">5</span></div>
+      <div class="tab"><svg viewBox="0 0 16 16"><path d="M2 5h12M2 11h12" stroke="#3A2E3F" stroke-width="1.6" stroke-linecap="round"/><circle cx="5" cy="8" r="1.6" fill="currentColor" stroke="#3A2E3F" stroke-width="1.2"/><circle cx="9" cy="8" r="1.6" fill="currentColor" stroke="#3A2E3F" stroke-width="1.2"/></svg>Shelf<span class="n">4</span></div>
+      <div class="tab"><svg viewBox="0 0 16 16"><rect x="3" y="2.5" width="10" height="11" rx="2" fill="currentColor" stroke="#3A2E3F" stroke-width="1.4"/><path d="M6 6h4M6 8.5h4M6 11h2.5" stroke="#3A2E3F" stroke-width="1.2" stroke-linecap="round"/></svg>Ledger</div>
+      <div class="bgm"><span class="pp"><b></b><b></b></span><span class="bars"><i style="height:6px"></i><i style="height:12px"></i><i style="height:16px"></i><i style="height:9px"></i><i style="height:13px"></i></span><span><span class="t">BGM · Hip Shop</span><span class="s"> · Rouxls Kaard</span></span><span class="vol"><i></i><i></i><i></i><i class="off"></i><i class="off"></i></span></div>
+    </nav>
+  </div>
+</div>
+</body></html>

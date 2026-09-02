@@ -1,0 +1,101 @@
+---
+/** Small rounded label: status, tech, counters. Optional dot or icon on the left. */
+import Icon from "./Icon.astro";
+import type { IconName } from "./Icon.astro";
+
+interface Props {
+  tone?: "white" | "sky" | "butter" | "mint" | "blush" | "blossom";
+  icon?: IconName;
+  dot?: "success" | "butter" | "blossom" | "ink";
+  href?: string;
+  external?: boolean;
+  size?: "sm" | "xs";
+  class?: string;
+}
+
+const {
+  tone = "white",
+  icon,
+  dot,
+  href,
+  external,
+  size = "sm",
+  class: className,
+} = Astro.props;
+const Tag = href ? "a" : "span";
+---
+
+<Tag
+  class:list={["chip", `tone-${tone}`, `size-${size}`, className]}
+  href={href}
+  target={href && external ? "_blank" : undefined}
+  rel={href && external ? "noopener noreferrer" : undefined}
+>
+  {dot && <i class:list={["dot", `dot-${dot}`]} aria-hidden="true"></i>}
+  {icon && <Icon name={icon} size={size === "xs" ? 12 : 14} />}
+  <slot />
+</Tag>
+
+<style>
+  .chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    border: var(--border-thin);
+    border-radius: var(--radius-pill);
+    padding: 4px 11px;
+    font-size: var(--text-sm);
+    font-weight: 800;
+    line-height: 1.25;
+    color: var(--ink);
+    background: var(--white);
+    box-shadow: var(--lift-sm);
+    text-decoration: none;
+    white-space: nowrap;
+  }
+
+  a.chip:hover {
+    transform: translateY(-1px);
+  }
+
+  .size-xs {
+    padding: 2px 8px;
+    font-size: var(--text-xs);
+  }
+
+  .dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    border: 1px solid var(--line);
+    flex: none;
+  }
+  .dot-success {
+    background: var(--success);
+  }
+  .dot-butter {
+    background: var(--butter);
+  }
+  .dot-blossom {
+    background: var(--blossom-deep);
+  }
+  .dot-ink {
+    background: var(--ink);
+  }
+
+  .tone-sky {
+    background: var(--sky);
+  }
+  .tone-butter {
+    background: var(--butter);
+  }
+  .tone-mint {
+    background: var(--mint);
+  }
+  .tone-blush {
+    background: var(--blush);
+  }
+  .tone-blossom {
+    background: var(--blossom);
+  }
+</style>

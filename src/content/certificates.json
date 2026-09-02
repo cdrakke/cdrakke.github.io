@@ -1,0 +1,19 @@
+[
+  {
+    "id": "civil-service",
+    "title": "Civil Service Professional Eligibility",
+    "issuer": "Civil Service Commission",
+    "date": "March 2, 2025",
+    "display": "PASSED",
+    "note": "Taken during my on-the-job training with no time to study. First attempt, passed.",
+    "image": "../assets/images/education/cse-result.png"
+  },
+  {
+    "id": "outstanding-capstone",
+    "title": "Outstanding Capstone Project Awardee",
+    "issuer": "STI College General Santos",
+    "date": "June 20, 2025",
+    "display": "AWARDED",
+    "image": "../assets/images/education/outstanding-capstone-project.jpg"
+  }
+]

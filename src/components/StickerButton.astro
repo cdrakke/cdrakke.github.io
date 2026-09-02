@@ -1,0 +1,145 @@
+---
+/** Every control in this world is a rounded sticker with a real press. Renders <a> or <button>. */
+import Icon from "./Icon.astro";
+import type { IconName } from "./Icon.astro";
+
+interface Props {
+  href?: string;
+  tone?: "mint" | "sky" | "butter" | "blush" | "blossom" | "white";
+  icon?: IconName;
+  /** Small pill at the far right, e.g. "11 entries". */
+  kicker?: string;
+  size?: "md" | "sm";
+  type?: "button" | "submit";
+  download?: boolean | string;
+  external?: boolean;
+  class?: string;
+  id?: string;
+  ariaLabel?: string;
+  full?: boolean;
+}
+
+const {
+  href,
+  tone = "white",
+  icon,
+  kicker,
+  size = "md",
+  type = "button",
+  download,
+  external,
+  class: className,
+  id,
+  ariaLabel,
+  full = true,
+} = Astro.props;
+
+const Tag = href ? "a" : "button";
+const attrs = href
+  ? {
+      href,
+      download: download === true ? "" : download || undefined,
+      target: external ? "_blank" : undefined,
+      rel: external ? "noopener noreferrer" : undefined,
+    }
+  : { type };
+---
+
+<Tag
+  {...attrs}
+  id={id}
+  class:list={["sticker-btn", `tone-${tone}`, `size-${size}`, className, full && "full"]}
+  aria-label={ariaLabel}
+>
+  {icon && <Icon name={icon} size={size === "sm" ? 15 : 18} />}
+  <span class="label"><slot /></span>
+  {kicker && <span class="kicker">{kicker}</span>}
+</Tag>
+
+<style>
+  .sticker-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 9px;
+    border: var(--border);
+    border-radius: var(--radius-pill);
+    padding: 9px 16px;
+    font-family: var(--font-display-stack);
+    font-weight: 600;
+    font-size: var(--text-md);
+    line-height: 1.2;
+    color: var(--ink);
+    text-decoration: none;
+    box-shadow: var(--lift);
+    background: var(--white);
+    transition:
+      transform var(--dur-fast) var(--ease-out),
+      box-shadow var(--dur-fast) var(--ease-out),
+      background var(--dur-fast) var(--ease-out);
+    white-space: nowrap;
+  }
+
+  .full {
+    width: 100%;
+  }
+
+  .size-sm {
+    padding: 6px 12px;
+    font-size: var(--text-sm);
+    gap: 7px;
+  }
+
+  .sticker-btn:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 4px 0 rgba(58, 46, 63, 0.18);
+  }
+
+  .sticker-btn:active {
+    transform: translateY(2px);
+    box-shadow: 0 1px 0 rgba(58, 46, 63, 0.18);
+  }
+
+  .label {
+    flex: 1;
+    text-align: left;
+    min-width: 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .kicker {
+    margin-left: auto;
+    font-family: var(--font-body-stack);
+    font-size: var(--text-xs);
+    font-weight: 900;
+    background: var(--veil);
+    border: 1px solid var(--line);
+    border-radius: var(--radius-pill);
+    padding: 1px 7px;
+  }
+
+  .tone-mint {
+    background: var(--mint);
+  }
+  .tone-sky {
+    background: var(--sky);
+  }
+  .tone-butter {
+    background: var(--butter);
+  }
+  .tone-blush {
+    background: var(--blush);
+  }
+  .tone-blossom {
+    background: var(--blossom);
+  }
+  .tone-mint:hover {
+    background: var(--mint-hover);
+  }
+  .tone-sky:hover {
+    background: var(--sky-hover);
+  }
+  .tone-butter:hover {
+    background: var(--butter-hover);
+  }
+</style>

@@ -1,0 +1,132 @@
+---
+import { getCollection } from "astro:content";
+import Base from "@/layouts/Base.astro";
+import Panel from "@/components/Panel.astro";
+import LedgerForm from "@/components/LedgerForm.astro";
+import StickerButton from "@/components/StickerButton.astro";
+import StickerChip from "@/components/StickerChip.astro";
+import Icon from "@/components/Icon.astro";
+import type { IconName } from "@/components/Icon.astro";
+import { site } from "@/data/site";
+
+const socials = await getCollection("socials");
+const projects = await getCollection("projects");
+const icons: Record<string, IconName> = { github: "github", x: "x", linkedin: "linkedin", discord: "discord" };
+const counts = { Diary: projects.length, Shelf: 4 };
+---
+
+<Base title="Ledger" description={`Leave a note for Calvin Drakke I. Rulete (Drekyz): email ${site.email}, or sign the guest ledger.`} counts={counts}>
+  <div class="wrap">
+    <header class="head settle" style="--i:0">
+      <h1>Guest ledger</h1>
+      <p class="lede">A role, a project, a question, or just hello. Notes go straight to my inbox and I write back to the email you leave.</p>
+    </header>
+
+    <div class="cols">
+      <Panel title="Sign here" icon="ledger" tone="butter" id="sign" i={1} class="signpanel">
+        <LedgerForm />
+      </Panel>
+
+      <div class="side">
+        <Panel title="Or reach me" icon="mail" tone="sky" id="reach" i={2}>
+          <div class="btns">
+            <StickerButton href={`mailto:${site.email}`} tone="sky" icon="mail">{site.email}</StickerButton>
+            <StickerButton href={`tel:${site.phone.replace(/\s+/g, "")}`} tone="white" icon="phone">{site.phone}</StickerButton>
+            <StickerButton href={site.resumePath} tone="butter" icon="pdf" download="Calvin_Drakke_Rulete_Resume.pdf">Take my resume (PDF)</StickerButton>
+          </div>
+          <div class="socials">
+            {
+              socials.map((s) =>
+                s.data.url === "#" ? (
+                  <StickerChip icon={icons[s.id]} tone="blush">
+                    {s.data.platform} · {s.data.username}
+                  </StickerChip>
+                ) : (
+                  <StickerChip href={s.data.url} external icon={icons[s.id]} tone={s.id === "github" ? "butter" : "white"}>
+                    {s.data.platform} · {s.data.username}
+                  </StickerChip>
+                ),
+              )
+            }
+          </div>
+        </Panel>
+
+        <Panel title="Where I am" icon="pin" tone="mint" id="where" i={3}>
+          <p class="where">
+            <Icon name="pin" size={16} class="pin" />
+            <span><b>{site.location}</b><br />UTC+8 · {site.availability.toLowerCase()}, contract or full-time.</span>
+          </p>
+        </Panel>
+      </div>
+    </div>
+  </div>
+</Base>
+
+<style>
+  .wrap {
+    max-width: 980px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-6);
+  }
+  .head {
+    padding: var(--space-2) var(--space-2) 0;
+  }
+  h1 {
+    font-size: var(--text-3xl);
+  }
+  .lede {
+    margin-top: var(--space-3);
+    max-width: 60ch;
+    font-size: var(--text-md);
+    color: var(--ink-2);
+  }
+  .cols {
+    display: grid;
+    grid-template-columns: minmax(0, 1.3fr) minmax(280px, 1fr);
+    gap: var(--space-4);
+    align-items: start;
+  }
+  .signpanel {
+    padding-top: var(--space-5);
+  }
+  .signpanel :global(.ledger) {
+    margin-top: 2px;
+  }
+  .side {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-5);
+  }
+  .btns {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin-top: 4px;
+  }
+  .socials {
+    display: flex;
+    gap: 6px;
+    flex-wrap: wrap;
+    margin-top: var(--space-3);
+  }
+  .where {
+    display: flex;
+    gap: 10px;
+    align-items: flex-start;
+    font-size: var(--text-sm);
+    line-height: 1.45;
+    margin-top: 4px;
+  }
+  .where :global(.pin) {
+    color: var(--blossom);
+    margin-top: 2px;
+  }
+
+  @media (max-width: 760px) {
+    .cols {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>
