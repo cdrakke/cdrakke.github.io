@@ -40,4 +40,13 @@ export default defineConfig({
   build: {
     inlineStylesheets: "auto",
   },
+  vite: {
+    build: {
+      // Each page's own stylesheet rides inside its HTML, which is what the room prefetches, so the first click
+      // to a page never waits on a stylesheet request during the ClientRouter's preparation. Only the layout's
+      // shared sheet (Base.*.css, on every page and cached after the first) stays external, so the rule cannot
+      // silently regress as a page's styles grow. Non-CSS assets keep Vite's default limit.
+      assetsInlineLimit: (file) => (file.endsWith(".css") ? !/(^|\/)Base\.[^/]+\.css$/.test(file) : undefined),
+    },
+  },
 });
