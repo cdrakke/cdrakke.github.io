@@ -18,7 +18,10 @@ export async function getStaticPaths() {
 
 const { project, index, prev, next } = Astro.props;
 const { data } = project;
-const gallery = [data.cover, ...data.screenshots].filter((g): g is NonNullable<typeof g> => Boolean(g));
+// Cover first, then screenshots; a screenshot that is also the cover is shown once.
+const gallery = [data.cover, ...data.screenshots.filter((s) => s.src !== data.cover?.src)].filter(
+  (g): g is NonNullable<typeof g> => Boolean(g),
+);
 // Full-size renditions for the lightbox (capped at 1600px, webp).
 const fullSize = await Promise.all(
   gallery.map((img) => getImage({ src: img, format: "webp", width: Math.min(1600, img.width) })),
@@ -66,6 +69,7 @@ const counts = { Diary: (await allProjects()).length, Shelf: 4 };
             {gallery.map((img, i) => (
               <a
                 class:list={["shot", i === 0 && "hero"]}
+                style={i === 0 ? `--ar: ${img.width} / ${img.height}` : undefined}
                 href={fullSize[i].src}
                 data-lightbox
                 data-index={i}
@@ -311,24 +315,21 @@ const counts = { Diary: (await allProjects()).length, Shelf: 4 };
   .shots {
     padding-bottom: var(--space-3);
   }
-  /* listing mosaic: one hero, a tight grid of thumbnails, every cell filled edge to edge */
+  /* listing mosaic: one hero at the cover's own ratio, thumbnails filling the rows it sets */
   .gallery {
     display: grid;
     gap: 8px;
     margin-top: 6px;
-    aspect-ratio: 2.6 / 1;
     grid-template-columns: 1.55fr 1fr 1fr;
     grid-template-rows: 1fr 1fr;
   }
   .count-1 {
     grid-template-columns: 1fr;
     grid-template-rows: 1fr;
-    aspect-ratio: 16 / 9;
   }
   .count-2 {
     grid-template-columns: 1fr 1fr;
     grid-template-rows: 1fr;
-    aspect-ratio: 2.4 / 1;
   }
   .count-3 {
     grid-template-columns: 1.55fr 1fr;
@@ -348,8 +349,13 @@ const counts = { Diary: (await allProjects()).length, Shelf: 4 };
     cursor: zoom-in;
     transition: box-shadow var(--dur-fast) var(--ease-out);
   }
+  .shot[hidden] {
+    display: none;
+  }
   .shot.hero {
     grid-row: 1 / 3;
+    /* the cover keeps its shape; only very square or very wide covers get trimmed */
+    aspect-ratio: clamp(1.25, var(--ar, 1.6), 2.4);
   }
   .count-1 .shot.hero,
   .count-2 .shot.hero {
@@ -366,6 +372,11 @@ const counts = { Diary: (await allProjects()).length, Shelf: 4 };
     object-fit: cover;
     object-position: top center;
     transition: transform var(--dur-base) var(--ease-out);
+  }
+  /* thumbnails add no height of their own, so the rows are sized by the hero alone */
+  .shot:not(.hero) :global(img) {
+    position: absolute;
+    inset: 0;
   }
   .shot:hover :global(img) {
     transform: scale(1.03);
@@ -407,7 +418,8 @@ const counts = { Diary: (await allProjects()).length, Shelf: 4 };
   }
   .lb-frame img {
     display: block;
-    max-width: calc(96vw - 24px);
+    /* same cap as the dialog, minus the frame's padding and line, so it never leaves the sticker */
+    max-width: calc(min(96vw, 1400px) - 24px);
     max-height: calc(96dvh - 70px);
     width: auto;
     height: auto;
@@ -576,7 +588,6 @@ const counts = { Diary: (await allProjects()).length, Shelf: 4 };
     .count-2 {
       grid-template-columns: 1fr 1fr;
       grid-template-rows: auto;
-      aspect-ratio: auto;
     }
     .shot {
       aspect-ratio: 4 / 3;
@@ -586,7 +597,7 @@ const counts = { Diary: (await allProjects()).length, Shelf: 4 };
     .count-2 .shot.hero {
       grid-column: 1 / 3;
       grid-row: auto;
-      aspect-ratio: 16 / 10;
+      aspect-ratio: clamp(1.25, var(--ar, 1.6), 2.4);
     }
     .count-4 .shot:nth-child(4) {
       grid-column: auto;
