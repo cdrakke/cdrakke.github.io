@@ -38,7 +38,7 @@
     ],
     "figures": [
       {
-        "label": "Commits, 95% mine",
+        "label": "Commits, 98% mine excluding bots",
         "value": "502"
       },
       {
@@ -77,7 +77,7 @@
     "status": "in-service",
     "role": "Full Stack Developer (contract)",
     "summary": "Internal operations platform for a real estate franchise, and the public website that reads from it: offices, brokerage, agents, listings, transactions, and events in one system.",
-    "description": "With a small team I build and run the internal operations platform of a real estate franchise, and the public website that reads from it. The platform is a Next.js app on Supabase/Postgres with a 9-role RBAC enforced in row-level security, a concurrency-safe commission engine, e-signature and document pipelines, and three-environment CI/CD with migration gates and integration tests. In October 2026 I moved the franchise off its old website builder and listings database in a single cutover: a read-only database role now feeds the new public site its listings, agents, and guides, with enquiries routed to the right agent, structured data, and every legacy URL carried over. Since then I have shipped a syndication feed to an international listings portal, foreclosure listings read from banks' PDF lists, event invitations with calendar files, and two-step verification on every password change. I am the top contributor by commits, and I review and merge every pull request the team lands: 1,187 on the platform and 107 on the website so far.",
+    "description": "With a small team I build and run the internal operations platform of a real estate franchise, and the public website that reads from it. The platform is a Next.js app on Supabase/Postgres with a 9-role RBAC enforced in row-level security, a concurrency-safe commission engine, e-signature and document pipelines, and three-environment CI/CD with migration gates and integration tests. In October 2026 I moved the franchise off its old website builder and listings database in a single cutover: a read-only database role now feeds the new public site its listings, agents, and guides, with enquiries routed to the right agent, structured data, and every legacy URL carried over. Since then I have shipped a syndication feed to an international listings portal, foreclosure listings read from banks' PDF lists, event invitations with calendar files, and two-step verification on every password change. I am the top contributor by commits, and I merge every pull request the team lands, reviewing all of my teammates': 808 on the platform and 77 on the website so far.",
     "features": [
       "9-role RBAC enforced in Postgres row-level security",
       "Concurrency-safe commission engine",
@@ -105,8 +105,8 @@
         "value": "381"
       },
       {
-        "label": "PRs reviewed and merged",
-        "value": "1,187"
+        "label": "teammate PRs reviewed and merged",
+        "value": "808"
       },
       {
         "label": "RBAC roles",

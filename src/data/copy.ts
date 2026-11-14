@@ -49,7 +49,7 @@ export const copy = {
 
   /** Positioning only: Raidium and the Realty ONE work each get their own entry right below, so the figures live there. */
   resumeSummary:
-    "Full stack developer who ships and runs whole products: schema, API, billing, infrastructure, and deploy, hosted on my own bare-metal server. I built a multi-tenant SaaS alone and lead merges on a team platform in production.",
+    "Full stack developer who ships and runs whole products: schema, API, billing, infrastructure, and deploy. I built a multi-tenant SaaS alone, and I review and merge every teammate's pull request on a production platform.",
 } as const;
 
 export type Copy = typeof copy;

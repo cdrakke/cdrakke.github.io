@@ -10,7 +10,7 @@
     "description": "Real estate franchise serving the Philippine market.",
     "responsibilities": [
       "Build and run the franchise's operations platform and the public website on top of it, in a team of three.",
-      "Top contributor (865 commits, 381 PRs), and I review and merge every pull request: 1,294 so far.",
+      "Top contributor (865 commits, 381 PRs), and the sole merger: I reviewed and merged all 885 of my teammates' PRs.",
       "Schema, row-level security for 9 roles, commission logic, e-signature and document pipelines, 3-stage CI/CD.",
       "Led the October 2026 cutover off the old website builder and listings database, every legacy URL kept.",
       "Shipped listing syndication to an international portal, foreclosure listings from bank PDFs, and 2-step verification."

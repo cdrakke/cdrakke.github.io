@@ -33,7 +33,7 @@ export const site = {
     { label: "Room", href: "/", icon: "home" },
     { label: "Work", href: "/diary", icon: "book" },
     { label: "About", href: "/shelf", icon: "shelf" },
-    { label: "Contact", href: "/ledger", icon: "ledger" },
+    { label: "Contact", href: "/ledger", icon: "mail" },
     { label: "Resume", href: resumePath, icon: "pdf", file: true },
   ],
   /** People he builds with. Michael on the mobile and web projects; Casey on the current team platform. */
