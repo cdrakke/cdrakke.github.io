@@ -7,13 +7,13 @@ import { allProjects, kindLabel, type Kind } from "@/lib/projects";
 
 const projects = await allProjects();
 const kinds = Array.from(new Set(projects.map((p) => p.data.kind))) as Kind[];
-const counts = { Diary: projects.length, Shelf: 4 };
+const counts = { Work: projects.length, About: 4 };
 ---
 
-<Base title="Diary" description="Every product Calvin Drakke I. Rulete (Drekyz) has shipped, newest first: SaaS, web, mobile, desktop, bots, and tools." counts={counts}>
+<Base title="Work" description="Every product Calvin Drakke I. Rulete (Drekyz) has shipped, newest first: SaaS, web, mobile, desktop, bots, and tools." counts={counts}>
   <div class="wrap">
     <header class="head settle" style="--i:0">
-      <h1>Diary</h1>
+      <h1>Work</h1>
       <p class="lede">Everything I've shipped, newest first. Each entry opens to what it does, what it's built on, and the real figures behind it.</p>
       <div class="filters" role="group" aria-label="Filter by kind">
         <button class="chip on" type="button" data-kind="all" aria-pressed="true">All <span class="n">{projects.length}</span></button>

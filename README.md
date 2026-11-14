@@ -1,6 +1,6 @@
 # cdrakke.github.io
 
-Calvin Drakke I. Rulete's portfolio, built as a minihompy: an isometric room you can visit, a diary of shipped products, a shelf of awards and experience, and a guest ledger. Live at [cdrakke.github.io](https://cdrakke.github.io).
+Calvin Drakke I. Rulete's portfolio, built as a minihompy: an isometric room you can visit, with Work (a diary of shipped products at `/diary`), About (a shelf of awards and experience at `/shelf`), Contact (a guest ledger at `/ledger`), and the resume PDF. Live at [cdrakke.github.io](https://cdrakke.github.io).
 
 ## Stack
 

@@ -19,12 +19,13 @@ const shelf = ["TypeScript", "Python", "C#", "NestJS", "Next.js", "Django", "Rea
   .map((n) => skills.find((s) => s.data.name === n)?.data.name)
   .filter((n): n is string => Boolean(n));
 
-// Flagship commits: Raidium (505) + the ops platform (56% of 2,004 = 1,122), rounded down to the hundred.
+// Flagship commits, merges excluded: Raidium (476) + the ops platform (865), rounded down to the hundred.
+// Recount with `git log origin/main --no-merges` in both repos when the figures in projects.json change.
 const raidium = projects.find((p) => p.id === "raidium");
 const guilds = raidium?.data.figures.find((f) => /guild/i.test(f.label))?.value ?? "6+";
-const flagshipCommits = `${Math.floor((505 + Math.round(2004 * 0.56)) / 100) * 100}`.replace(/\B(?=(\d{3})+(?!\d))/g, ",") + "+";
+const flagshipCommits = `${Math.floor((476 + 865) / 100) * 100}`.replace(/\B(?=(\d{3})+(?!\d))/g, ",") + "+";
 
-const counts = { Diary: projects.length, Shelf: 4 };
+const counts = { Work: projects.length, About: 4 };
 ---
 
 <Base person counts={counts}>
@@ -55,7 +56,7 @@ const counts = { Diary: projects.length, Shelf: 4 };
       </ul>
     </Panel>
 
-    <Panel title="Diary" icon="book" tone="butter" aside="newest first" class="diarypanel" id="diary" i={2}>
+    <Panel title="Work" icon="book" tone="butter" aside="diary · newest first" class="diarypanel" id="diary" i={2}>
       <ol class="diary">
         {
           recent.map((p, i) => (
@@ -65,7 +66,7 @@ const counts = { Diary: projects.length, Shelf: 4 };
           ))
         }
       </ol>
-      <a class="all" href="/diary">All {projects.length} entries <Icon name="arrow" size={14} /></a>
+      <a class="all" href="/diary">All {projects.length} projects <Icon name="arrow" size={14} /></a>
 
       <LedgerForm teaser />
 
@@ -84,7 +85,7 @@ const counts = { Diary: projects.length, Shelf: 4 };
       </div>
 
       <div class="group">
-        <div class="lbl">Shelf · stack</div>
+        <div class="lbl">Stack</div>
         <div class="srow">
           {shelf.map((n, i) => <StickerChip size="xs" tone={(["mint", "sky", "field"] as const)[i % 3]}>{n}</StickerChip>)}
         </div>

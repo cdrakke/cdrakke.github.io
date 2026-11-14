@@ -132,7 +132,7 @@ export function barong(): Drawn {
     <path d="M${hx - 5} ${hy + 40} q5 -4 10 0 M${hx - 5} ${hy + 52} q5 -4 10 0 M${hx - 5} ${hy + 64} q5 -4 10 0 M${hx - 5} ${hy + 76} q5 -4 10 0" fill="none" stroke="#C9A27E" stroke-width="1"/>
     <circle cx="${hx}" cy="${hy + 46}" r="1.3" fill="#C9A27E"/><circle cx="${hx}" cy="${hy + 58}" r="1.3" fill="#C9A27E"/><circle cx="${hx}" cy="${hy + 70}" r="1.3" fill="#C9A27E"/>
   </g>`;
-  return { svg: s, label: tag(hx - 4, hy + 100, "Barong", { size: 9.5, fill: "#FFF8E8" }) };
+  return { svg: s, label: tag(hx - 4, hy + 100, "Barong · about me", { size: 9.5, fill: "#FFF8E8" }) };
 }
 
 /**
@@ -157,7 +157,8 @@ export function windowScene(viewHref?: string): Drawn {
   <rect x="-2" y="82" width="108" height="6" rx="2" fill="#E2C4A2" stroke="${INK}" stroke-opacity=".6" stroke-width="1.1"/>
 </g>`;
   const [a, b] = P(0, 5.95, 70);
-  return { svg: s, label: tag(a, b, "GenSan sunset", { size: 9.5, fill: "#F7D58B" }) };
+  // 16px left of the sill so the sticker clears the server rack in front of it.
+  return { svg: s, label: tag(a - 16, b, "Hometown · GenSan", { size: 9.5, fill: "#F7D58B" }) };
 }
 
 /** Desk with keyboard and mug; monitors are separate so each can be its own link. */
@@ -202,7 +203,7 @@ export function monitorTerminal(): Drawn {
   <text x="6" y="42" font-size="4.6" font-weight="700" fill="#7FE0A0">$ _</text>
 </g>`;
   const [a, b] = P(2.4, 1.6, 0);
-  return { svg: s, label: tag(a, b, "Desk · 2 monitors", { size: 9.5 }) };
+  return { svg: s, label: tag(a, b, "Desk · my work", { size: 9.5 }) };
 }
 
 export function serverRack(): Drawn {
@@ -297,5 +298,5 @@ export function guestbook(): Drawn {
       <path d="M26 -4 l10 -14" stroke="#F7D58B" stroke-width="4" stroke-linecap="round"/><path d="M26 -4 l10 -14" stroke="${INK}" stroke-opacity=".6" stroke-width="1" fill="none"/><path d="M25 -2 l2 -3 l2 2z" fill="${INK}"/>
     </g>
   </g>`;
-  return { svg: s, label: tag(gx + 6, gy + 30, "Guest ledger", { size: 9.5 }) };
+  return { svg: s, label: tag(gx + 6, gy + 30, "Guest ledger · contact", { size: 9.5 }) };
 }

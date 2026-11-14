@@ -26,12 +26,12 @@ const gallery = [data.cover, ...data.screenshots.filter((s) => s.src !== data.co
 const fullSize = await Promise.all(
   gallery.map((img) => getImage({ src: img, format: "webp", width: Math.min(1600, img.width) })),
 );
-const counts = { Diary: (await allProjects()).length, Shelf: 4 };
+const counts = { Work: (await allProjects()).length, About: 4 };
 ---
 
 <Base title={data.title} description={data.summary} counts={counts}>
   <article class="wrap">
-    <a class="back settle" style="--i:0" href="/diary"><Icon name="back" size={14} />Back to the diary</a>
+    <a class="back settle" style="--i:0" href="/diary"><Icon name="back" size={14} />Back to all work</a>
 
     <header class="head settle" style="--i:1">
       <span class:list={["yr", `tone-${yearTone(index)}`]}>{data.year}</span>

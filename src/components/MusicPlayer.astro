@@ -385,13 +385,23 @@ const { music } = site;
     display: grid;
   }
 
-  @media (max-width: 720px) {
+  /* The nav carries five tabs; below this the player gives up its title and volume dots to make room for them. */
+  @media (max-width: 1040px) {
     .meta,
     .vol {
       display: none;
     }
     .bgm {
       padding-right: 6px;
+    }
+  }
+
+  @media (max-width: 400px) {
+    .bars {
+      display: none;
+    }
+    .bgm {
+      gap: 6px;
     }
   }
 

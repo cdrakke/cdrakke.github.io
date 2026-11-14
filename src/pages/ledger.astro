@@ -12,13 +12,13 @@ import { site } from "@/data/site";
 const socials = await getCollection("socials");
 const projects = await getCollection("projects");
 const icons: Record<string, IconName> = { github: "github", x: "x", linkedin: "linkedin", discord: "discord", whatsapp: "whatsapp", viber: "viber" };
-const counts = { Diary: projects.length, Shelf: 4 };
+const counts = { Work: projects.length, About: 4 };
 ---
 
-<Base title="Ledger" description={`Leave a note for Calvin Drakke I. Rulete (Drekyz): email ${site.email}, or sign the guest ledger.`} counts={counts}>
+<Base title="Contact" description={`Leave a note for Calvin Drakke I. Rulete (Drekyz): email ${site.email}, or sign the guest ledger.`} counts={counts}>
   <div class="wrap">
     <header class="head settle" style="--i:0">
-      <h1>Guest ledger</h1>
+      <h1>Contact</h1>
       <p class="lede">A role, a project, a question, or just hello. Notes go straight to my inbox and I write back to the email you leave.</p>
     </header>
 

@@ -1,4 +1,6 @@
 /** Site-wide facts that are not a collection. Everything else lives in src/content/*.json. */
+const resumePath = "/resume/Calvin_Drakke_Rulete_Resume.pdf";
+
 export const site = {
   handle: "Drekyz",
   name: "Calvin Drakke I. Rulete",
@@ -12,7 +14,7 @@ export const site = {
   url: "https://cdrakke.github.io",
   github: "https://github.com/cdrakke",
   twitterHandle: "@CDrakke",
-  resumePath: "/resume/Calvin_Drakke_Rulete_Resume.pdf",
+  resumePath,
   /** Kept on purpose: the room's record player. */
   music: {
     src: "/audio/deltarune-rouxl-kard.mp3",
@@ -23,11 +25,16 @@ export const site = {
   },
   /** web3forms access keys are public by design; the form still needs a honeypot. */
   web3formsKey: "7e8d5943-a358-4e09-9373-250488759333",
+  /**
+   * Tabs say what a visitor is looking for; the room keeps its own words (diary, shelf, ledger) as subtitles.
+   * `file` tabs open a document outside the client router: new tab, no prefetch, never active.
+   */
   nav: [
     { label: "Room", href: "/", icon: "home" },
-    { label: "Diary", href: "/diary", icon: "book" },
-    { label: "Shelf", href: "/shelf", icon: "shelf" },
-    { label: "Ledger", href: "/ledger", icon: "ledger" },
+    { label: "Work", href: "/diary", icon: "book" },
+    { label: "About", href: "/shelf", icon: "shelf" },
+    { label: "Contact", href: "/ledger", icon: "ledger" },
+    { label: "Resume", href: resumePath, icon: "pdf", file: true },
   ],
   /** People he builds with. Michael on the mobile and web projects; Casey on the current team platform. */
   friends: [

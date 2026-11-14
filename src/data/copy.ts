@@ -47,8 +47,9 @@ export const copy = {
   seoDescription:
     "Calvin Drakke I. Rulete (Drekyz), full stack developer from General Santos City who ships and runs whole products: Django, Next.js, NestJS, bare-metal DevOps.",
 
+  /** Positioning only: Raidium and the Realty ONE work each get their own entry right below, so the figures live there. */
   resumeSummary:
-    "Full stack developer who ships and runs whole products: schema, API, billing, infrastructure, deploy, and the frontend when it needs me. I built Raidium alone, a multi-tenant guild management SaaS with ~225 API routes and on-chain USDt payments serving 6+ MMORPG guilds, and I have authored 56% of the commits on an internal operations platform for a real estate franchise. BSIT Cum Laude, Best Capstone Project, Programmer of the Year.",
+    "Full stack developer who ships and runs whole products: schema, API, billing, infrastructure, and deploy, hosted on my own bare-metal server. I built a multi-tenant SaaS alone and lead merges on a team platform in production.",
 } as const;
 
 export type Copy = typeof copy;

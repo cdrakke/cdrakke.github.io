@@ -10,11 +10,14 @@ import { copy } from "@/data/copy";
 import { allProjects, figureText } from "@/lib/projects";
 
 const experience = (await getCollection("experience")).sort((a, b) => b.data.start.localeCompare(a.data.start));
-const education = (await getCollection("education")).sort((a, b) => b.data.years.localeCompare(a.data.years));
-const certificates = await getCollection("certificates");
+// The degree speaks for school on the resume; senior high stays on the About page.
+const education = (await getCollection("education")).filter((e) => e.id !== "gscnhs").sort((a, b) => b.data.years.localeCompare(a.data.years));
+// The capstone award is already an achievement under Education; the site still shows it framed.
+const certificates = (await getCollection("certificates")).filter((c) => c.id !== "outstanding-capstone");
 const skills = await getCollection("skills");
 const projects = await allProjects();
-const selected = ["raidium", "ops-platform", "ifs-dss", "gyocc-online"].map((id) => projects.find((p) => p.id === id)!).filter(Boolean);
+// The ops platform is told once, under its employer in Experience; listing it here too repeated it.
+const selected = ["raidium", "ifs-dss", "gyocc-online"].map((id) => projects.find((p) => p.id === id)!).filter(Boolean);
 
 const groups = [
   ["Languages", "language"],
@@ -24,7 +27,6 @@ const groups = [
   ["Practices", "other"],
 ] as const;
 
-const sti = education.find((e) => e.id === "sti-college");
 ---
 
 <Base title="Resume" description={copy.resumeSummary} noindex bare>
@@ -104,6 +106,9 @@ const sti = education.find((e) => e.id === "sti-college");
             </div>
           ))
         }
+      </section>
+
+      <section>
         <h2>Certifications</h2>
         {
           certificates.map((c) => (
@@ -117,28 +122,26 @@ const sti = education.find((e) => e.id === "sti-college");
           ))
         }
       </section>
-
-      <section>
-        <h2>Skills</h2>
-        {
-          groups.map(([label, key]) => (
-            <div class="skill">
-              <strong>{label}</strong>
-              <span>{skills.filter((s) => s.data.category === key).map((s) => s.data.name).join(", ")}</span>
-            </div>
-          ))
-        }
-      </section>
     </div>
 
-    {sti && <p class="foot">References and project details available on request. Generated from {site.url}.</p>}
+    <section>
+      <h2>Skills</h2>
+      {
+        groups.map(([label, key]) => (
+          <div class="skill">
+            <strong>{label}:</strong>{" "}
+            <span>{skills.filter((s) => s.data.category === key).map((s) => s.data.name).join(", ")}</span>
+          </div>
+        ))
+      }
+    </section>
   </div>
 </Base>
 
 <style is:global>
   @page {
     size: A4;
-    margin: 12mm 14mm;
+    margin: 9mm 13mm;
   }
   /* The resume prints on plain white: no field, no motif, no ruled paper. */
   html:has(body.bare),
@@ -156,8 +159,8 @@ const sti = education.find((e) => e.id === "sti-college");
     padding: 24px 0;
     font-family: var(--font-body-stack);
     font-weight: 600;
-    font-size: 10.2pt;
-    line-height: 1.38;
+    font-size: 9.6pt;
+    line-height: 1.32;
     color: #111;
   }
   .top {
@@ -193,8 +196,8 @@ const sti = education.find((e) => e.id === "sti-college");
     color: #1f4dbf;
   }
   .summary {
-    margin: 10px 0 6px;
-    font-size: 10pt;
+    margin: 8px 0 4px;
+    font-size: 9.6pt;
   }
   h2 {
     font-family: var(--font-display-stack);
@@ -202,12 +205,12 @@ const sti = education.find((e) => e.id === "sti-college");
     font-weight: 600;
     text-transform: uppercase;
     letter-spacing: 1px;
-    margin: 12px 0 4px;
+    margin: 10px 0 3px;
     padding-bottom: 2px;
     border-bottom: 1px solid #b8a8bf;
   }
   .item {
-    margin: 6px 0;
+    margin: 5px 0;
     break-inside: avoid;
   }
   .row {
@@ -246,21 +249,15 @@ const sti = education.find((e) => e.id === "sti-college");
   }
   .two {
     display: grid;
-    grid-template-columns: 1.2fr 1fr;
+    grid-template-columns: 1.15fr 1fr;
     gap: 18px;
   }
   .skill {
-    margin: 4px 0;
+    margin: 2px 0;
     font-size: 9.4pt;
   }
   .skill strong {
-    display: block;
     color: #111;
-  }
-  .foot {
-    margin-top: 14px;
-    font-size: 8.5pt;
-    color: #777;
   }
   @media print {
     .sheet {

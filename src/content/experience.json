@@ -9,11 +9,13 @@
     "end": null,
     "description": "Real estate franchise serving the Philippine market.",
     "responsibilities": [
-      "Build and run an internal operations platform for a real estate franchise with a small team.",
-      "Full stack work spanning office, brokerage, agent, listing, and transaction management: schema, row-level security, commission logic, document pipelines, and CI/CD.",
-      "Contract role, remote."
+      "Build and run the franchise's operations platform and the public website on top of it, in a team of three.",
+      "Top contributor (865 commits, 381 PRs), and I review and merge every pull request: 1,294 so far.",
+      "Schema, row-level security for 9 roles, commission logic, e-signature and document pipelines, 3-stage CI/CD.",
+      "Led the October 2026 cutover off the old website builder and listings database, every legacy URL kept.",
+      "Shipped listing syndication to an international portal, foreclosure listings from bank PDFs, and 2-step verification."
     ],
-    "tech": ["Next.js", "TypeScript", "Supabase", "PostgreSQL"],
+    "tech": ["Next.js", "TypeScript", "Supabase", "PostgreSQL", "Bun", "GitHub Actions"],
     "logo": "../assets/images/logos/realty-one-group.png"
   },
   {
@@ -43,10 +45,8 @@
     "end": "2025-05",
     "description": "CMO-ICTD manages IT operations and connectivity for LGU General Santos City.",
     "responsibilities": [
-      "Assisted in maintaining network systems across LGU offices.",
-      "Updated LGU WordPress websites; added features such as searchable executive order archives.",
-      "Performed diagnostics and repair on government computer hardware.",
-      "Collaborated in a team-based environment alongside staff and other interns."
+      "Maintained network systems and repaired computer hardware across LGU offices.",
+      "Updated LGU WordPress websites, adding a searchable archive of executive orders."
     ],
     "tech": ["WordPress", "Networking", "Hardware diagnostics"],
     "logo": "../assets/images/logos/ictd-gensan.png"
